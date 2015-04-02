@@ -10,7 +10,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace DBUtility
 {
@@ -35,7 +34,7 @@ namespace DBUtility
         private static Hashtable parmCache = Hashtable.Synchronized(new Hashtable());
 
         /// <summary>
-        /// 使用新的数据库连接执行一个SQL命令，返回受影响行数
+        /// 执行一个SQL命令，返回受影响行数
         /// </summary>
         /// <remarks>
         /// e.g.:  
@@ -61,7 +60,7 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 使用现有数据库连接执行一个SQL命令，返回受影响行数
+        /// 执行一个SQL命令，返回受影响行数
         /// </summary>
         /// <remarks>
         /// e.g.:  
@@ -105,18 +104,17 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// Execute a SqlCommand that returns a resultset against the database specified in the connection string 
-        /// using the provided parameters.
+        /// 执行一个SQL命令返回一个结果集
         /// </summary>
         /// <remarks>
         /// e.g.:  
         ///  SqlDataReader r = ExecuteReader(connString, CommandType.StoredProcedure, "PublishOrders", new SqlParameter("@prodid", 24));
         /// </remarks>
-        /// <param name="connectionString">a valid connection string for a SqlConnection</param>
-        /// <param name="commandType">the CommandType (stored procedure, text, etc.)</param>
-        /// <param name="commandText">the stored procedure name or T-SQL command</param>
-        /// <param name="commandParameters">an array of SqlParamters used to execute the command</param>
-        /// <returns>A SqlDataReader containing the results</returns>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="commandType">SQL命令类型 (存储过程或文本等)</param>
+        /// <param name="commandText">命令文本（存储过程名或SQL语句）</param>
+        /// <param name="commandParameters">命令参数数组（允许null）</param>
+        /// <returns>返回包含结果的SqlDataReader</returns>
         public static SqlDataReader ExecuteReader(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
             SqlCommand cmd = new SqlCommand();
@@ -140,18 +138,17 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// Execute a SqlCommand that returns the first column of the first record against the database specified in the connection string 
-        /// using the provided parameters.
+        /// 执行SQL命令返回结果第一行第一列
         /// </summary>
         /// <remarks>
         /// e.g.:  
         ///  Object obj = ExecuteScalar(connString, CommandType.StoredProcedure, "PublishOrders", new SqlParameter("@prodid", 24));
         /// </remarks>
-        /// <param name="connectionString">a valid connection string for a SqlConnection</param>
-        /// <param name="commandType">the CommandType (stored procedure, text, etc.)</param>
-        /// <param name="commandText">the stored procedure name or T-SQL command</param>
-        /// <param name="commandParameters">an array of SqlParamters used to execute the command</param>
-        /// <returns>An object that should be converted to the expected type using Convert.To{Type}</returns>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="commandType">SQL命令类型 (存储过程或文本等)</param>
+        /// <param name="commandText">命令文本（存储过程名或SQL语句）</param>
+        /// <param name="commandParameters">命令参数数组（允许null）</param>
+        /// <returns>返回一个对象（可用Convert.To{Type}转换类型）</returns>
         public static object ExecuteScalar(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
             SqlCommand cmd = new SqlCommand();
@@ -166,18 +163,17 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// Execute a SqlCommand that returns the first column of the first record against an existing database connection 
-        /// using the provided parameters.
+        /// 执行SQL命令返回结果第一行第一列
         /// </summary>
         /// <remarks>
         /// e.g.:  
         ///  Object obj = ExecuteScalar(connString, CommandType.StoredProcedure, "PublishOrders", new SqlParameter("@prodid", 24));
         /// </remarks>
-        /// <param name="conn">an existing database connection</param>
-        /// <param name="commandType">the CommandType (stored procedure, text, etc.)</param>
-        /// <param name="commandText">the stored procedure name or T-SQL command</param>
-        /// <param name="commandParameters">an array of SqlParamters used to execute the command</param>
-        /// <returns>An object that should be converted to the expected type using Convert.To{Type}</returns>
+        /// <param name="conn">现有的SqlConnection对象</param>
+        /// <param name="commandType">SQL命令类型 (存储过程或文本等)</param>
+        /// <param name="commandText">命令文本（存储过程名或SQL语句）</param>
+        /// <param name="commandParameters">命令参数数组（允许null）</param>
+        /// <returns>返回一个对象（可用Convert.To{Type}转换类型）</returns>
         public static object ExecuteScalar(SqlConnection connection, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
 
@@ -190,20 +186,20 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// add parameter array to the cache
+        /// 增加SqlParameter数组到缓存
         /// </summary>
-        /// <param name="cacheKey">Key to the parameter cache</param>
-        /// <param name="cmdParms">an array of SqlParamters to be cached</param>
+        /// <param name="cacheKey">缓存项名</param>
+        /// <param name="cmdParms">要缓存SqlParamters数组</param>
         public static void CacheParameters(string cacheKey, params SqlParameter[] commandParameters)
         {
             parmCache[cacheKey] = commandParameters;
         }
 
         /// <summary>
-        /// Retrieve cached parameters
+        /// 检索缓存的SqlParamters
         /// </summary>
-        /// <param name="cacheKey">key used to lookup parameters</param>
-        /// <returns>Cached SqlParamters array</returns>
+        /// <param name="cacheKey">根据缓存项名查找SqlParameter</param>
+        /// <returns>被缓存的SqlParamters数组</returns>
         public static SqlParameter[] GetCachedParameters(string cacheKey)
         {
             SqlParameter[] cachedParms = (SqlParameter[])parmCache[cacheKey];
