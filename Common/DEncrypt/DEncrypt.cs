@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography;  
 using System.Text;
-namespace Maticsoft.Common.DEncrypt
+namespace PC.Common.DEncrypt
 {
 	/// <summary>
 	/// Encrypt 的摘要说明。
-    /// Copyright (C) Maticsoft
+    /// Copyright (C) PC
 	/// </summary>
 	public class DEncrypt
 	{
@@ -25,7 +25,7 @@ namespace Maticsoft.Common.DEncrypt
 		/// <returns>密文</returns>
 		public static string Encrypt(string original)
 		{
-			return Encrypt(original,"MATICSOFT");
+			return Encrypt(original,"PC");
 		}
 		/// <summary>
 		/// 使用缺省密钥字符串解密string
@@ -34,7 +34,7 @@ namespace Maticsoft.Common.DEncrypt
 		/// <returns>明文</returns>
 		public static string Decrypt(string original)
 		{
-			return Decrypt(original,"MATICSOFT",System.Text.Encoding.Default);
+			return Decrypt(original,"PC",System.Text.Encoding.Default);
 		}
 
 		#endregion
@@ -88,7 +88,7 @@ namespace Maticsoft.Common.DEncrypt
 		/// <returns>明文</returns>
 		public static byte[] Decrypt(byte[] encrypted)  
 		{  
-			byte[] key = System.Text.Encoding.Default.GetBytes("MATICSOFT"); 
+			byte[] key = System.Text.Encoding.Default.GetBytes("PC"); 
 			return Decrypt(encrypted,key);     
 		}
 		/// <summary>
@@ -99,7 +99,7 @@ namespace Maticsoft.Common.DEncrypt
 		/// <returns>密文</returns>
 		public static byte[] Encrypt(byte[] original)  
 		{  
-			byte[] key = System.Text.Encoding.Default.GetBytes("MATICSOFT"); 
+			byte[] key = System.Text.Encoding.Default.GetBytes("PC"); 
 			return Encrypt(original,key);     
 		}  
 		#endregion

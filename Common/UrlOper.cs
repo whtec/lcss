@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Collections.Specialized;
 
-namespace Maticsoft.Common
+namespace PC.Common
 {
     /// <summary>
     /// URL的操作类

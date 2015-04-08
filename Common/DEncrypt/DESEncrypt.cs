@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography;  
 using System.Text;
-namespace Maticsoft.Common.DEncrypt
+namespace PC.Common.DEncrypt
 {
 	/// <summary>
 	/// DES加密/解密类。
-    /// Copyright (C) Maticsoft
+    /// Copyright (C) PC
 	/// </summary>
 	public class DESEncrypt
 	{
@@ -22,7 +22,7 @@ namespace Maticsoft.Common.DEncrypt
         /// <returns></returns>
 		public static string Encrypt(string Text) 
 		{
-			return Encrypt(Text,"MATICSOFT");
+			return Encrypt(Text,"PC");
 		}
 		/// <summary> 
 		/// 加密数据 
@@ -61,7 +61,7 @@ namespace Maticsoft.Common.DEncrypt
         /// <returns></returns>
 		public static string Decrypt(string Text) 
 		{
-			return Decrypt(Text,"MATICSOFT");
+			return Decrypt(Text,"PC");
 		}
 		/// <summary> 
 		/// 解密数据 

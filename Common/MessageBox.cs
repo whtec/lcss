@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
-namespace Maticsoft.Common
+namespace PC.Common
 {
 	/// <summary>
 	/// 显示消息提示对话框。
-    /// Copyright (C) Maticsoft
+    /// Copyright (C) PC
 	/// </summary>
 	public class MessageBox
 	{		

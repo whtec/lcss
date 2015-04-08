@@ -3,11 +3,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
 
-namespace Maticsoft.Common
+namespace PC.Common
 {
     /// <summary>
     /// INI文件读写类。
-    /// Copyright (C) Maticsoft
+    /// Copyright (C) PC
     /// </summary>
 	public class INIFile
 	{

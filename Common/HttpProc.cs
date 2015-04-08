@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IO.Compression;
 using System.Net.Cache;
 
-namespace Maticsoft.Common
+namespace PC.Common
 {
     /// <summary>    
     /// 上传数据参数    

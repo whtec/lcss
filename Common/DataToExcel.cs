@@ -6,11 +6,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //using Excel;
-namespace Maticsoft.Common
+namespace PC.Common
 {
     /// <summary>
     /// 操作EXCEL导出数据报表的类
-    /// Copyright (C) Maticsoft
+    /// Copyright (C) PC
     /// </summary>
     public class DataToExcel
     {

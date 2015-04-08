@@ -1,13 +1,13 @@
 ﻿using System.Data;
-using Maticsoft.Model;
-namespace Maticsoft.BLL
+using LCSS.Model;
+namespace LCSS.BLL
 {
 	/// <summary>
 	/// 系统菜单管理。
 	/// </summary>
 	public class SysManage
 	{
-		Maticsoft.DAL.SysManage dal=new Maticsoft.DAL.SysManage();
+		LCSS.DAL.SysManage dal=new LCSS.DAL.SysManage();
 
         
 		public SysManage()

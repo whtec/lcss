@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
-using Maticsoft.Common;
+using PC.Common;
 using LCSS.Model;
 namespace LCSS.BLL
 {
@@ -63,7 +63,7 @@ namespace LCSS.BLL
 		{
 			
 			string CacheKey = "SalaryLineModel-" + SL_Sal_ID+SL_CI_Code;
-			object objModel = Maticsoft.Common.DataCache.GetCache(CacheKey);
+			object objModel = PC.Common.DataCache.GetCache(CacheKey);
 			if (objModel == null)
 			{
 				try
@@ -71,8 +71,8 @@ namespace LCSS.BLL
 					objModel = dal.GetModel(SL_Sal_ID,SL_CI_Code);
 					if (objModel != null)
 					{
-						int ModelCache = Maticsoft.Common.ConfigHelper.GetConfigInt("ModelCache");
-						Maticsoft.Common.DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
+						int ModelCache = PC.Common.ConfigHelper.GetConfigInt("ModelCache");
+						PC.Common.DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
 					}
 				}
 				catch{}

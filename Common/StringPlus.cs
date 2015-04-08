@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Maticsoft.Common
+namespace PC.Common
 {
     public class StringPlus
     {

@@ -4,11 +4,11 @@ using System.Web;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 
-namespace Maticsoft.Common
+namespace PC.Common
 {
 	/// <summary>
 	/// 页面数据校验类
-    /// Copyright (C) Maticsoft 2004-2012
+    /// Copyright (C) PC 2004-2012
 	/// </summary>
 	public class PageValidate
 	{

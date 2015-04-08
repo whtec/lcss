@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Maticsoft.Common
+namespace PC.Common
 {
 	/// <summary>
 	/// web.config操作类
-    /// Copyright (C) Maticsoft
+    /// Copyright (C) PC
 	/// </summary>
 	public sealed class ConfigHelper
 	{
