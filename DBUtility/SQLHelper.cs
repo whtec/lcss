@@ -16,9 +16,11 @@ namespace DBUtility
 
     /// <summary>
     /// The SqlHelper class is intended to encapsulate high performance, 
-    /// scalable best practices for common uses of SqlClient.
+    /// scalable best practices for common uses of SqlClient.    
+    /// 这个类是静态的，应用程序启动时，自动驻留在内存中，所建连接，在使用过程中，
+    /// 也只是Close()，放回到连接池中。并没有注销Dispose()，可以下次连接时，快速使用。
     /// </summary>
-    public abstract class SqlHelper
+    public abstract class SQLHelper
     {
 
         //数据库连接字符串
@@ -33,8 +35,10 @@ namespace DBUtility
         //用哈希表存储缓存参数
         private static Hashtable parmCache = Hashtable.Synchronized(new Hashtable());
 
+
+        #region 使用新数据库连接，执行一个SQL命令，返回受影响行数
         /// <summary>
-        /// 执行一个SQL命令，返回受影响行数
+        /// 使用新数据库连接，执行一个SQL命令，返回受影响行数
         /// </summary>
         /// <remarks>
         /// e.g.:  
@@ -58,9 +62,11 @@ namespace DBUtility
                 return val;
             }
         }
+        #endregion
 
+        #region 使用现有数据库连接对象，执行一个SQL命令，返回受影响行数
         /// <summary>
-        /// 执行一个SQL命令，返回受影响行数
+        /// 使用现有数据库连接对象，执行一个SQL命令，返回受影响行数
         /// </summary>
         /// <remarks>
         /// e.g.:  
@@ -81,7 +87,9 @@ namespace DBUtility
             cmd.Parameters.Clear();
             return val;
         }
+        #endregion
 
+        #region 使用现有SQL事务执行一个SQL命令，返回受影响行数
         /// <summary>
         /// 使用现有SQL事务执行一个SQL命令，返回受影响行数
         /// </summary>
@@ -102,9 +110,11 @@ namespace DBUtility
             cmd.Parameters.Clear();
             return val;
         }
+        #endregion
 
+        #region 使用新数据库连接，执行一个SQL命令返回一个结果集
         /// <summary>
-        /// 执行一个SQL命令返回一个结果集
+        /// 使用新数据库连接，执行一个SQL命令返回一个结果集
         /// </summary>
         /// <remarks>
         /// e.g.:  
@@ -126,6 +136,8 @@ namespace DBUtility
             try
             {
                 PrepareCommand(cmd, conn, null, cmdType, cmdText, commandParameters);
+                //如果创建了 SqlDataReader 并将 CommandBehavior 设置为 CloseConnection，
+                //则关闭 SqlDataReader 会自动关闭此连接
                 SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 cmd.Parameters.Clear();
                 return rdr;
@@ -136,9 +148,11 @@ namespace DBUtility
                 throw;
             }
         }
+        #endregion
 
+        #region 使用新数据库连接，执行一个SQL命令返回结果第一行第一列
         /// <summary>
-        /// 执行SQL命令返回结果第一行第一列
+        /// 使用新数据库连接，执行一个SQL命令返回结果第一行第一列
         /// </summary>
         /// <remarks>
         /// e.g.:  
@@ -161,9 +175,11 @@ namespace DBUtility
                 return val;
             }
         }
+        #endregion
 
+        #region 使用现有数据库连接对象，执行一个SQL命令返回结果第一行第一列
         /// <summary>
-        /// 执行SQL命令返回结果第一行第一列
+        /// 使用现有数据库连接对象，执行一个SQL命令返回结果第一行第一列
         /// </summary>
         /// <remarks>
         /// e.g.:  
@@ -184,7 +200,9 @@ namespace DBUtility
             cmd.Parameters.Clear();
             return val;
         }
+        #endregion
 
+        #region 增加SqlParameter数组到缓存
         /// <summary>
         /// 增加SqlParameter数组到缓存
         /// </summary>
@@ -194,7 +212,9 @@ namespace DBUtility
         {
             parmCache[cacheKey] = commandParameters;
         }
+        #endregion
 
+        #region 检索缓存的SqlParamters
         /// <summary>
         /// 检索缓存的SqlParamters
         /// </summary>
@@ -214,7 +234,9 @@ namespace DBUtility
 
             return clonedParms;
         }
+        #endregion
 
+        #region 设置SQL命令属性并打开数据库连接
         /// <summary>
         /// 设置SQL命令属性并打开数据库连接
         /// </summary>
@@ -253,5 +275,6 @@ namespace DBUtility
 
             }
         }
+        #endregion
     }
 }

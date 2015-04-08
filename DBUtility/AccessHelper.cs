@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Data.OleDb;
 namespace DBUtility
 {
-    class AccessHelper
+    public abstract class AccessHelper
     {
+        public void aaa()
+        { 
+            //System.Data.O
+        }
     }
 }
