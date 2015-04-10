@@ -12,8 +12,7 @@ namespace LCSS.BLL
 	{
 		private readonly LCSS.DAL.Employees dal=new LCSS.DAL.Employees();
 		public Employees()
-		{}
-		#region  BasicMethod
+		{} 
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
@@ -21,7 +20,13 @@ namespace LCSS.BLL
 		{
 			return dal.Exists(Emp_Code);
 		}
-
+        /// <summary>
+        /// 是否存在该名员工
+        /// </summary>
+        public bool ExistsByName(string Emp_Name)
+        {
+            return dal.ExistsByName(Emp_Name);
+        }
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
@@ -168,11 +173,6 @@ namespace LCSS.BLL
 		//{
 			//return dal.GetList(PageSize,PageIndex,strWhere);
 		//}
-
-		#endregion  BasicMethod
-		#region  ExtensionMethod
-
-		#endregion  ExtensionMethod
 	}
 }
 

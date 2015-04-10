@@ -2,7 +2,7 @@
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using DBUtility;
+using PC.DBUtility;
 namespace LCSS.DAL
 {
 	/// <summary>

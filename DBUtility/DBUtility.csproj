@@ -7,8 +7,8 @@
     <ProjectGuid>{1AE8201C-ACFA-41B3-8C1D-BB1C08972049}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBUtility</RootNamespace>
-    <AssemblyName>DBUtility</AssemblyName>
+    <RootNamespace>PC.DBUtility</RootNamespace>
+    <AssemblyName>PC.DBUtility</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

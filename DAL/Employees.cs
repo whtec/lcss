@@ -2,7 +2,7 @@
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
-using DBUtility;
+using PC.DBUtility;
 namespace LCSS.DAL
 {
 	/// <summary>
@@ -12,7 +12,6 @@ namespace LCSS.DAL
 	{
 		public Employees()
 		{}
-		#region  BasicMethod
 
 		/// <summary>
 		/// 是否存在该记录
@@ -28,6 +27,20 @@ namespace LCSS.DAL
 
 			return DbHelperSQL.Exists(strSql.ToString(),parameters);
 		}
+        /// <summary>
+        /// 是否存在该名员工
+        /// </summary>
+        public bool ExistsByName(string Emp_Name)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from Employees");
+            strSql.Append(" where Emp_Name=@Emp_Name ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Emp_Name", SqlDbType.NVarChar,20)			};
+            parameters[0].Value = Emp_Name;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
 
 
 		/// <summary>
@@ -338,10 +351,6 @@ namespace LCSS.DAL
 			return DbHelperSQL.RunProcedure("UP_GetRecordByPage",parameters,"ds");
 		}*/
 
-		#endregion  BasicMethod
-		#region  ExtensionMethod
-
-		#endregion  ExtensionMethod
 	}
 }
 
