@@ -381,7 +381,43 @@ namespace LCSS.DAL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
+        /// <summary>
+        /// 根据组织代码获得相关薪酬项目列表
+        /// </summary>
+        public DataSet GetListByOrg(string CI_Org_Code)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select CI_ID,CI_Code,CI_Name,CI_Remarks,CI_BuiltIin,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code ");
+            strSql.Append(" FROM CompensationItem ");
+            SqlParameter[] parameters =  { 
+                new SqlParameter("@CI_Org_Code",SqlDbType.VarChar,20)
+            };
+            return DbHelperSQL.Query(strSql.ToString(), parameters);
+        }
+        /// <summary>
+        /// 根据项目名称查找匹配的项目代码
+        /// </summary>
+        public string GetCodeByName(string CI_Name, string CI_Org_Code)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select CI_Code from CompensationItem");
+            strSql.Append(" where CI_Name=@CI_Name and CI_Org_Code=@CI_Org_Code");
+            SqlParameter[] parameters = {
+					new SqlParameter("@CI_Name", SqlDbType.NVarChar,20),
+                    new SqlParameter("@CI_Org_Code", SqlDbType.VarChar,20)};
+            parameters[0].Value = CI_Name;
+            parameters[1].Value = CI_Org_Code;
 
+            object obj = DbHelperSQL.ExecuteScalar(strSql.ToString(), parameters);
+            if (obj == null)
+            {
+                return null;
+            }
+            else
+            {
+                return obj.ToString();
+            }
+        }
 		#endregion  ExtensionMethod
 	}
 }

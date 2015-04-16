@@ -27,6 +27,13 @@ namespace LCSS.BLL
         {
             return dal.ExistsByName(Emp_Name);
         }
+        /// <summary>
+        /// 是否存在该名员工
+        /// </summary>
+        public string GetCodeByName(string Emp_Name)
+        {
+            return dal.GetCodeByName(Emp_Name);
+        }
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>

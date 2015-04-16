@@ -171,7 +171,20 @@ namespace LCSS.BLL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
-
+        /// <summary>
+        /// 根据组织代码获得相关薪酬项目列表
+        /// </summary>
+        public DataSet GetListByOrg(string CI_Org_Code)
+        {
+            return dal.GetListByOrg(CI_Org_Code);
+        }
+         /// <summary>
+        /// 根据项目名称查找匹配的项目代码
+        /// </summary>
+        public string GetCodeByName(string CI_Name, string CI_Org_Code)
+        {
+            return dal.GetCodeByName(CI_Name,CI_Org_Code);
+        }
 		#endregion  ExtensionMethod
 	}
 }

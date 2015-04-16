@@ -156,7 +156,13 @@ namespace LCSS.BLL
 
 		#endregion  BasicMethod
 		#region  ExtensionMethod
-
+        /// <summary>
+		/// 分页获取数据列表
+		/// </summary>
+        public DataSet GetListSalaryLine(int PageSize, int PageIndex, string OrderBy, string strWhere, string Org_Code)
+        {
+            return dal.GetListSalaryLine(PageSize, PageIndex, OrderBy, strWhere, Org_Code);
+        }
 		#endregion  ExtensionMethod
 	}
 }

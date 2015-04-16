@@ -41,6 +41,28 @@ namespace LCSS.DAL
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
+        /// <summary>
+        /// 是否存在该名员工
+        /// </summary>
+        public string GetCodeByName(string Emp_Name)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select Emp_Code from Employees");
+            strSql.Append(" where Emp_Name=@Emp_Name ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Emp_Name", SqlDbType.NVarChar,20)			};
+            parameters[0].Value = Emp_Name;
+
+            object obj = DbHelperSQL.ExecuteScalar(strSql.ToString(), parameters);
+            if (obj == null)
+            {
+                return null;
+            }
+            else
+            {
+                return obj.ToString();
+            }
+        }
 
 
 		/// <summary>

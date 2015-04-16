@@ -15,7 +15,7 @@ using System.Text;
 using System.Data;
 using System.Web.Script.Serialization;
 
-namespace OMS.Common
+namespace PC.Common
 {
     public static class JSONHelper
     {

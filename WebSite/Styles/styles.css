@@ -1,0 +1,162 @@
+﻿/*.container {
+	width: 1000px !important;
+}*/
+body {
+	background-color: #efefef;
+}
+.loginbg {
+	
+	background: #fff  url(../img/login1.jpg) no-repeat fixed top center;
+margin: 0;
+padding: 0;
+background-size: cover;
+-moz-background-size: cover;
+-webkit-background-size: cover;
+}
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+a:link {
+	color: inherit;
+	text-decoration: inherit;
+}
+a:visited {
+	text-decoration: inherit;
+	color: inherit;
+}
+a:hover {
+	text-decoration: inherit;
+	color: inherit;
+}
+a:active {
+	text-decoration: inherit;
+	color: inherit;
+}
+a:link, a:visited {
+	color: inherit;
+	text-decoration: inherit;
+}
+.loginBox {
+	width: 400px;
+	height: 300px;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: -200px;
+	position: absolute;
+}
+.loginFrom {
+	width: 100%;
+	background: rgba(255, 255, 255, 0.2);
+	padding-left: 20px;
+	padding-right: 40px;
+	padding-bottom: 60px;
+	padding-top: 40px;
+	font-size: 16px;
+	line-height: 1.6;
+	font-family: "黑体", "微软雅黑", "宋体";
+}
+.loginFrom .form-control {
+	padding: 16px 8px;
+	font-size: 13spx;
+	background-color: #fff;
+	border: 1px solid #FFF;
+}
+.header {
+	  background: rgba(65, 69, 71,0.9)!important;
+	height: 80px;
+	margin-bottom: 15px;
+}
+
+.navbar-right {
+  margin-top:30px; ;
+}
+.container .nav.navbar-nav.navbar-right .dropdown {
+	color:#A2ACB3;
+	
+	}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #444;
+}
+.userimg {
+	width:40px;
+	height:40px;
+	margin-top:-10px;
+	margin-left:10px;
+	  float: left;
+	}
+.adminleft {
+	background-color: #fff;
+}
+.adminleft #accordion .panel.panel-default {
+	background: #fff;
+	font-size: 13px;
+	color: #444;
+	box-shadow: 0 0 5px 0 silver;
+}
+.adminleft #accordion .panel.panel-default .panel-heading {
+	/* border: 1px solid #ddd; 
+
+ */
+  
+	border-top: 0px solid #BDC5CA;
+	border-bottom: 1px solid #BDC5CA;
+	background: #fff;
+	padding-bottom: 18px;
+	padding-top: 18px;
+	padding-left: 30px;
+	font-size: 16px;
+	font-family: "黑体", "微软雅黑", "宋体";
+	color: #6B6B6B;
+}
+.adminleft #accordion .panel.panel-default .panel-heading .panel-title a {
+	font-size: 15px;
+	font-family: "黑体", "微软雅黑", "宋体";
+	color: #6B6B6B;
+}
+.adminleft #accordion .panel.panel-default .panel-body {
+	padding: 0px;
+	margin-top: 15px;
+}
+.adminleft #accordion .panel.panel-default .panel-body ul {
+	list-style-type: none;
+	padding-left: 0px;
+}
+.adminleft #accordion .panel.panel-default .panel-body ul li {
+	/* border: 1px solid #ddd; 
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0px 0px 2px 1px #eee;
+  box-shadow: 0px 0px 2px 1px #eee;*/
+  /* background: #f3f3f3; */
+	padding-bottom: 14px;
+	padding-top: 14px;
+	padding-left: 50px;
+}
+
+.adminleft #accordion .panel.panel-default .panel-body ul li a {
+	font-family: "黑体", "微软雅黑", "宋体";
+	color: #6B6B6B;
+	font-size: 14px;
+}
+.adminleft #accordion .panel.panel-default .panel-body ul li:hover a {
+	color: rgb(0, 176, 240);
+}
+.adminleft #accordion .panel.panel-default .panel-body ul li.active {
+
+	background-color: #5B6D74;
+}
+.adminleft #accordion .panel.panel-default .panel-body ul li.active a {
+	color: rgb(0, 176, 240);
+	
+}.container .nav.navbar-nav.navbar-right .dropdown {
+}
+
+
+.adminright {
+	background-color: #fff;
+	  box-shadow: 0 0 5px 0 silver;
+}
+	
