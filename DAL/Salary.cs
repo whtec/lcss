@@ -38,20 +38,20 @@ namespace LCSS.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into Salary(");
-            strSql.Append("Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Time,Sal_Org_Code)");
+            strSql.Append("Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Date,Sal_Org_Code)");
 			strSql.Append(" values (");
-            strSql.Append("@Sal_Year,@Sal_Month,@Sal_Add_User,@Sal_Add_Time,@Sal_Org_Code)");
+            strSql.Append("@Sal_Year,@Sal_Month,@Sal_Add_User,@Sal_Add_Date,@Sal_Org_Code)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Sal_Year", SqlDbType.Int,4),
 					new SqlParameter("@Sal_Month", SqlDbType.Int,4),
 					new SqlParameter("@Sal_Add_User", SqlDbType.VarChar,20),
-					new SqlParameter("@Sal_Add_Time", SqlDbType.DateTime),
+					new SqlParameter("@Sal_Add_Date", SqlDbType.DateTime),
                     new SqlParameter("@Sal_Org_Code", SqlDbType.VarChar,20)};
             parameters[0].Value = System.DateTime.Now.Year;//model.Sal_Year;
             parameters[1].Value = System.DateTime.Now.Month;//model.Sal_Month;
 			parameters[2].Value = model.Sal_Add_User;
-            parameters[3].Value = System.DateTime.Now;//model.Sal_Add_Time;
+            parameters[3].Value = System.DateTime.Now;//model.Sal_Add_Date;
             parameters[4].Value = model.Sal_Org_Code;
 
 			object obj = DbHelperSQL.ReturnValue(strSql.ToString(),parameters);
@@ -74,18 +74,18 @@ namespace LCSS.DAL
 			strSql.Append("Sal_Year=@Sal_Year,");
 			strSql.Append("Sal_Month=@Sal_Month,");
 			strSql.Append("Sal_Add_User=@Sal_Add_User,");
-			strSql.Append("Sal_Add_Time=@Sal_Add_Time");
+			strSql.Append("Sal_Add_Date=@Sal_Add_Date");
 			strSql.Append(" where Sal_ID=@Sal_ID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Sal_Year", SqlDbType.Int,4),
 					new SqlParameter("@Sal_Month", SqlDbType.Int,4),
 					new SqlParameter("@Sal_Add_User", SqlDbType.VarChar,20),
-					new SqlParameter("@Sal_Add_Time", SqlDbType.DateTime),
+					new SqlParameter("@Sal_Add_Date", SqlDbType.DateTime),
 					new SqlParameter("@Sal_ID", SqlDbType.BigInt,8)};
 			parameters[0].Value = model.Sal_Year;
 			parameters[1].Value = model.Sal_Month;
 			parameters[2].Value = model.Sal_Add_User;
-			parameters[3].Value = model.Sal_Add_Time;
+			parameters[3].Value = model.Sal_Add_Date;
 			parameters[4].Value = model.Sal_ID;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
@@ -150,7 +150,7 @@ namespace LCSS.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  top 1 Sal_ID,Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Time,Sal_Org_Code from Salary ");
+            strSql.Append("select  top 1 Sal_ID,Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Date,Sal_Org_Code from Salary ");
 			strSql.Append(" where Sal_ID=@Sal_ID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Sal_ID", SqlDbType.BigInt)
@@ -194,9 +194,9 @@ namespace LCSS.DAL
 				{
 					model.Sal_Add_User=row["Sal_Add_User"].ToString();
 				}
-				if(row["Sal_Add_Time"]!=null && row["Sal_Add_Time"].ToString()!="")
+				if(row["Sal_Add_Date"]!=null && row["Sal_Add_Date"].ToString()!="")
 				{
-					model.Sal_Add_Time=DateTime.Parse(row["Sal_Add_Time"].ToString());
+					model.Sal_Add_Date=DateTime.Parse(row["Sal_Add_Date"].ToString());
 				}
                 if (row["Sal_Org_Code"] != null)
 				{
@@ -212,7 +212,7 @@ namespace LCSS.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select Sal_ID,Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Time,Sal_Org_Code ");
+            strSql.Append("select Sal_ID,Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Date,Sal_Org_Code ");
 			strSql.Append(" FROM Salary ");
 			if(strWhere.Trim()!="")
 			{
@@ -232,7 +232,7 @@ namespace LCSS.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-            strSql.Append(" Sal_ID,Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Time,Sal_Org_Code ");
+            strSql.Append(" Sal_ID,Sal_Year,Sal_Month,Sal_Add_User,Sal_Add_Date,Sal_Org_Code ");
 			strSql.Append(" FROM Salary ");
 			if(strWhere.Trim()!="")
 			{

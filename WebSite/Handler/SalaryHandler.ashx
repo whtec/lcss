@@ -6,13 +6,14 @@ using System.Data;
 using PC.Common;
 public class SalaryHandler : IHttpHandler
 {
-    
-    public void ProcessRequest (HttpContext context) {
+
+    public void ProcessRequest(HttpContext context)
+    {
         context.Response.ContentType = "text/plain";
-        
+
         try
         {
-            string json = GetGridDataJSON();
+            string json = GetGridDataJSON(context);
             context.Response.Write(json);
         }
         catch (Exception ex)
@@ -21,16 +22,29 @@ public class SalaryHandler : IHttpHandler
         }
         context.Response.End();
     }
- 
-    public bool IsReusable {
-        get {
+
+    public bool IsReusable
+    {
+        get
+        {
             return false;
         }
     }
-    string GetGridDataJSON()
+    string GetGridDataJSON(HttpContext context)
     {
+        int PageSize = 20, PageIndex = 1;
+        string OrderBy = string.Empty, strWhere = " 1=1 ", Org_Code = string.Empty;
+
+        PageSize = Convert.ToInt32(context.Request.Params["pageSize"]);
+        PageIndex = Convert.ToInt32(context.Request.Params["page"]);
+        OrderBy = context.Request.Params["sortname"] + " " + context.Request.Params["sortorder"];
+        strWhere += context.Request.Params["where"];
+        //return "";
+        if (string.IsNullOrWhiteSpace(OrderBy))
+            OrderBy = "工号 asc";
+        
         LCSS.BLL.SalaryLine SLBLL = new LCSS.BLL.SalaryLine();
-        DataSet ds= SLBLL.GetListSalaryLine(20, 1, " Emp_Code,Sal_Add_Time desc ", " 1=1","Org01");
+        DataSet ds = SLBLL.GetListSalaryLine(PageSize, PageIndex, OrderBy, strWhere, "Org01");
         return DataToJSON.GetGridJson(ds);
     }
 
