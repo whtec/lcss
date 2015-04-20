@@ -6,17 +6,17 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <link href="Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
-    <link href="Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
-    <link href="Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
-    <script src="Scripts/jquery.min.js"></script>
-    <%--<script src="Styles/libV1.2.3/jquery/jquery-1.7.2.min.js"></script>--%>
-    <script src="Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
-    <%--<script src="Styles/libV1.2.3/ligerUI/js/ligerui.all.js"></script>--%>
-    <script src="Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
-    <script src="Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
-    <script src="Styles/libV1.2.3/ligerUI/js/plugins/ligerDrag.js"></script>
-    <script src="Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>
+    <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
+    <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
+    <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
+    <script src="../Scripts/jquery.min.js"></script>
+    <%--<script src="../Styles/libV1.2.3/jquery/jquery-1.7.2.min.js"></script>--%>
+    <script src="../Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
+    <%--<script src="../Styles/libV1.2.3/ligerUI/js/ligerui.all.js"></script>--%>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerDrag.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>
 
     <script type="text/javascript">
         var grid = null;//主表
@@ -64,7 +64,7 @@
 
         //工程类别弹出框,
         $(function () {
-            createGrid("divGrid", "Handler/SalaryHandler.ashx");
+            createGrid("divGrid", "../Handler/SalaryHandler.ashx");
         });
     </script>
 </head>

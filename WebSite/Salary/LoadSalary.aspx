@@ -13,12 +13,12 @@
             <%--<asp:FileUpload ID="FileUpload1" runat="server"  />--%>
             <label id="lbl1" runat="server" style="width: 200px"></label>
             <input id="File1" type="file" runat="server" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+            <input id="btnRead" type="button" value="读取Excel" runat="server" onserverclick="btnRead_ServerClick" />
+            <input id="btnImport" type="button" value="导入系统" runat="server" onserverclick="btnImport_ServerClick" />
         </div>
-        <input id="btnRead" type="button" value="读取Excel" runat="server" onserverclick="btnRead_ServerClick" />
-        <input id="btnImport" type="button" value="导入系统" runat="server" onserverclick="btnImport_ServerClick" />
-        <asp:GridView ID="gvExcel" runat="server" >
+        <asp:GridView ID="gvExcel" runat="server">
             <Columns>
-               <%-- <asp:ImageField DataImageUrlField="是否匹配" DataImageUrlFormatString="image/img1.jpg" HeaderText="是否匹配">
+                <%-- <asp:ImageField DataImageUrlField="是否匹配" DataImageUrlFormatString="image/img1.jpg" HeaderText="是否匹配">
                 </asp:ImageField>--%>
             </Columns>
         </asp:GridView>
