@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 public partial class SalaryLineList : System.Web.UI.Page
 {
-    public string defaultWhere;     
+    public string defaultWhere;
     //protected string 
     protected void Page_Load(object sender, EventArgs e)
     {
