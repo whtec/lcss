@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="DataToJSON.cs" />
     <Compile Include="ExcelHelper.cs" />
+    <Compile Include="FileOper.cs" />
     <Compile Include="HttpProc.cs" />
     <Compile Include="JSONHelper.cs" />
     <Compile Include="MailSender.cs" />

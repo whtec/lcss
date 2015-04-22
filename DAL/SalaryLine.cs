@@ -2,6 +2,7 @@
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 using PC.DBUtility;
 namespace LCSS.DAL
 {
@@ -290,7 +291,32 @@ namespace LCSS.DAL
 
         #endregion  BasicMethod
         #region  ExtensionMethod
-
+        /// <summary>
+        /// 增加多条数据
+        /// </summary>
+        public bool AddMul(IList<LCSS.Model.SalaryLine> ilModel)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into SalaryLine(");
+            strSql.Append("SL_Sal_ID,SL_CI_Code,SL_Emp_Code,SL_Pay)");
+            strSql.Append(" values ");
+            StringBuilder strValues = new StringBuilder();
+            foreach (LCSS.Model.SalaryLine model in ilModel)
+            {
+                strValues.AppendFormat(",({0},'{1}','{2}',{3})", model.SL_Sal_ID, model.SL_CI_Code, model.SL_Emp_Code, model.SL_Pay);
+            }
+            strValues.Remove(0, 1);
+            strSql.Append(strValues.ToString());
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         /// <summary>
         /// 分页获取数据列表
         /// </summary>

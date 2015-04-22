@@ -12,11 +12,11 @@
     <script src="../Scripts/jquery.min.js"></script>
     <%--<script src="../Styles/libV1.2.3/jquery/jquery-1.7.2.min.js"></script>--%>
     <script src="../Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
-    <%--<script src="../Styles/libV1.2.3/ligerUI/js/ligerui.all.js"></script>--%>
-    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/ligerui.all.js"></script>
+    <%--<script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerDrag.js"></script>
-    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>--%>
 
     <script type="text/javascript">
         var grid = null;//主表
@@ -62,9 +62,9 @@
         function operate()
         { }
 
-        //工程类别弹出框,
+        
         $(function () {
-            createGrid("divGrid", "../Handler/SalaryHandler.ashx");
+            createGrid("divGrid", "../Handler/SalaryHandler.ashx?opt=queryList");
         });
     </script>
 </head>

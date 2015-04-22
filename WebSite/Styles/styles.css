@@ -58,7 +58,7 @@ a:link, a:visited {
 	font-family: "黑体", "微软雅黑", "宋体";
 }
 .loginFrom .form-control {
-	padding: 16px 8px;
+	/*padding: 16px 8px;*/
 	font-size: 13spx;
 	background-color: #fff;
 	border: 1px solid #FFF;

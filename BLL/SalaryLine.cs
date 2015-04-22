@@ -157,6 +157,13 @@ namespace LCSS.BLL
 		#endregion  BasicMethod
 		#region  ExtensionMethod
         /// <summary>
+        /// 增加多条数据
+        /// </summary>
+        public bool AddMul(IList<LCSS.Model.SalaryLine> ilModel)
+        {
+            return dal.AddMul(ilModel);
+        }
+        /// <summary>
 		/// 分页获取数据列表
 		/// </summary>
         public DataSet GetListSalaryLine(int PageSize, int PageIndex, string OrderBy, string strWhere, string Org_Code)
