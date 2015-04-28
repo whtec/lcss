@@ -7,6 +7,7 @@ using System.Data;
 using System.Collections;
 using System.Collections.Generic;
 using PC.Common;
+using LCSS.Model;
 
 public class SalaryHandler : IHttpHandler, IRequiresSessionState
 {
@@ -25,12 +26,21 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
             string opt = context.Request.QueryString["opt"].ToString();
             switch (opt)
             {
-                case "queryList":
-                    json = GetGridDataJSON(context);                    
+                case "Query":
+                    json = GetGridDataJSON(context);
                     break;
                 case "Import":
                     json = Import(context);
                     break;
+                //case "QueryListByMonth":
+                //    json = GetGridDataJSON(context);
+                //    break;
+                //case "QueryListBySalary":
+                //    json = GetGridDataJSON(context);
+                //    break;
+                //case "QueryListByEmployees":
+                //    json = GetGridDataJSON(context);
+                //    break;
                 default:
                     break;
             }
@@ -52,26 +62,52 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
     }
     string GetGridDataJSON(HttpContext context)
     {
+        //LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
+        LoginInfo oLoginInfo = new LoginInfo();
+        oLoginInfo.OrgCode = "Org01";
+        oLoginInfo.UserID = "420002";
+
         int PageSize = 20, PageIndex = 1;
-        string OrderBy = string.Empty, strWhere = " 1=1 ", Org_Code = string.Empty;
+        string OrderBy = string.Empty, strWhere = " 1=1 ", Call = string.Empty;
 
         PageSize = Convert.ToInt32(context.Request.Params["pageSize"]);
         PageIndex = Convert.ToInt32(context.Request.Params["page"]);
         OrderBy = context.Request.Params["sortname"] + " " + context.Request.Params["sortorder"];
         strWhere += context.Request.Params["where"];
+        Call = context.Request.Params["call"];
         //return "";
         if (string.IsNullOrWhiteSpace(OrderBy))
-            OrderBy = "工号 asc";
+            OrderBy = "统计年,统计月,工号 asc";
 
         LCSS.BLL.SalaryLine SLBLL = new LCSS.BLL.SalaryLine();
-        DataSet ds = SLBLL.GetListSalaryLine(PageSize, PageIndex, OrderBy, strWhere, "Org01");
+        DataSet ds = null;
+        switch (Call)
+        {
+            case "1":
+                ds = SLBLL.GetSalaryLineByMonth(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
+                break;
+            case "2":
+                ds = SLBLL.GetList_SalaryLineBySalary(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
+                break;
+            case "3":
+                ds = SLBLL.GetList_SalaryLineByEmployees(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.UserID);
+                break; 
+            default:
+                return "";
+                break;
+        }
+        if (ds == null)
+            return "";
         return DataToJSON.GetGridJson(ds);
     }
+    
     string Import(HttpContext context)
     {
+        LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
+
         LCSS.Model.Salary oSalary = new LCSS.Model.Salary();
-        oSalary.Sal_Add_User = "420001";//获取当前用户 @TODO
-        oSalary.Sal_Org_Code = "Org01";//获取当前用户所属组织 @TODO
+        oSalary.Sal_Add_User = oLoginInfo.LoginID;//"420001";//获取当前用户
+        oSalary.Sal_Org_Code = oLoginInfo.OrgCode;//"Org01";//获取当前用户所属组织
         LCSS.BLL.Salary SalaryBLL = new LCSS.BLL.Salary();
         oSalary.Sal_ID = SalaryBLL.Add(oSalary);
         //循环插入数据库（排除空数据）
@@ -81,7 +117,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
 
         //DataTable dtValid = (DataTable)ViewState["dtValid"];
         DataTable dtValid = (DataTable)context.Session["dtValid"];
-       
+
         IList<LCSS.Model.SalaryLine> ilSalaryLine = new List<LCSS.Model.SalaryLine>();
         foreach (DataRow dr in dtValid.Rows)
         {
@@ -108,6 +144,4 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         //返回匹配后的文件表格
         return DataToJSON.GetGridJson(dtValid);
     }
-    
-
 }

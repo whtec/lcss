@@ -183,6 +183,7 @@
     <Compile Include="MessageBox.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PageSessionName.cs" />
     <Compile Include="PageValidate.cs">
       <SubType>Code</SubType>
     </Compile>

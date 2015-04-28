@@ -11,7 +11,10 @@
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
     <script src="../Scripts/jquery.min.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
-    <script src="../Styles/libV1.2.3/ligerUI/js/ligerui.all.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerDrag.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>
     <script>
         var onlyshow = true;
         function onclickimport() {
@@ -28,6 +31,7 @@
             }
         }
         function uploadFile(flag, text) {
+
             var form = document.getElementById("uploadForm");
             if (form != undefined) {
                 form.method = "";
@@ -52,9 +56,11 @@
             $.getJSON(url, { Rnd: Math.random() }, showGrid);
         }
         function showGrid(json) {
+
             $("#divGrid").remove();
             var div = "<div id='divGrid' style='margin:0; padding:0'></div>";
-            $(document.body).append(div);
+            //$(document.body).append(div);
+            $(document.getElementById('upfileIFrame')).append(div);
 
             var colnames = ",{ display: '是否匹配', name:'是否匹配', minWidth: 50 ,width: 80,frozen:true}";
             colnames += ",{ display: '工号', name:'工号', minWidth: 50 ,width: 80,frozen:true}";
@@ -81,7 +87,9 @@
             if (!onlyshow)
                 ligergrid += ",toolbar: { items: [{ text: '导入系统', type: 'queryCond',click: onclickimport }]}";
             ligergrid += "});"
+            alert(ligergrid);
             eval(ligergrid);
+            alert(22);
         }
 
         function check() {
@@ -94,7 +102,12 @@
             if (ext == "xls" || ext == "xlsx") {
                 return true;
             } else {
-                alert("禁止");
+                // $('div#alert1').remove();
+                // clearTimeout(t);
+                //  var div2 = "<div class='alert alert-danger' role='alert' id='alert1'  style='display: none' >请先选择上传文件后，在导入。</div>";
+                //  $(document.getElementById('uploadForm')).before(div2);
+                $("div#alert1").slideDown("slow");
+                t = setTimeout("$('div#alert1').slideUp('slow')", 4000);
                 return false;
             }
         }
@@ -105,10 +118,21 @@
 <body>
     <iframe name="upfileIFrame" style="display: none"></iframe>
     <form id="uploadForm" name="uploadForm" runat="server">
-        <input id="formSubmit" type="submit" value="submit" name="formSubmit" style="display: none" onclick="this.form.submit()" />
-        <input id="file1" name="file1" type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-        <input id="btnRead" name="btnRead" type="button" value="读取Excel" onclick="return onclickread();" />
+        <div class='alert alert-danger' role='alert' id='alert1' style='display: none'>请先选择上传文件后，在读取。</div>
+        <div class="row">
+            <input id="formSubmit" type="submit" value="submit" name="formSubmit" style="display: none" onclick="this.form.submit()" />
+            <div class="form-group col-sm-7 import-file1">
+                <label for="file1">1.文件上传：</label>
+                <input id="file1" name="file1" type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <p class="help-block">请您先选取文件，然后在读取确认无误后 即可导入。</p>
+            </div>
+            <div class="form-group col-sm-5 import-btn">
+                <label for="btnRead">2.</label>
+                <input id="btnRead" name="btnRead" class="btn btn-default" type="button" value="读取Excel" onclick="return onclickread();" />
+            </div>
+        </div>
         <div id="divGrid" runat="server"></div>
     </form>
+    <script src="Scripts/miao.js"></script>
 </body>
 </html>

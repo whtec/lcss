@@ -74,20 +74,18 @@ namespace LCSS.DAL
 			strSql.Append("Org_Parent_Code=@Org_Parent_Code,");
 			strSql.Append("Org_Status=@Org_Status,");
 			strSql.Append("Org_Layer=@Org_Layer");
-			strSql.Append(" where Org_ID=@Org_ID");
+            strSql.Append(" where Org_Code=@Org_Code");
 			SqlParameter[] parameters = {
 					new SqlParameter("@Org_Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@Org_Parent_Code", SqlDbType.VarChar,20),
 					new SqlParameter("@Org_Status", SqlDbType.Bit,1),
 					new SqlParameter("@Org_Layer", SqlDbType.NVarChar,20),
-					new SqlParameter("@Org_ID", SqlDbType.BigInt,8),
 					new SqlParameter("@Org_Code", SqlDbType.VarChar,20)};
 			parameters[0].Value = model.Org_Name;
 			parameters[1].Value = model.Org_Parent_Code;
 			parameters[2].Value = model.Org_Status;
 			parameters[3].Value = model.Org_Layer;
-			parameters[4].Value = model.Org_ID;
-			parameters[5].Value = model.Org_Code;
+			parameters[4].Value = model.Org_Code;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -170,16 +168,16 @@ namespace LCSS.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public LCSS.Model.Organization GetModel(long Org_ID)
+        public LCSS.Model.Organization GetModel(string Org_Code)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select  top 1 Org_ID,Org_Code,Org_Name,Org_Parent_Code,Org_Status,Org_Layer from Organization ");
-			strSql.Append(" where Org_ID=@Org_ID");
+            strSql.Append(" where Org_Code=@Org_Code");
 			SqlParameter[] parameters = {
-					new SqlParameter("@Org_ID", SqlDbType.BigInt)
+					new SqlParameter("@Org_Code", SqlDbType.VarChar,20)
 			};
-			parameters[0].Value = Org_ID;
+            parameters[0].Value = Org_Code;
 
 			LCSS.Model.Organization model=new LCSS.Model.Organization();
 			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);

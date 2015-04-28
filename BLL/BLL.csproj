@@ -124,6 +124,7 @@
     <Compile Include="Organization.cs" />
     <Compile Include="Salary.cs" />
     <Compile Include="SalaryLine.cs" />
+    <Compile Include="T_Account.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

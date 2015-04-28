@@ -159,4 +159,56 @@ a:link, a:visited {
 	background-color: #fff;
 	  box-shadow: 0 0 5px 0 silver;
 }
-	
+#loadTittle {
+    color:#333;
+    font-family:SimHei,'Microsoft YaHei';
+    font-size:20px;
+    padding:15px 0 10px 15px;
+    border-bottom:1px solid #ddd;
+    margin-bottom:10px;
+
+}
+
+.import-file1 {
+    padding-left:30px;
+
+}
+
+
+.import-btn input {
+    width:90px;
+    margin-bottom:5px;
+    
+}
+.chaxun-info {
+margin:15px;}
+.chaxun-info .chaxun-info-label {
+    float:left;
+width:100px;
+font-size:14px;
+}
+.chaxun-info-input {
+float:left;
+width:237px;}
+
+.l-panel {
+    border: 0px solid #FFFFFF;
+}
+.clearfix > .page-header {
+margin:0 40px 0 40px;
+padding:0px;
+font-family:SimHei,'Microsoft YaHei';
+
+
+}
+
+.clearfix > .page-header  small{
+margin-left:10px;
+}
+
+.tl-content {
+    width:100%;
+    display:block;
+margin:10px;
+padding:10px;
+}

@@ -164,11 +164,43 @@ namespace LCSS.BLL
             return dal.AddMul(ilModel);
         }
         /// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-        public DataSet GetListSalaryLine(int PageSize, int PageIndex, string OrderBy, string strWhere, string Org_Code)
+        /// 查询人工成本列表（每月每人）（分页）
+        /// </summary>
+        /// <param name="PageSize">每页显示数量</param>
+        /// <param name="PageIndex">页码</param>
+        /// <param name="OrderBy">排序</param>
+        /// <param name="strWhere">条件</param>
+        /// <param name="Emp_Code">员工编号</param>
+        /// <returns></returns>
+        public DataSet GetSalaryLineByMonth(int PageSize, int PageIndex, string OrderBy, string strWhere, string Org_Code)
         {
-            return dal.GetListSalaryLine(PageSize, PageIndex, OrderBy, strWhere, Org_Code);
+            return dal.GetSalaryLineByMonth(PageSize, PageIndex, OrderBy, strWhere, Org_Code);
+        }
+        /// <summary>
+        /// 查询导入的人工成本列表（每次导入每人）（分页）
+        /// </summary>
+        /// <param name="PageSize">每页显示数量</param>
+        /// <param name="PageIndex">页码</param>
+        /// <param name="OrderBy">排序</param>
+        /// <param name="strWhere">条件</param>
+        /// <param name="Org_Code">组织编号</param>
+        /// <returns></returns>
+        public DataSet GetList_SalaryLineBySalary(int PageSize, int PageIndex, string OrderBy, string strWhere, string Org_Code)
+        {
+            return dal.GetList_SalaryLineBySalary(PageSize, PageIndex, OrderBy, strWhere, Org_Code);
+        }
+        /// <summary>
+        /// 查询个人收入明细列表（分页）
+        /// </summary>
+        /// <param name="PageSize">每页显示数量</param>
+        /// <param name="PageIndex">页码</param>
+        /// <param name="OrderBy">排序</param>
+        /// <param name="strWhere">条件</param>
+        /// <param name="Emp_Code">员工编号</param>
+        /// <returns></returns>
+        public DataSet GetList_SalaryLineByEmployees(int PageSize, int PageIndex, string OrderBy, string strWhere, string Emp_Code)
+        {
+            return dal.GetList_SalaryLineByEmployees(PageSize, PageIndex, OrderBy, strWhere, Emp_Code);
         }
 		#endregion  ExtensionMethod
 	}

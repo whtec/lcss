@@ -65,25 +65,25 @@ namespace LCSS.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public LCSS.Model.Organization GetModel(long Org_ID)
+        public LCSS.Model.Organization GetModel(string Org_Code)
 		{
-			
-			return dal.GetModel(Org_ID);
+
+            return dal.GetModel(Org_Code);
 		}
 
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public LCSS.Model.Organization GetModelByCache(long Org_ID)
+        public LCSS.Model.Organization GetModelByCache(string Org_Code)
 		{
-			
-			string CacheKey = "OrganizationModel-" + Org_ID;
+
+            string CacheKey = "OrganizationModel-" + Org_Code;
 			object objModel = PC.Common.DataCache.GetCache(CacheKey);
 			if (objModel == null)
 			{
 				try
 				{
-					objModel = dal.GetModel(Org_ID);
+                    objModel = dal.GetModel(Org_Code);
 					if (objModel != null)
 					{
 						int ModelCache = PC.Common.ConfigHelper.GetConfigInt("ModelCache");
