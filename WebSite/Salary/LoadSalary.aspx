@@ -31,7 +31,6 @@
             }
         }
         function uploadFile(flag, text) {
-
             var form = document.getElementById("uploadForm");
             if (form != undefined) {
                 form.method = "";
@@ -56,11 +55,9 @@
             $.getJSON(url, { Rnd: Math.random() }, showGrid);
         }
         function showGrid(json) {
-
             $("#divGrid").remove();
             var div = "<div id='divGrid' style='margin:0; padding:0'></div>";
-            //$(document.body).append(div);
-            $(document.getElementById('upfileIFrame')).append(div);
+            $(document.getElementById('uploadForm')).append(div);
 
             var colnames = ",{ display: '是否匹配', name:'是否匹配', minWidth: 50 ,width: 80,frozen:true}";
             colnames += ",{ display: '工号', name:'工号', minWidth: 50 ,width: 80,frozen:true}";
@@ -83,34 +80,32 @@
                     "dataAction:'local'," +
                     "height:'auto'," +
                     "rownumbers:true," +
-                    "page: 1,pageSize:100,pageSizeOptions: [100,200,500]";
+                    "page: 1,pageSize:20,pageSizeOptions: [20,50,100,200,500]";
             if (!onlyshow)
                 ligergrid += ",toolbar: { items: [{ text: '导入系统', type: 'queryCond',click: onclickimport }]}";
             ligergrid += "});"
-            alert(ligergrid);
             eval(ligergrid);
-            alert(22);
         }
 
-        function check() {
-            //获得要上传的文件的扩展名
-            var file = document.getElementById("file1");
-            var value = file.value;
-            var ext = value.substr(value.lastIndexOf(".") + 1);
+            function check() {
+                //获得要上传的文件的扩展名
+                var file = document.getElementById("file1");
+                var value = file.value;
+                var ext = value.substr(value.lastIndexOf(".") + 1);
 
-            //先在客户端进行第一次判断
-            if (ext == "xls" || ext == "xlsx") {
-                return true;
-            } else {
-                // $('div#alert1').remove();
-                // clearTimeout(t);
-                //  var div2 = "<div class='alert alert-danger' role='alert' id='alert1'  style='display: none' >请先选择上传文件后，在导入。</div>";
-                //  $(document.getElementById('uploadForm')).before(div2);
-                $("div#alert1").slideDown("slow");
-                t = setTimeout("$('div#alert1').slideUp('slow')", 4000);
-                return false;
+                //先在客户端进行第一次判断
+                if (ext == "xls" || ext == "xlsx") {
+                    return true;
+                } else {
+                    // $('div#alert1').remove();
+                    // clearTimeout(t);
+                    //  var div2 = "<div class='alert alert-danger' role='alert' id='alert1'  style='display: none' >请先选择上传文件后，在导入。</div>";
+                    //  $(document.getElementById('uploadForm')).before(div2);
+                    $("div#alert1").slideDown("slow");
+                    t = setTimeout("$('div#alert1').slideUp('slow')", 4000);
+                    return false;
+                }
             }
-        }
 
 
     </script>
@@ -128,11 +123,11 @@
             </div>
             <div class="form-group col-sm-5 import-btn">
                 <label for="btnRead">2.</label>
-                <input id="btnRead" name="btnRead" class="btn btn-default" type="button" value="读取Excel" onclick="return onclickread();" />
+                <input id="btnRead" name="btnRead" class="btn btn-primary" type="button" value="读取Excel" onclick="return onclickread();" />
             </div>
         </div>
         <div id="divGrid" runat="server"></div>
     </form>
-    <script src="Scripts/miao.js"></script>
+<%--    <script src="Scripts/miao.js"></script>--%>
 </body>
 </html>

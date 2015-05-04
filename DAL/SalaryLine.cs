@@ -392,7 +392,33 @@ namespace LCSS.DAL
             parameters[4].Value = Emp_Code;
             return DbHelperSQL.Query("GetList_SalaryLineByEmployees", CommandType.StoredProcedure, parameters);
         }
-        
+        /// <summary>
+        /// 得到指定年月工资信息
+        /// </summary>
+        /// <param name="iYear"></param>
+        /// <param name="iMonth"></param>
+        /// <param name="Emp_Code"></param>
+        /// <returns>返回2个表，包含基本工资项表和统计表</returns>
+        public DataSet GetMyGongzitiao(int iYear,int iMonth,string Emp_Code)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@iYear", SqlDbType.Int),
+					new SqlParameter("@iMonth", SqlDbType.Int),
+                    new SqlParameter("@Emp_Code", SqlDbType.VarChar,20)
+					};
+            parameters[0].Value = iYear;
+            parameters[1].Value = iMonth;
+            parameters[2].Value = Emp_Code;
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"SELECT *
+                      FROM [dbo].[View_SalaryLineByGZT] where [Sal_Year]=@iYear and [Sal_Month]=@iMonth and [SL_Emp_Code]=@Emp_Code
+                      order by [Sal_Year],[Sal_Month],CT_Sequence,CI_Sequence");
+            strSql.Append(@";SELECT *
+                      FROM [dbo].[View_SalaryLineTotalByGZT] where [V_SLTG_Sal_Year]=@iYear and [V_SLTG_Sal_Month]=@iMonth and [V_SLTG_Emp_Code]=@Emp_Code
+                      order by [V_SLTG_Sal_Year],[V_SLTG_Sal_Month],[V_SLTG_CT_Sequence]");
+            return DbHelperSQL.Query(strSql.ToString(), CommandType.Text, parameters);
+        }
 
         #endregion  ExtensionMethod
     }

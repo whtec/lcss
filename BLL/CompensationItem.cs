@@ -178,12 +178,19 @@ namespace LCSS.BLL
         {
             return dal.GetListByOrg(CI_Org_Code);
         }
-         /// <summary>
+        /// <summary>
         /// 根据项目名称查找匹配的项目代码
         /// </summary>
         public string GetCodeByName(string CI_Name, string CI_Org_Code)
         {
             return dal.GetCodeByName(CI_Name,CI_Org_Code);
+        }
+        /// <summary>
+        /// 根据项目名称查找匹配的薪酬项目
+        /// </summary>
+        public LCSS.Model.CompensationItem GetModelByName(string CI_Name, string CI_Org_Code)
+        {
+            return dal.GetModelByName(CI_Name, CI_Org_Code);
         }
 		#endregion  ExtensionMethod
 	}

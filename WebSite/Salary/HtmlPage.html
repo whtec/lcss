@@ -1,0 +1,53 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <script src="../lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="../lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var grid = null;
+        var j;
+        function creategrid(divname, url) {
+            $("#" + divname).remove();
+            var div = "<div id='" + divname + "' style='margin:0; padding:0'></div>";
+            $(document.body).append(div);
+            $.getJSON(url, { page: 1, pagesize: 10, Rnd: Math.random() },
+            function (json) {
+                var colnames = "";
+                for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
+                {
+                    if (!(i == 'RECORDCOUNT' || i == 'PASSWORD'))
+                        colnames += ",{name:'" + i + "',display:'" + i + "'}";
+                }
+                colnames = colnames.substr(1, colnames.length);
+                j = json;
+                eval(
+                        "grid=$('#" + divname + "').ligerGrid({" +
+                        "checkbox: true," +
+                        "columns:[" + colnames + "]," +  //然后么拼字符串
+                        //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
+                        "url:'" + url + "'," +
+                        "dataAction:'server'," +
+                        "pageSize:10,pageSizeOptions: [10, 15, 20, 30, 50, 100]" +
+                        "});"
+                    );
+            });
+        }
+
+    </script>
+</head>
+<body style="padding:10px">
+    <input type="button" onclick="creategrid('g', '../Handler/SalaryHandler.ashx?opt=Query&call=1')" value="动态grid1" />
+    <input type="button" onclick="creategrid('g','/service/DataHandler.ashx?View=thread&id=999&type=system')" value="动态grid2" />
+    <input type="button" onclick="creategrid('g','/service/DataHandler.ashx?View=city')" value="动态grid3" />
+
+    <input type="button" onclick="creategrid('g2','/service/DataHandler.ashx?View=thread&id=999&type=system')" value="增加grid2" />
+    <input type="button" onclick="creategrid('g3','/service/DataHandler.ashx?View=city')" value="增加grid3" />
+
+    <input type="button" onclick="$('#g2').remove();" value="删除grid2" />
+    <input type="button" onclick="$('#g3').remove();" value="删除grid3" />
+
+
+</body>
+</html>

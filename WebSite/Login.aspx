@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
-                    <input type="submit" class="btn btn-primary" id="btnLogin" value="登   入" runat="server" onserverclick="btnLogin_ServerClick" />
+                    <input type="submit" class="btn btn-primary col-sm-12" id="btnLogin" value="登   入" runat="server" onserverclick="btnLogin_ServerClick" />
                 </div>
             </div>
         </form>

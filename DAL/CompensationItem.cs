@@ -267,6 +267,18 @@ namespace LCSS.DAL
 				{
 					model.CI_CT_Code=row["CI_CT_Code"].ToString();
 				}
+                if (row["CI_Type"] != null)
+                {
+                    model.CI_Type = row["CI_Type"].ToString();
+                }
+                if (row["CI_NODP"] != null && row["CI_NODP"].ToString() != "")
+                {
+                    model.CI_NODP = int.Parse(row["CI_NODP"].ToString());
+                }
+                if (row["CI_Formula"] != null)
+                {
+                    model.CI_Formula = row["CI_Formula"].ToString();
+                }
 			}
 			return model;
 		}
@@ -417,6 +429,25 @@ namespace LCSS.DAL
             {
                 return obj.ToString();
             }
+        }
+        /// <summary>
+        /// 根据项目名称查找匹配的薪酬项目
+        /// </summary>
+        public LCSS.Model.CompensationItem GetModelByName(string CI_Name, string CI_Org_Code)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * from CompensationItem");
+            strSql.Append(" where CI_Name=@CI_Name and CI_Org_Code=@CI_Org_Code");
+            SqlParameter[] parameters = {
+					new SqlParameter("@CI_Name", SqlDbType.NVarChar,20),
+                    new SqlParameter("@CI_Org_Code", SqlDbType.VarChar,20)};
+            parameters[0].Value = CI_Name;
+            parameters[1].Value = CI_Org_Code;
+
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds == null||ds.Tables.Count==0||ds.Tables[0].Rows.Count==0)
+                return null;
+            return DataRowToModel(ds.Tables[0].Rows[0]);
         }
 		#endregion  ExtensionMethod
 	}

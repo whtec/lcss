@@ -1,84 +1,66 @@
 ﻿$(document).ready(function () {
-    console.log("abb");
-   // $('#loadContent').load('Salary/Incomedetails.html');
+    //  console.log("abb");
+    // $('#loadContent').load('Salary/Incomedetails.html');
+})
+
+function ajaxStartIndex() {
+    $(document).ajaxStart(function () {
+        $('#loadContent').html('<img id="ajaxStart" class="lodingimg1" src="Image/712.GIF"  />');
+    });
+}
+
+function indexleft(id, url) {
+    $(id).click(function () {
+        $('#loadTittle').text($(id).text());
+        ajaxStartIndex();
+        $('#loadContent').load(url);
+        $('#accordion').find("li").removeClass("active");
+        $(id).parent('li').addClass("active");;
+    })
+}
+
+$(document).ready(function () {
+
+    indexleft("#gzdr", 'Salary/LoadSalary.aspx');
+    indexleft("#jxdr", 'Salary/LoadSalary.aspx');
+    indexleft("#fldr", 'Salary/LoadSalary.aspx');
+    indexleft("#drls", 'Salary/SalaryLineList.aspx?call=2');
+
+    indexleft("#rgcb", 'Salary/SalaryLineList.aspx?call=1');
+    indexleft("#grsr", 'Salary/SalaryLineList.aspx?call=3');
+    indexleft("#srgs", 'Salary/SalaryLineList.aspx?call=3');
+    indexleft("#srmx", 'Salary/SalaryDetails.aspx');
+
 })
 
 $(document).ready(function () {
-    $("#gzdr").click(function () {
-        $('#loadTittle').text($('#gzdr').text());
-        window.location.href = "Salary/LoadSalary.aspx";
-        //$('#loadContent').load('Salary/LoadSalary.aspx');
-        $('#accordion').find("li").removeClass("active");
-        $('#gzdr').parent('li').addClass("active");;
-    })
+    //$("#rgcb").click(function () {
+    //    $('#loadTittle').text($('#rgcb').text()); ajaxStartIndex();
 
-    $("#jxdr").click(function () {
-        $('#loadTittle').text($('#jxdr').text());
-        window.location.href = "Salary/LoadSalary.aspx"; //$('#loadContent').load('Salary/LoadSalary.aspx');
-        $('#accordion').find("li").removeClass("active");
-        $('#jxdr').parent('li').addClass("active");;
-    })
+    //    //$.get("Salary/SalaryLineList.aspx", { call: "2" }, function (result) {
+    //    //    console.log(result);
+    //    //    $("#loadContent").html(result);
+    //    //});
 
-    $("#fldr").click(function () {
-        $('#loadTittle').text($('#fldr').text());
-        window.location.href = "Salary/LoadSalary.aspx"; //$('#loadContent').load('Salary/LoadSalary.aspx');
-        $('#accordion').find("li").removeClass("active");
-        $('#fldr').parent('li').addClass("active");;
-    })
+    //    $('#loadContent').load("Salary/SalaryLineList.aspx?call=1");
+    //    $('#accordion').find("li").removeClass("active");
+    //    $('#rgcb').parent('li').addClass("active");;
+    //})
 
-    $("#drls").click(function () {
-        $('#loadTittle').text($('#drls').text());
-        window.location.href = "Salary/SalaryLineList.aspx?call=2"; //$('#loadContent').load('Salary/SalaryLineList.aspx?call=2');
-        $('#accordion').find("li").removeClass("active");
-        $('#fldr').parent('li').addClass("active");;
-    })
 })
 
-$(document).ready(function () {
-    $("#rgcb").click(function () {
-        $('#loadTittle').text($('#rgcb').text());
-        alert(1);
-        window.location.href = "Salary/SalaryLineList.aspx?call=1"; //$('#loadContent').load('Salary/SalaryLineList.aspx?call=1');
-        $('#accordion').find("li").removeClass("active");
-        $('#rgcb').parent('li').addClass("active");;
-    })
+//$(document).ready(function () {
+//    $("#dateup").change(function () {
+//        console.log("abb");
+//        $('#datedown').val($('#dateup').val());
+//        $("#datedown").removeAttr("disabled");
+//    })
+//})
 
-    $("#grsr").click(function () {
-        $('#loadTittle').text($('#grsr').text());
-        window.location.href = "Salary/Incomedetails.html"; //$('#loadContent').load('Salary/Incomedetails.html');
-        $('#accordion').find("li").removeClass("active");
-        $('#grsr').parent('li').addClass("active");;
-    })
-
-    $("#srgs").click(function () {
-        $('#loadTittle').text($('#srgs').text());
-        window.location.href = "Salary/SalaryLineList.aspx?call=3"; //$('#loadContent').load('Salary/SalaryLineList.aspx?call=3');
-        $('#accordion').find("li").removeClass("active");
-        $('#srgs').parent('li').addClass("active");;
-    })
-
-    $("#srmx").click(function () {
-        $('#loadTittle').text($('#srmx').text());
-        window.location.href = "Salary/SalaryLineList.aspx?call=3"; //$('#loadContent').load('Salary/SalaryLineList.aspx?call=3');
-        $('#accordion').find("li").removeClass("active");
-        $('#srmx').parent('li').addClass("active");;
-    })
-})
-
-
-
-$(document).ready(function () {
-    $("#dateup").change(function () {
-        console.log("abb");
-        $('#datedown').val($('#dateup').val());
-        $("#datedown").removeAttr("disabled");
-    })
-})
-
-$(document).ready(function () {
-    $("#btnRead").click(function () {
-       // console.log("abb");
-        // $("#btnImport").removeAttr("disabled");
-     //   $('div.alert').remove();
-    })
-})
+//$(document).ready(function () {
+//    $("#btnRead").click(function () {
+//        // console.log("abb");
+//        // $("#btnImport").removeAttr("disabled");
+//        //   $('div.alert').remove();
+//    })
+//})
