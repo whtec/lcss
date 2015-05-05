@@ -197,9 +197,11 @@
         var icount = 0;
         var hahaha = "";
         function SalaryDetailsajax() {
+            
             icount++;
+            console.log(icount);
             $.get("Handler/SalaryHandler.ashx", { opt: "MyGzt", count: icount }, function (result) {
-                console.log(result);
+            //    console.log(result);
                 if (result == hahaha) {
                     $("#li_last").removeAttr("id");
                 } else {
@@ -211,7 +213,7 @@
         $(document).ready(function () {
             SalaryDetailsajax();
             if ($(window).scrollTop() == 0) {
-                console.log(icount)
+            //    console.log(icount)
 
                 SalaryDetailsajax()
             }
@@ -219,7 +221,7 @@
                 var li_lasth = $("#li_last").offset().top;
                 var navH2 = $(window).scrollTop() + $(window).height();
                 var li_lastchazhi = navH2 - li_lasth;
-                console.log(li_lastchazhi);
+          //      console.log(li_lastchazhi);
                 // if (li_lastchazhi >= 71) {
                 if (li_lastchazhi >= 45) {
                     //  console.log(icount);
