@@ -197,23 +197,44 @@
         var icount = 0;
         var hahaha = "";
         function SalaryDetailsajax() {
-            
+
             icount++;
             console.log(icount);
-            $.get("Handler/SalaryHandler.ashx", { opt: "MyGzt", count: icount }, function (result) {
-            //    console.log(result);
-                if (result == hahaha) {
-                    $("#li_last").removeAttr("id");
-                } else {
-                    //console.log(result);
-                    $("#li_last").before(result);
-                }
+            //$.get("Handler/SalaryHandler.ashx", { opt: "MyGzt", count: icount }, function (result) {
+            //    //    console.log(result);
+            //    if (result == hahaha) {
+            //        $("#li_last").removeAttr("id");
+            //    } else {
+            //        //console.log(result);
+            //        $("#li_last").before(result);
+            //    }
+            //});
+
+            $.ajaxSetup({
+                url: "Handler/SalaryHandler.ashx",
+                global: false,
+                type: "get",
+                async: false,
+                cache: false,
+                success: function (result) {
+
+                    if (result == hahaha) {
+                        $("#li_last").removeAttr("id");
+                    } else {
+
+                        $("#li_last").before(result);
+                    }
+                },
+
             });
+            $.ajax({ data: { opt: "MyGzt", count: icount } }
+                )
         }
         $(document).ready(function () {
+
             SalaryDetailsajax();
             if ($(window).scrollTop() == 0) {
-            //    console.log(icount)
+                //    console.log(icount)
 
                 SalaryDetailsajax()
             }
@@ -221,7 +242,7 @@
                 var li_lasth = $("#li_last").offset().top;
                 var navH2 = $(window).scrollTop() + $(window).height();
                 var li_lastchazhi = navH2 - li_lasth;
-          //      console.log(li_lastchazhi);
+                //      console.log(li_lastchazhi);
                 // if (li_lastchazhi >= 71) {
                 if (li_lastchazhi >= 45) {
                     //  console.log(icount);
