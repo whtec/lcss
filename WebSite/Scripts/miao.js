@@ -3,6 +3,12 @@
     // $('#loadContent').load('Salary/Incomedetails.html');
 })
 
+$.ajaxSetup({
+    global: false,
+    async: false,
+   // cache: false,
+});
+
 function ajaxStartIndex() {
     $(document).ajaxStart(function () {
         $('#loadContent').html('<img id="ajaxStart" class="lodingimg1" src="Image/712.GIF"  />');
