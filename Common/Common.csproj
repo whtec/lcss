@@ -112,17 +112,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Excel.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\..\LCSS2015.04.29\LCSS\Common\bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI">
-      <HintPath>H:\myfile\pchome\NPOI binary 2.1.3.1\dotnet4\NPOI.dll</HintPath>
+      <HintPath>..\..\..\..\LCSS2015.04.29\LCSS\Common\bin\Debug\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>H:\myfile\pchome\NPOI binary 2.1.3.1\dotnet4\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\..\..\..\LCSS2015.04.29\LCSS\Common\bin\Debug\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>H:\myfile\pchome\NPOI binary 2.1.3.1\dotnet4\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\..\..\..\LCSS2015.04.29\LCSS\Common\bin\Debug\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>H:\myfile\pchome\NPOI binary 2.1.3.1\dotnet4\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\..\..\..\LCSS2015.04.29\LCSS\Common\bin\Debug\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="OpenSmtp, Version=1.11.0.34196, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
