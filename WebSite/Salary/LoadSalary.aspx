@@ -39,7 +39,7 @@
                 form.action = "";
             }
             if (!flag)
-                alert(unescape(text));
+                divGrid.innerText(text);//alert(unescape(text));
             else {
                 createGrid(text);
             }
