@@ -39,7 +39,7 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="javascript:void(0)" onclick="javascript:zoom('1.0')">正常</a></li>
-                        <li><a href="javascript:void(0)" onclick="javascript:zoom('1.1')">中</a></li>
+                        <li><a href="javascript:void(0)" onclick="javascript:zoom('1.2')">中</a></li>
                         <li><a href="javascript:void(0)" onclick="javascript:zoom('1.4')">大</a></li>
                     </ul>
 

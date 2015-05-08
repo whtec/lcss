@@ -5,7 +5,7 @@
 
 function zoom(zoomvalue) {
 
-    $(document.body).css("zoom", zoomvalue);
+    $("#loadContent").css("zoom", zoomvalue);
 }
 
 $.ajaxSetup({
