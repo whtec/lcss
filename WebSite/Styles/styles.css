@@ -171,7 +171,8 @@ a {
                     .adminleft #accordion .panel.panel-default .panel-body ul li a {
                         font-family: "黑体", "微软雅黑", "宋体";
                         color: #6B6B6B;
-                        font-size: 14px;
+                        /*font-size: 14px;*/
+                        font-size: 16px;
                     }
 
                     .adminleft #accordion .panel.panel-default .panel-body ul li:hover a {
