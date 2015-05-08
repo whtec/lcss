@@ -57,6 +57,7 @@
                         "url:'" + url + "'," +
                         "dataAction:'server'," +
                         "height:'auto'," +
+                     //   "width:'100%',"+
                         "sortname:'统计年,统计月,工号'," +
                         "sortorder:'asc'," +
                         "page: 1,pageSize:15,pageSizeOptions: [15, 20, 30, 50, 100]" +

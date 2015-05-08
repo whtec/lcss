@@ -220,7 +220,8 @@
     padding-right: 2em;
     padding-bottom: 15px;
     /*font-size: 13px;*/
-    font-size: 15px;
+    font-size: 18px;
+    font-weight:bold;
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
@@ -268,3 +269,7 @@
             .cbp_tmtimeline .cbp_tmlabel .pay-total .pay-base ul > li {
                 line-height: 1.8;
             }
+
+
+.pay-base h5 {
+font-size:24px;}

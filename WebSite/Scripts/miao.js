@@ -3,10 +3,10 @@
     // $('#loadContent').load('Salary/Incomedetails.html');
 })
 
-function zoom(zoomvalue) {
+//function zoom(zoomvalue) {
 
-    $(document.body).css("zoom", zoomvalue);
-}
+//    $("#loadContent").css("zoom", zoomvalue);
+//}
 
 $.ajaxSetup({
     global: false,
