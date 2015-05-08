@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
 
-    <title>首页</title>
+    <title>工资查询系统</title>
     <link rel="stylesheet" type="text/css" href="Styles/bootstrapg/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="Styles/bootstrapg/css/todc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="Styles/styles.css">
@@ -33,6 +33,18 @@
                 </button>
                       </form>
                       -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        视觉放大
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="javascript:void(0)" onclick="javascript:zoom('1.0')">正常</a></li>
+                        <li><a href="javascript:void(0)" onclick="javascript:zoom('1.1')">中</a></li>
+                        <li><a href="javascript:void(0)" onclick="javascript:zoom('1.4')">大</a></li>
+                    </ul>
+
+                </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <label id="lblUserName" runat="server"></label>

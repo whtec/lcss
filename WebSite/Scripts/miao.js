@@ -3,10 +3,15 @@
     // $('#loadContent').load('Salary/Incomedetails.html');
 })
 
+function zoom(zoomvalue) {
+
+    $(document.body).css("zoom", zoomvalue);
+}
+
 $.ajaxSetup({
     global: false,
     async: false,
-   // cache: false,
+    // cache: false,
 });
 
 function ajaxStartIndex() {
@@ -14,6 +19,8 @@ function ajaxStartIndex() {
         $('#loadContent').html('<img id="ajaxStart" class="lodingimg1" src="Image/712.GIF"  />');
     });
 }
+
+
 
 function indexleft(id, url) {
     $(id).click(function () {
