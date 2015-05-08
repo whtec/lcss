@@ -219,7 +219,8 @@
     padding-left: 2em;
     padding-right: 2em;
     padding-bottom: 15px;
-    font-size: 13px;
+    /*font-size: 13px;*/
+    font-size: 15px;
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
