@@ -328,6 +328,29 @@ namespace LCSS.DAL
             parameters[2].Value = Emp_Code;
             return DbHelperSQL.Query("GetList_SalaryDate", CommandType.StoredProcedure, parameters);
         }
+        /// <summary>
+        /// 查询导入历史列表（分页）
+        /// </summary>
+        /// <param name="PageSize">每页显示数量</param>
+        /// <param name="PageIndex">页码</param>
+        /// <param name="OrderBy">排序</param>
+        /// <param name="strWhere">条件</param>
+        /// <param name="Org_Code">组织编号</param>
+        /// <returns></returns>
+        public DataSet GetList_Salary(int PageSize, int PageIndex, string OrderBy, string strWhere)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@PageSize", SqlDbType.Int),
+					new SqlParameter("@PageIndex", SqlDbType.Int),
+                    new SqlParameter("@OrderBy", SqlDbType.VarChar, 50),
+                    new SqlParameter("@strWhere", SqlDbType.VarChar,1000)
+					};
+            parameters[0].Value = PageSize;
+            parameters[1].Value = PageIndex;
+            parameters[2].Value = OrderBy;
+            parameters[3].Value = strWhere;
+            return DbHelperSQL.Query("GetList_Salary", CommandType.StoredProcedure, parameters);
+        }
         #endregion  ExtensionMethod
     }
 }

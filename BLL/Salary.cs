@@ -167,6 +167,19 @@ namespace LCSS.BLL
         {
             return dal.GetSalaryDateList(PageSize, PageIndex, Emp_Code);
         }
+        /// <summary>
+        /// 查询导入历史列表（分页）
+        /// </summary>
+        /// <param name="PageSize">每页显示数量</param>
+        /// <param name="PageIndex">页码</param>
+        /// <param name="OrderBy">排序</param>
+        /// <param name="strWhere">条件</param>
+        /// <param name="Org_Code">组织编号</param>
+        /// <returns></returns>
+        public DataSet GetList_Salary(int PageSize, int PageIndex, string OrderBy, string strWhere)
+        {
+            return dal.GetList_Salary(PageSize, PageIndex, OrderBy, strWhere);
+        }
         #endregion  ExtensionMethod
     }
 }

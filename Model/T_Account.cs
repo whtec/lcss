@@ -116,6 +116,27 @@ namespace LCSS.Model
             set { _acct_org_code = value; }
             get { return _acct_org_code; }
         }
+
+        private string _CurrentPwd;
+        /// <summary>
+        /// 当前密码
+        /// </summary>
+        public string CurrentPwd
+        {
+            set { _CurrentPwd = value; }
+            get { return _CurrentPwd; }
+        }
+        private string _NewPwd;
+        /// <summary>
+        /// 新密码
+        /// </summary>
+        public string NewPwd
+        {
+            set { _NewPwd = value; }
+            get { return _NewPwd; }
+        }
+
+
         #endregion Model
 
     }

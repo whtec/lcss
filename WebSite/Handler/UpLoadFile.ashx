@@ -28,7 +28,8 @@ public class UpLoadFile : IHttpHandler, IRequiresSessionState
         }
         catch (Exception ex)
         {
-            throw ex;
+            //context.Response.Write("<script>window.parent.uploadFile(false,'1');</script>");
+            context.Response.Write("<script>window.parent.uploadFile(false,'" + Microsoft.JScript.GlobalObject.escape(ex.ToString()) + "');</script>");
         }
     }
     public bool IsReusable

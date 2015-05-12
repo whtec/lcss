@@ -45,7 +45,7 @@ public partial class _Default : System.Web.UI.Page
                 string sCategory = dr["Menu_Category"].ToString();
                 if (!dicMenu.ContainsKey(sCategory))
                     dicMenu[sCategory] = new StringBuilder();
-                dicMenu[sCategory].AppendFormat("<li><a href=\"#\" id=\"{0}\">{1}</a></li>", dr["Menu_Code"].ToString(), dr["Menu_Name"].ToString());
+                dicMenu[sCategory].AppendFormat("<li><a href=\"#\" id=\"{0}\" onclick=\"indexleft1('#{0}','{2}')\">{1}</a></li>", dr["Menu_Code"].ToString(), dr["Menu_Name"].ToString(), dr["Menu_Url"].ToString());
             }
             StringBuilder sMenuHtml = new StringBuilder();
             int count = 1;
@@ -57,7 +57,7 @@ public partial class _Default : System.Web.UI.Page
                 sMenuHtml.AppendFormat("            <a data-toggle=\"collapse\" data-parent=\"#accordion1\" href=\"#collapse{1}\" aria-expanded=\"true\" aria-controls=\"collapse{1}\">{0}</a>", key, count.ToString());
                 sMenuHtml.Append("              </h4>");
                 sMenuHtml.Append("          </div>");
-                sMenuHtml.AppendFormat("    <div id=\"collapse{1}\" class=\"panel-collapse collapse in\" role=\"tabpanel\" aria-labelledby=\"heading{0}\">", count.ToString(), count.ToString());
+                sMenuHtml.AppendFormat("    <div id=\"collapse{0}\" class=\"panel-collapse collapse in\" role=\"tabpanel\" aria-labelledby=\"heading{0}\">", count.ToString());
                 sMenuHtml.Append("              <div class=\"panel-body\">");
                 sMenuHtml.Append("                  <ul>");
                 sMenuHtml.Append(dicMenu[key]);

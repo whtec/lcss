@@ -44,6 +44,22 @@ namespace LCSS.DAL
 
 			return DbHelperSQL.Exists(strSql.ToString(),parameters);
 		}
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
+        public bool Exists(string ACCT_LoginID, string ACCT_Pwd)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from T_Account");
+            strSql.Append(" where ACCT_LoginID=@ACCT_LoginID and ACCT_Pwd=@ACCT_Pwd ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ACCT_LoginID", SqlDbType.VarChar,20),
+                    new SqlParameter("@ACCT_Pwd", SqlDbType.VarChar,20)};
+            parameters[0].Value = ACCT_LoginID;
+            parameters[1].Value = ACCT_Pwd;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
 
 
 		/// <summary>
@@ -135,6 +151,31 @@ namespace LCSS.DAL
 				return false;
 			}
 		}
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        public bool UpdatePassword(string ACCT_LoginID, string ACCT_Pwd)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update T_Account set ");
+            strSql.Append("ACCT_Pwd=@ACCT_Pwd");
+            strSql.Append(" where ACCT_LoginID=@ACCT_LoginID");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ACCT_LoginID", SqlDbType.VarChar,20),
+                    new SqlParameter("@ACCT_Pwd", SqlDbType.VarChar,20)};
+            parameters[0].Value = ACCT_LoginID;
+            parameters[1].Value = ACCT_Pwd;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 		/// <summary>
 		/// 删除一条数据

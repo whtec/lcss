@@ -22,29 +22,35 @@ function ajaxStartIndex() {
 
 
 
-function indexleft(id, url) {
-    $(id).click(function () {
-        $('#loadTittle').text($(id).text());
-        ajaxStartIndex();
-        $('#loadContent').load(url);
-        $('#accordion').find("li").removeClass("active");
-        $(id).parent('li').addClass("active");;
-    })
+//function indexleft(id, url) {
+//    $(id).click(function () {
+//        $('#loadTittle').text($(id).text());
+//        ajaxStartIndex();
+//        $('#loadContent').load(url);
+//        $('#accordion').find("li").removeClass("active");
+//        $(id).parent('li').addClass("active");;
+//    })
+//}
+function indexleft1(id, url) {
+    $('#loadTittle').text($(id).text());
+    ajaxStartIndex();
+    $('#loadContent').load(url);
+    $('#accordion').find("li").removeClass("active");
+    $(id).parent('li').addClass("active");
 }
 
-$(document).ready(function () {
+//$(document).ready(function () {
+//    indexleft("#gzdr", 'Salary/LoadSalary.aspx');
+//    indexleft("#jxdr", 'Salary/LoadSalary.aspx');
+//    indexleft("#fldr", 'Salary/LoadSalary.aspx');
+//    indexleft("#drls", 'Salary/SalaryLineList.aspx?call=2');
+//    indexleft("#rgcb", 'Salary/SalaryLineList.aspx?call=1');
+//    indexleft("#grsr", 'Salary/SalaryLineList.aspx?call=3');
+//    indexleft("#srgs", 'Salary/SalaryLineList.aspx?call=3');
+//    indexleft("#srmx", 'Salary/SalaryDetails.aspx');
+//    indexleft("#xgmm", 'System/ChangePassword.aspx');
 
-    indexleft("#gzdr", 'Salary/LoadSalary.aspx');
-    indexleft("#jxdr", 'Salary/LoadSalary.aspx');
-    indexleft("#fldr", 'Salary/LoadSalary.aspx');
-    indexleft("#drls", 'Salary/SalaryLineList.aspx?call=2');
-
-    indexleft("#rgcb", 'Salary/SalaryLineList.aspx?call=1');
-    indexleft("#grsr", 'Salary/SalaryLineList.aspx?call=3');
-    indexleft("#srgs", 'Salary/SalaryLineList.aspx?call=3');
-    indexleft("#srmx", 'Salary/SalaryDetails.aspx');
-
-})
+//})
 
 $(document).ready(function () {
     //$("#rgcb").click(function () {

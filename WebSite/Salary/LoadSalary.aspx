@@ -39,7 +39,11 @@
                 form.action = "";
             }
             if (!flag)
-                divGrid.innerText(text);//alert(unescape(text));
+            {
+                $("div#alert2").append(unescape(text));
+                $("div#alert2").slideDown("slow");
+                //t = setTimeout("$('div#alert2').slideUp('slow')", 4000);
+            }
             else {
                 createGrid(text);
             }
@@ -79,6 +83,7 @@
                     "data:json," +
                     "dataAction:'local'," +
                     "height:'auto'," +
+                    "widht:'auto'," +
                     "rownumbers:true," +
                     "page: 1,pageSize:20,pageSizeOptions: [20,50,100,200,500]";
             if (!onlyshow)
@@ -114,6 +119,7 @@
     <iframe name="upfileIFrame" style="display: none"></iframe>
     <form id="uploadForm" name="uploadForm" runat="server">
         <div class='alert alert-danger' role='alert' id='alert1' style='display: none'>请先选择上传文件后，在读取。</div>
+        <div class='alert alert-danger' role='alert' id='alert2' style='display: none'>错误提示：</div>
         <div class="row">
             <input id="formSubmit" type="submit" value="submit" name="formSubmit" style="display: none" onclick="this.form.submit()" />
             <div class="form-group col-sm-7 import-file1">

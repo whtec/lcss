@@ -58,10 +58,16 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
     }
     string GetGridDataJSON(HttpContext context)
     {
-        LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
-        if (oLoginInfo == null)
-            context.Response.Redirect("../Login.aspx");
+        //LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
+        //if (oLoginInfo == null)
+        //    context.Response.Redirect("../Login.aspx");
 
+        LoginInfo oLoginInfo = new LoginInfo();
+        oLoginInfo.LoginID = "42000062";
+        oLoginInfo.OrgCode = "Org01";
+        oLoginInfo.UserID = "42000062";
+        
+        
         int PageSize = 20, PageIndex = 1;
         string OrderBy = string.Empty, strWhere = " 1=1 ", Call = string.Empty;
 
@@ -71,7 +77,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         strWhere += context.Request.Params["where"];
         Call = context.Request.Params["call"];
         if (string.IsNullOrWhiteSpace(OrderBy))
-            OrderBy = "统计年,统计月,工号 asc";
+            OrderBy = "年度 desc,月度 desc,工号 asc";
 
         LCSS.BLL.SalaryLine SLBLL = new LCSS.BLL.SalaryLine();
         DataSet ds = null;
@@ -85,6 +91,28 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
                 break;
             case "3":
                 ds = SLBLL.GetList_SalaryLineByEmployees(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.UserID);
+                break;
+            case "4":
+                {
+                    LCSS.BLL.Salary SalaryBLL = new LCSS.BLL.Salary();
+                    if (CheckAuthority(oLoginInfo.LoginID, PC.Common.PageAuthorityName.ckdrls))
+                    {
+                        strWhere = " 1=1 ";
+                    }
+                    else
+                    {
+                        strWhere = " 工号='" + oLoginInfo.LoginID + "'";
+                    }
+                    ds = SalaryBLL.GetList_Salary(PageSize, PageIndex, OrderBy, strWhere);
+                }
+                break;
+            case "5":
+                {
+                    string said = context.Request.Params["said"];
+                    strWhere += " AND [导入编次]=" + said;
+                    ds = SLBLL.GetList_SalaryLineBySalary(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
+                    
+                }
                 break;
             default:
                 return "";
@@ -226,5 +254,19 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
 
         //返回匹配后的文件表格
         return DataToJSON.GetGridJson(dtValid);
+    }
+
+
+    /// <summary>
+    /// 根据登录账号判断是否有访问权限
+    /// </summary>
+    bool CheckAuthority(string LoginID, string Authority_Code)
+    {
+        //oLoginInfo.LoginID 根据账号查找是否有权限
+        string sql = @"  select count(*) from [dbo].[T_ConferAuthority]
+            where [CA_ObjCode]='{0}' or [CA_ObjCode] in (select distinct [AR_Role_Code] from [dbo].[T_Account_Role] where [AR_ACCT_LoginID]='{0}') and [CA_Aut_Code]='{1}'";
+        object obj = PC.DBUtility.DbHelperSQL.ReturnValue(string.Format(sql, LoginID, Authority_Code));
+        int num = Convert.ToInt32(obj);
+        return (num > 0) ? true : false;
     }
 }

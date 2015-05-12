@@ -42,7 +42,7 @@
                         colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,type:'date' }";
                         continue;
                     }
-                    if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name'))
+                    if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数'))
                         colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
                 }
                 colnames = colnames.substr(1, colnames.length);
@@ -52,13 +52,13 @@
                         "grid=$('#" + divname + "').ligerGrid({" +
                         "checkbox: false," +
                         "columns:[" + colnames + "]," +
-                        "toolbar: { items: [{ text: '导出Execl', type: 'queryCond', click: operate }]}," +
+                        //"toolbar: { items: [{ text: '导出Execl', type: 'queryCond', click: operate }]}," +
                         //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
                         "url:'" + url + "'," +
                         "dataAction:'server'," +
                         "height:'auto'," +
                      //   "width:'100%',"+
-                        "sortname:'统计年,统计月,工号'," +
+                        "sortname:'年度 desc,月度 desc,工号 '," +
                         "sortorder:'asc'," +
                         "page: 1,pageSize:15,pageSizeOptions: [15, 20, 30, 50, 100]" +
                         "});"
@@ -150,35 +150,29 @@
         });
     </script>
 
-    <script>$(document).ready(function () {
-    $("#dateup").change(function () {
-        //console.log("abb");
-        $('#datedown').val($('#dateup').val());
-        $("#datedown").removeAttr("disabled");
+    <script>
+        $(document).ready(function () {
+            $("#dateup").change(function () {
+                //console.log("abb");
+                $('#datedown').val($('#dateup').val());
+                $("#datedown").removeAttr("disabled");
+            });
 
+            $("#open1").on("click", function () {
+                if ($(this).hasClass("activeopen1")) {
+                    $("div.chaxun-info").slideUp("normal");
+                    $("#open1").addClass("glyphicon-menu-down");
+                    $("#open1").removeClass("glyphicon-menu-up");
+                    $(this).removeClass("activeopen1");
+                } else {
+                    $("div.chaxun-info").slideDown("normal");
+                    $("#open1").addClass("glyphicon-menu-up");
+                    $("#open1").removeClass("glyphicon-menu-down");
+                    $(this).addClass("activeopen1");
+                }
+            });
+        });
 
-
-    })
-
-
-    $("#open1").on("click", function () {
-        if ($(this).hasClass("activeopen1")) {
-
-
-            $("div.chaxun-info").slideUp("normal");
-            $("#open1").addClass("glyphicon-menu-down");
-            $("#open1").removeClass("glyphicon-menu-up");
-            $(this).removeClass("activeopen1");
-        } else {
-            $("div.chaxun-info").slideDown("normal");
-            $("#open1").addClass("glyphicon-menu-up");
-            $("#open1").removeClass("glyphicon-menu-down");
-            $(this).addClass("activeopen1");
-        }
-    })
-
-
-
-})</script>
+    </script>
 </body>
 </html>
