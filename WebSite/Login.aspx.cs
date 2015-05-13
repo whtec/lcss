@@ -16,7 +16,7 @@ public partial class Login : System.Web.UI.Page
     }
     protected void btnLogin_ServerClick(object sender, EventArgs e)
     {
-        LCSS.Model.T_Account oAccount = new LCSS.BLL.T_Account().GetLoginInfo(txtUserName.Value, txtPassword.Value);
+        LCSS.Model.T_Account oAccount = new LCSS.BLL.T_Account().GetLoginInfo(txtUserName.Value, DESEncrypt.Encrypt(txtPassword.Value.Trim()));
         if (oAccount == null)
         {
             //throw new Exception("用户名或密码错误");

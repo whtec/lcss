@@ -58,7 +58,7 @@ public class LoginHandler : IHttpHandler,IRequiresSessionState
         }
         oLoginInfo.OrgName = new LCSS.BLL.Organization().GetModel(oLoginInfo.OrgCode).Org_Name;
         context.Session[PageSessionName.LoginObject] = oLoginInfo;
-        context.Response.Redirect("Default.aspx");        
+        context.Response.Redirect("Default.aspx");         
     }
 
 }

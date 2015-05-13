@@ -154,6 +154,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DESEncrypt.cs" />
     <Compile Include="DataToJSON.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="FileOper.cs" />
