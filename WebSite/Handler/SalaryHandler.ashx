@@ -58,14 +58,14 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
     }
     string GetGridDataJSON(HttpContext context)
     {
-        //LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
-        //if (oLoginInfo == null)
-        //    context.Response.Redirect("../Login.aspx");
+        LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
+        if (oLoginInfo == null)
+            context.Response.Redirect("../Login.aspx");
 
-        LoginInfo oLoginInfo = new LoginInfo();
-        oLoginInfo.LoginID = "42000062";
-        oLoginInfo.OrgCode = "Org01";
-        oLoginInfo.UserID = "42000062";
+        //LoginInfo oLoginInfo = new LoginInfo();
+        //oLoginInfo.LoginID = "42000062";
+        //oLoginInfo.OrgCode = "Org01";
+        //oLoginInfo.UserID = "42000062";
         
         
         int PageSize = 20, PageIndex = 1;
