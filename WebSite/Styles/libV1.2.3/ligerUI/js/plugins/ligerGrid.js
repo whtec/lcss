@@ -171,6 +171,7 @@
         hide: false,
         editor: null,
         render: null,
+        colclass:null,
         textField: null  //真正显示的字段名,如果设置了，在编辑状态时,会调用创建编辑器的setText和getText方法
     };
     $.ligerDefaults.Grid_editor = {
@@ -257,6 +258,11 @@
             return value.toString();
         }
     }
+
+
+
+
+
     //-----------------------------START add by PC at 2013.09.27----------------------------//
     $.ligerDefaults.Grid.formatters['money'] = function (value, column) {
         function getFormatDate(num) {
@@ -315,6 +321,16 @@
     };
 
     $.ligerui.controls.Grid.ligerExtend($.ligerui.core.UIComponent, {
+
+        _createColumnClass: function (column) {
+            if (column.colclass != null && column.colclass != "") return column.colclass.toString();
+          //  if (column.colclass != null && column.colclass != "") console.log(column.colclass.toString());
+            // console.log( "c" + (100 + this._columnCount));
+            return "" ;
+          //  return "c" + (100 + this._columnCount);
+        },
+
+
         __getType: function ()
         {
             return '$.ligerui.controls.Grid';
@@ -2466,10 +2482,13 @@
             //设置id、pid、level、leaf，返回叶节点数,如果是叶节点，返回1
             function setColumn(column, level, pid, previd)
             {
-                removeProp(column, ['__id', '__pid', '__previd', '__nextid', '__domid', '__leaf', '__leafindex', '__level', '__colSpan', '__rowSpan']);
+                removeProp(column, ['__id', '__class', '__pid', '__previd', '__nextid', '__domid', '__leaf', '__leafindex', '__level', '__colSpan', '__rowSpan']);
                 if (level > g._columnMaxLevel) g._columnMaxLevel = level;
                 g._columnCount++;
                 column['__id'] = g._createColumnId(column);
+                //console.log(g._createColumnId(column));
+               // column['__class'] = g._createColumnClass(column);
+               // console.log(g._createColumnClass(column));
                 column['__domid'] = g.id + "|hcell|" + column['__id'];
                 g._columns[column['__id']] = column;
                 if (!column.columns || !column.columns.length)
@@ -3114,7 +3133,9 @@
                         return;
                     }
                     var colwidth = this._width;
-                    gridhtmlarr.push(' class="l-grid-row-cell ');
+                    //column['__class'] = g._createColumnClass(column);
+                    //console.log(g._createColumnClass(column));
+                    gridhtmlarr.push(' class="l-grid-row-cell ' + g._createColumnClass(column));
                     if (g.changedCells[rowid + "_" + this['__id']]) gridhtmlarr.push("l-grid-row-cell-edited ");
                     if (this.islast)
                         gridhtmlarr.push('l-grid-row-cell-last ');
@@ -3443,6 +3464,7 @@
                 totalsummaryArr.push('" ');
                 totalsummaryArr.push('id="' + g.id + "|total" + g.totalNumber + "|" + column.__id + '" ');
                 totalsummaryArr.push('width="' + this._width + '" ');
+               // totalsummaryArr.push('class="' + this._width + '" ');
                 columnname = this.columnname;
                 if (columnname)
                 {

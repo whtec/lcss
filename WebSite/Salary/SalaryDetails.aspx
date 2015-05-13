@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalaryDetails.aspx.cs" Inherits="Salary_SalaryDetails" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" class="no-js">
@@ -36,6 +35,12 @@
         }
 
     </script>--%>
+
+    <style>
+
+        body {
+        overflow-x:scroll;}
+    </style>
 </head>
 <body>
     <div class="row">
@@ -46,6 +51,149 @@
         </header>--%>
         <div class="main">
             <ul class="cbp_tmtimeline">
+                <%--<li>
+                    <time class="cbp_tmtime" datetime=""><span>2015年</span> <span>4月</span></time>
+                    <div class="cbp_tmicon"></div>
+                    <div class="cbp_tmlabel">
+                        <h4>王松<small>第一次</small></h4>
+                        <div class="pay-content">
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+
+                                </ul>
+                            </div>
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pay-total">
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <time class="cbp_tmtime" datetime=""><span>2015年</span> <span>4月</span></time>
+                    <div class="cbp_tmicon"></div>
+                    <div class="cbp_tmlabel">
+                        <h4>王松<small>第一次</small></h4>
+                        <div class="pay-content">
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pay-total">
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <time class="cbp_tmtime" datetime=""><span>2015年</span> <span>4月</span></time>
+                    <div class="cbp_tmicon"></div>
+                    <div class="cbp_tmlabel">
+                        <h4>王松<small>第一次</small></h4>
+                        <div class="pay-content">
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                    <li>基本工资 <span class="red">3000.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pay-total">
+                            <div class="pay-base">
+                                <h5>应发项目</h5>
+                                <ul>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                    <li>基本工资 <span>3000.00</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>--%>
+
                 <li id="li_last"></li>
             </ul>
         </div>
@@ -68,7 +216,7 @@
             //});
 
             $.ajaxSetup({
-                url: "Handler/SalaryHandler.ashx",
+                url: "../Handler/SalaryHandler.ashx",
                 global: false,
                 type: "get",
                 async: false,
@@ -99,7 +247,7 @@
                 var li_lasth = $("#li_last").offset().top;
                 var navH2 = $(window).scrollTop() + $(window).height();
                 var li_lastchazhi = navH2 - li_lasth;
-                //      console.log(li_lastchazhi);
+                console.log(li_lastchazhi);
                 // if (li_lastchazhi >= 71) {
                 if (li_lastchazhi >= 45) {
                     //  console.log(icount);

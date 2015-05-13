@@ -9,12 +9,7 @@
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css">
-
-    <link href="../Styles/bootstrapg/css/todc-bootstrap.css" rel="stylesheet" />
-    <link href="../Styles/styles.css" rel="stylesheet" />
-    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="../Styles/bootstrapg/js/bootstrap.js"></script>
+    <script src="../Scripts/jquery.min.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
@@ -25,17 +20,6 @@
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.min.js"></script>
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.zh-CN.js"></script>
     <%--    <link rel="stylesheet" type="text/css" href="Styles/styles.css" />--%>
-
-    <style>
-        /*#divGridgrid  td[id$="|c108"] {
-            background:#7bbff2!important;
-        }*/
-        .gridcolor1 {
-            background: #D5E9F8 !important;
-            border-right: 1px solid #A3C0E8;
-            border-bottom: 1px solid #A3C0E8;
-        }
-    </style>
 
     <script type="text/javascript">
         var grid = null;//主表
@@ -51,7 +35,7 @@
             function (json) {
                 var colnames = ",{ display: '行号', name:'Row', minWidth: 40 ,width: 50,frozen:true}";
                 colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
-                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true,colclass:'gridcolor1'}";
+                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true}";
                 for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
                 {
                     if (i.indexOf("时间") > 0) {
@@ -103,7 +87,6 @@
     </script>
 </head>
 <body>
-    <br />
     <form id="formsll" runat="server">
         <span class="glyphicon glyphicon-menu-down" aria-hidden="true" id="open1"></span>
         <div class="chaxun-info" style="display: none;">
@@ -147,7 +130,7 @@
                 </div>
             </div>
             <div class="row">
-                <button type="button" class="btn btn-primary col-md-1 col-md-offset-6">提 交</button>
+                <button type="button" class="btn btn-primary col-md-1 col-md-offset-9">提 交</button>
                 <br />
             </div>
         </div>

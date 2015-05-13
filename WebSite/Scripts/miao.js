@@ -33,8 +33,10 @@ function ajaxStartIndex() {
 //}
 function indexleft1(id, url) {
     $('#loadTittle').text($(id).text());
-    ajaxStartIndex();
-    $('#loadContent').load(url);
+    //ajaxStartIndex();
+    //  $('#loadContent').load(url);
+    console.log(url)
+    $('#loadContent_f').attr('src', url);
     $('#accordion').find("li").removeClass("active");
     $(id).parent('li').addClass("active");
 }

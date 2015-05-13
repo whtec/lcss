@@ -2,7 +2,7 @@
 	width: 1000px !important;
 }*/
 body {
-    background-color: #efefef;
+    /*background-color: #efefef;*/
 }
 #divGridgrid {
 zoom:1.4;}
@@ -266,5 +266,11 @@ a {
     color: #4d90fe;
     position: absolute;
     right: 40px;
-    top: 20px;
+    top: 0px;
 }
+
+.daoru {
+  margin: 0;}
+
+#loadContent {
+margin-bottom:30px;}

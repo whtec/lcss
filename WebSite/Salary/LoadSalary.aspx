@@ -9,7 +9,13 @@
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
-    <script src="../Scripts/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css"/>
+    <link href="../Styles/bootstrapg/css/todc-bootstrap.css" rel="stylesheet" />
+    <link href="../Styles/styles.css" rel="stylesheet" />
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="../Styles/bootstrapg/js/bootstrap.js"></script>
+
     <script src="../Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
@@ -120,7 +126,7 @@
     <form id="uploadForm" name="uploadForm" runat="server">
         <div class='alert alert-danger' role='alert' id='alert1' style='display: none'>请先选择上传文件后，在读取。</div>
         <div class='alert alert-danger' role='alert' id='alert2' style='display: none'>错误提示：</div>
-        <div class="row">
+        <div class="row daoru">
             <input id="formSubmit" type="submit" value="submit" name="formSubmit" style="display: none" onclick="this.form.submit()" />
             <div class="form-group col-sm-7 import-file1">
                 <label for="file1">1.文件上传：</label>

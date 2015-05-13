@@ -6,7 +6,13 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <link href="../Styles/bootstrapg/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css" />
+    <link href="../Styles/bootstrapg/css/todc-bootstrap.css" rel="stylesheet" />
+    <link href="../Styles/styles.css" rel="stylesheet" />
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="../Styles/bootstrapg/js/bootstrap.js"></script>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -43,9 +49,10 @@
                     </div>
                 </div>
                 <%--<button type="button" class="btn btn-primary col-md-1 col-md-offset-9" runat="server">提 交</button>--%>
-                <input id="btnChange" type="button" class="btn btn-primary col-md-1 col-md-offset-9" value="提 交" runat="server" onserverclick="btnChange_ServerClick"></input>
+
                 <br />
             </div>
+            <input id="btnChange" type="button" class="btn btn-primary col-md-1" value="提 交" runat="server" onserverclick="btnChange_ServerClick"></input>
         </div>
     </form>
 </body>
