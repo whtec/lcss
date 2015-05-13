@@ -18,7 +18,11 @@ public partial class Login : System.Web.UI.Page
     {
         LCSS.Model.T_Account oAccount = new LCSS.BLL.T_Account().GetLoginInfo(txtUserName.Value, txtPassword.Value);
         if (oAccount == null)
-        { throw new Exception("用户名或密码错误"); return; }
+        {
+            //throw new Exception("用户名或密码错误");
+            lblmsg.InnerText = "用户名或密码错误!";
+            return;
+        }
         LCSS.Model.LoginInfo oLoginInfo = new LCSS.Model.LoginInfo();
         oLoginInfo.Agent = Request.UserAgent;
         oLoginInfo.HostName = Request.UserHostName;

@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,14 +15,9 @@
     <script src="Scripts/Validform_v5.3.2.js"></script>
 </head>
 <body class="loginbg">
-    <!--    <div class="container-fluid">
-
-        </div>-->
-
     <div class="loginBox">
         <div id="logo">
             <img src="Image/logo.png" width="400" height="80" alt="" />
-
         </div>
         <form class="form-horizontal loginFrom" id="loginForm" name="loginForm" runat="server">
             <div class="form-group">
@@ -44,20 +37,10 @@
                     <input type="submit" class="btn btn-primary col-sm-12" id="btnLogin" value="登   入" runat="server" onserverclick="btnLogin_ServerClick" />
                 </div>
             </div>
+            <div class="form-group">
+                <label id="lblmsg" runat="server" style="color:red"></label>
+                </div>
         </form>
     </div>
 </body>
 </html>
-
-
-
-<%--<form name="aspnetForm" method="post" action="signin.aspx?ReturnUrl=%2f%2fwww.asp.net%2f" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_MainContent_loginForm_btnLogin')" id="aspnetForm">
-<div>
-    
-
-<script type="text/javascript">
-    //<![CDATA[
-    WebForm_AutoFocus('ctl00_MainContent_loginForm_txtUsername'); Sys.Application.initialize();
-    //]]>
-</script>
-</form>--%>
