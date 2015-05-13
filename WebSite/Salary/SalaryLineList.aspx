@@ -51,15 +51,18 @@
             function (json) {
                 var colnames = ",{ display: '行号', name:'Row', minWidth: 40 ,width: 50,frozen:true}";
                 colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
-                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true,colclass:'gridcolor1'}";
+                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true}";
                 for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
                 {
                     if (i.indexOf("时间") > 0) {
                         colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,type:'date' }";
-                        continue;
+                        //continue;
                     }
-                    if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数'))
-                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
+                    else if (i.indexOf("实发") >= 0) {
+                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1'}";
+                    }
+                    else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数'))
+                    { colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}"; }                    
                 }
                 colnames = colnames.substr(1, colnames.length);
                 //console.log(colnames);

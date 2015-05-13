@@ -38,7 +38,7 @@ public partial class System_ChangePassword : System.Web.UI.Page
         {
             if (T_AccountBLL.UpdatePassword(txtAccount.Value, txtNew.Value))
             {
-                Response.Write("<script>alert('修改成功，请使用新密码重新登陆！');window.location.href='../Login.aspx';</script>");
+                Response.Write("<script>alert('修改成功，请使用新密码重新登陆！');window.parent.location.href='../Login.aspx';</script>");
                 //Response.Redirect("../Login.aspx");
             }
             else

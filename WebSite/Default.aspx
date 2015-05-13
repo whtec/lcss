@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="renderer" content="webkit" />
-    <title>无标题文档</title>
+    <title>工资查询系统</title>
     <link rel="stylesheet" type="text/css" href="Styles/bootstrapg/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="Styles/bootstrapg/css/todc-bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="Styles/styles.css" />
@@ -34,11 +34,11 @@
                         <label id="lblUserName" runat="server"></label>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">业务中心</a></li>
-                        <li><a href="#">修改密码</a></li>
+                        <%--<li><a href="#">业务中心</a></li>
+                        <li><a href="Login.aspx">修改密码</a></li>--%>
 
                         <li class="divider"></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a href="Login.aspx">退出</a></li>
                     </ul>
                 </li>
 
