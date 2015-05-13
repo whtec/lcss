@@ -247,7 +247,7 @@
                 var li_lasth = $("#li_last").offset().top;
                 var navH2 = $(window).scrollTop() + $(window).height();
                 var li_lastchazhi = navH2 - li_lasth;
-                console.log(li_lastchazhi);
+              //  console.log(li_lastchazhi);
                 // if (li_lastchazhi >= 71) {
                 if (li_lastchazhi >= 45) {
                     //  console.log(icount);
