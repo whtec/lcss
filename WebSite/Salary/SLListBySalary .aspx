@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalaryLineList.aspx.cs" Inherits="SalaryLineList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SLListBySalary .aspx.cs" Inherits="SLListBySalary" %>
 
 <!DOCTYPE html>
 
@@ -41,6 +41,22 @@
         var grid = null;//主表
         var call = "<%=call%>";//request.QueryString("call");
         //var j;
+
+        $(function () {
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1);
+
+            $("#dateup").val(date);
+            $("#dtp_input1").val(date);
+            
+            $.getJSON(url, { page: 1, pagesize: 15, sortname: '工号', sortorder: 'asc', Rnd: Math.random() },
+                function (json) {
+                    $("#selDes").val(des);
+                });
+        });
+
+
+
         function createGrid(divname, url) {
             $("#" + divname).remove();
             var div = "<div id='" + divname + "' style='margin:0; padding:0'></div>";
@@ -109,43 +125,23 @@
     <br />
     <form id="formsll" runat="server">
         <span class="glyphicon glyphicon-menu-down" aria-hidden="true" id="open1"></span>
-        <div class="chaxun-info" style="display: none;">
+        <%--<div class="chaxun-info" style="display: none;">--%>
+        <div class="chaxun-info" >
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <label for="" class="control-label chaxun-info-label">内容：</label>
-                    <div class="chaxun-info-input">
-                        <input type="text" class="form-control inputxt" placeholder="内容1" value="" />
+                    <label for="dtp_input" class="control-label chaxun-info-label">发放日期：</label>
+                    <div class="input-group date form_date chaxun-info-input" data-date="" data-date-format="yyyy-mm" data-link-field="dtp_input" data-link-format="yyyy-mm">
+                        <input id="dateup" class="form-control" size="16" type="text" readonly datatype="*" errormsg="不能为空" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                        <input type="hidden" id="dtp_input" value="" />
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
-                    <label for="" class="control-label chaxun-info-label">类型:</label>
+                    <label for="" class="control-label chaxun-info-label">发放项目:</label>
                     <div class="chaxun-info-input">
-                        <select class="form-control">
-                            <option></option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select class="form-control" id="selDes">
+                            <option>请选择</option>
                         </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-sm-6">
-                    <label for="dtp_input2" class="control-label chaxun-info-label">起始日期：</label>
-                    <div class="input-group date form_date chaxun-info-input" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:ii:ss">
-                        <input id="dateup" class="form-control" size="16" type="text" value="2015-1-1" readonly datatype="*" errormsg="不能为空">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                        <input type="hidden" id="dtp_input2" value="">
-                    </div>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="dtp_input2" class="control-label chaxun-info-label">结束日期：</label>
-                    <div class="input-group date form_date chaxun-info-input" disabled="disabled" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:ii:ss">
-                        <input id="datedown" class="form-control" disabled="disabled" size="16" type="text" value="2015-1-1" readonly datatype="*" errormsg="不能为空" />
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                        <input type="hidden" id="dtp_input3" value="" />
                     </div>
                 </div>
             </div>
@@ -164,8 +160,8 @@
             // todayBtn: 1,
             autoclose: 1,
             todayHighlight: 1,
-            startView: 3,
-            minView: 2,
+            startView: 4,
+            minView: 3,
             forceParse: 0
         });
     </script>

@@ -16,6 +16,7 @@ namespace LCSS.Model
         private string _sal_add_user;
         private DateTime _sal_add_date = DateTime.Now;
         private string _sal_org_code;
+        private string _sal_description;
 
         /// <summary>
         /// 薪水台账流水号
@@ -64,6 +65,14 @@ namespace LCSS.Model
         {
             set { _sal_org_code = value; }
             get { return _sal_org_code; }
+        }
+        /// <summary>
+        /// 工资单标题，描述
+        /// </summary>
+        public string Sal_Description
+        {
+            set { _sal_description = value; }
+            get { return _sal_description; }
         }
         #endregion Model
 

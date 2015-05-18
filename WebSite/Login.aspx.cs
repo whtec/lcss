@@ -38,6 +38,12 @@ public partial class Login : System.Web.UI.Page
         {
             LCSS.Model.Employees oEmployees = new LCSS.Model.Employees();
             oEmployees = new LCSS.BLL.Employees().GetModel(oAccount.ACCT_US_Code);
+            if (oAccount == null)
+            {
+                //throw new Exception("用户名或密码错误");
+                lblmsg.InnerText = "没有找到对应的员工!";
+                return;
+            }
             oLoginInfo.UserID = oEmployees.Emp_Code;
             oLoginInfo.UserName = oEmployees.Emp_Name;
             oLoginInfo.OrgCode = oEmployees.Emp_Org_Code;

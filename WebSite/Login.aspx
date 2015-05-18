@@ -23,13 +23,13 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-3 control-label">用户名:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="txtUserName" name="txtUserName" placeholder="您的用户名" runat="server" value="test1" />
+                    <input type="text" class="form-control" id="txtUserName" name="txtUserName" placeholder="您的用户名" runat="server" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-3 control-label">密码:</label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="您的密码" runat="server" value="1" />
+                    <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="您的密码" runat="server" />
                 </div>
             </div>
             <div class="form-group">

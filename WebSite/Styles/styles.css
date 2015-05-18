@@ -4,7 +4,7 @@
 body {
     /*background-color: #efefef;*/
 }
-#divGridgrid {
+#divGridZoom {
 zoom:1.4;}
 
 .loginbg {
@@ -54,6 +54,10 @@ a {
         color: inherit;
         text-decoration: inherit;
     }
+
+    #file1 {
+display:initial;
+}
 
 .loginBox {
     width: 400px;

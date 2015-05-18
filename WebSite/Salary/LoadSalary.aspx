@@ -9,23 +9,39 @@
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css" />
     <link href="../Styles/bootstrapg/css/todc-bootstrap.css" rel="stylesheet" />
     <link href="../Styles/styles.css" rel="stylesheet" />
+    <link href="../Styles/bootstrapg/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
     <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../Styles/bootstrapg/js/bootstrap.js"></script>
-
     <script src="../Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerGrid.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerDrag.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>
+    <script src="../Styles/bootstrapg/bootstrap-datetimepicker.min.js"></script>
+    <script src="../Styles/bootstrapg/bootstrap-datetimepicker.zh-CN.js"></script>
     <script>
         var onlyshow = true;
-        function onclickimport() {
-            createGrid2("divGrid", "../Handler/SalaryHandler.ashx?opt=Import")
-        };
+        var desdefault = '工资单';
+        $(function () {
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth()+1);
+            var des = date + desdefault;
+
+            $("#dateup").val(date);
+            $("#dtp_input1").val(date);
+            $("#txtDescription").val(des);
+        });
+
+        function ondatechange()
+        {
+            $("#txtDescription").val($("#dtp_input1").val()+desdefault);
+        }
+       
+        //上传选择的excel到服务器并读取内容
         function onclickread() {
             if (check()) {
                 var form = document.getElementById("uploadForm")
@@ -36,6 +52,23 @@
                 uploadForm.formSubmit.click();
             }
         }
+        //检查文件格式是否有效
+        function check() {
+            //获得要上传的文件的扩展名
+            var file = document.getElementById("file1");
+            var value = file.value;
+            var ext = value.substr(value.lastIndexOf(".") + 1);
+
+            //先在客户端进行第一次判断
+            if (ext == "xls" || ext == "xlsx") {
+                return true;
+            } else {
+                $("div#alert1").slideDown("slow");
+                t = setTimeout("$('div#alert1').slideUp('slow')", 4000);
+                return false;
+            }
+        }
+        //文件上传结束时触发
         function uploadFile(flag, text) {
             var form = document.getElementById("uploadForm");
             if (form != undefined) {
@@ -44,13 +77,14 @@
                 //form.enctype = "";
                 form.action = "";
             }
-            if (!flag)
-            {
+            if (!flag) {
                 $("div#alert2").append(unescape(text));
                 $("div#alert2").slideDown("slow");
                 //t = setTimeout("$('div#alert2').slideUp('slow')", 4000);
-            }
+                $("#btnImport").addClass("disabled");
+            }   
             else {
+                $("#btnImport").removeClass("disabled");
                 createGrid(text);
             }
         }
@@ -59,9 +93,15 @@
             onlyshow = false;
             showGrid(json);
         }
-
+        //导入数据并显示
+        function onclickimport() {
+            $("#btnImport").addClass("disabled");
+            var date = $("#dtp_input1").val();
+            var des = $("#txtDescription").val();
+            createGrid2("divGrid", "../Handler/SalaryHandler.ashx?opt=Import&date=" + date + "&des=" + escape(des));
+        }
         function createGrid2(divname, url) {
-            onlyshow = true;
+            //onlyshow = true;
             $.getJSON(url, { Rnd: Math.random() }, showGrid);
         }
         function showGrid(json) {
@@ -92,54 +132,75 @@
                     "widht:'auto'," +
                     "rownumbers:true," +
                     "page: 1,pageSize:20,pageSizeOptions: [20,50,100,200,500]";
-            if (!onlyshow)
-                ligergrid += ",toolbar: { items: [{ text: '导入系统', type: 'queryCond',click: onclickimport }]}";
+            //if (!onlyshow)
+            //    ligergrid += ",toolbar: { items: [{ text: '导入系统', type: 'queryCond',click: onclickimport }]}";
             ligergrid += "});"
             eval(ligergrid);
         }
 
-            function check() {
-                //获得要上传的文件的扩展名
-                var file = document.getElementById("file1");
-                var value = file.value;
-                var ext = value.substr(value.lastIndexOf(".") + 1);
 
-                //先在客户端进行第一次判断
-                if (ext == "xls" || ext == "xlsx") {
-                    return true;
-                } else {
-                    // $('div#alert1').remove();
-                    // clearTimeout(t);
-                    //  var div2 = "<div class='alert alert-danger' role='alert' id='alert1'  style='display: none' >请先选择上传文件后，在导入。</div>";
-                    //  $(document.getElementById('uploadForm')).before(div2);
-                    $("div#alert1").slideDown("slow");
-                    t = setTimeout("$('div#alert1').slideUp('slow')", 4000);
-                    return false;
-                }
-            }
-
+        //$(document).ready(function () {
+        //    $("#btnRead").click(function () {
+        //        $("#btnImport").removeClass("disabled");
+        //        //   $('div.alert').remove();
+        //    })
+        //})
 
     </script>
 </head>
 <body>
     <iframe name="upfileIFrame" style="display: none"></iframe>
-    <form id="uploadForm" name="uploadForm" runat="server">
+    <form id="uploadForm" name="uploadForm" runat="server" class="chaxun-info">
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="dtp_input1" class="control-label chaxun-info-label">所属年月度：</label>
+                <div class="input-group date form_date chaxun-info-input" data-date="" data-date-format="yyyy-mm" data-link-field="dtp_input1" data-link-format="yyyy-mm">
+                    <input id="dateup" class="form-control" size="16" type="text" readonly datatype="*" errormsg="不能为空" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    <input type="hidden" id="dtp_input1" value="" onchange="ondatechange()" />
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="txtDescription" class="control-label chaxun-info-label">标题：</label>
+                <div class="chaxun-info-input">
+                    <input id="txtDescription" type="text" class="form-control inputxt" placeholder="这里输入标题" value="" />
+                </div>
+            </div>
+        </div>
         <div class='alert alert-danger' role='alert' id='alert1' style='display: none'>请先选择上传文件后，在读取。</div>
         <div class='alert alert-danger' role='alert' id='alert2' style='display: none'>错误提示：</div>
         <div class="row daoru">
             <input id="formSubmit" type="submit" value="submit" name="formSubmit" style="display: none" onclick="this.form.submit()" />
-            <div class="form-group col-sm-7 import-file1">
+            <div class="form-group col-sm-5 import-file1">
                 <label for="file1">1.文件上传：</label>
                 <input id="file1" name="file1" type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-                <p class="help-block">请您先选取文件，然后在读取确认无误后 即可导入。</p>
+                
             </div>
             <div class="form-group col-sm-5 import-btn">
                 <label for="btnRead">2.</label>
                 <input id="btnRead" name="btnRead" class="btn btn-primary" type="button" value="读取Excel" onclick="return onclickread();" />
+
+            
+                <label for="btnRead">3.</label>
+                <input id="btnImport" name="btnImport" class="btn btn-primary disabled" type="button" value="导入Excel" onclick="onclickimport()" />
+
             </div>
+             
         </div>
         <div id="divGrid" runat="server"></div>
     </form>
-<%--    <script src="Scripts/miao.js"></script>--%>
+    <%--    <script src="Scripts/miao.js"></script>--%>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            // todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 4,
+            minView: 3,
+            forceParse: 0
+        });
+    </script>
 </body>
 </html>

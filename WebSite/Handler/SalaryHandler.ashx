@@ -196,12 +196,20 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
     string Import(HttpContext context)
     {
         LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
+        if (oLoginInfo == null)
+            context.Response.Redirect("../Login.aspx");
 
+        string[] date = context.Request.Params["date"].Split('-');
+
+        LCSS.BLL.Salary SalaryBLL = new LCSS.BLL.Salary();
         LCSS.Model.Salary oSalary = new LCSS.Model.Salary();
         oSalary.Sal_Add_User = oLoginInfo.LoginID;//获取当前用户
         oSalary.Sal_Org_Code = oLoginInfo.OrgCode;//获取当前用户所属组织
-        LCSS.BLL.Salary SalaryBLL = new LCSS.BLL.Salary();
+        oSalary.Sal_Year = int.Parse(date[0]);
+        oSalary.Sal_Month = int.Parse(date[1]);
+        oSalary.Sal_Description = context.Request.Params["des"];
         oSalary.Sal_ID = SalaryBLL.Add(oSalary);
+        
         //循环插入数据库（排除空数据）
         LCSS.Model.SalaryLine oSalaryLine;
         LCSS.BLL.CompensationItem CIBLL = new LCSS.BLL.CompensationItem();
