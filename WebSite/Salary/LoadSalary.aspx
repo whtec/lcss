@@ -25,7 +25,7 @@
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.zh-CN.js"></script>
     <script>
         var onlyshow = true;
-        var desdefault = '工资单';
+        var desdefault = ' 工资单';
         $(function () {
             var today = new Date();
             var date = today.getFullYear() + '-' + (today.getMonth()+1);

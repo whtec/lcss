@@ -112,9 +112,15 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
             case "5":
                 {
                     string said = context.Request.Params["said"];
-                    strWhere += " AND [导入编次]=" + said;
-                    ds = SLBLL.GetList_SalaryLineBySalary(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
-
+                    ds = SLBLL.GetList_SalaryLineByEmployees2(said.ToString(), oLoginInfo.UserID);
+                }
+                break;
+            case "6":
+                {
+                    string[] date = context.Request.Params["date"].ToString().Split('-');
+                    string Sal_Year = date[0];
+                    string Sal_Month = date[1];
+                    ds = SLBLL.GetList_SalaryLineByEmployees3(oLoginInfo.UserID, Sal_Year, Sal_Month);
                 }
                 break;
             default:
@@ -282,16 +288,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         if (dsSalary == null || dsSalary.Tables.Count == 0)
             return "";
 
-        StringBuilder sHtml = new StringBuilder();
-        sHtml.Append("{");
-        foreach (DataRow dr in dsSalary.Tables[0].Rows)
-        {
-            //sHtml.AppendFormat("<option value=\"{0}\">{1}</option>", dr["Sal_ID"].ToString(), dr["Sal_Description"].ToString());
-            sHtml.AppendFormat(",[id:{0},text:'{1}']", dr["Sal_ID"].ToString(), dr["Sal_Description"].ToString());
-        }
-        sHtml.Remove(1, 1);
-        sHtml.Append("}");
-        return sHtml.ToString();//DataToJSON.GetGridJson(ds);
+        return JSONHelper.TableToJson(dsSalary.Tables[0]);
     }
 
 

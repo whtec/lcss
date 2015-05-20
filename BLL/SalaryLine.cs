@@ -202,6 +202,14 @@ namespace LCSS.BLL
         {
             return dal.GetList_SalaryLineByEmployees(PageSize, PageIndex, OrderBy, strWhere, Emp_Code);
         }
+        public DataSet GetList_SalaryLineByEmployees2(string Sal_ID, string Emp_Code)
+        {
+            return dal.GetList_SalaryLineByEmployees2(Sal_ID,Emp_Code);
+        }
+        public DataSet GetList_SalaryLineByEmployees3(string Emp_Code, string Sal_Year, string Sal_Month)
+        {
+            return dal.GetList_SalaryLineByEmployees3(Emp_Code, Sal_Year, Sal_Month);
+        }
         public DataSet GetMyGongzitiao(int iYear,int iMonth,string Emp_Code)
         {
             return dal.GetMyGongzitiao(iYear, iMonth, Emp_Code);

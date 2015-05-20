@@ -39,7 +39,6 @@
     <script type="text/javascript">
         var grid = null;//主表
         var call = "<%=call%>";//request.QueryString("call");
-        //var j;
 
         $(function () {
             var today = new Date();
@@ -47,20 +46,38 @@
 
             $("#dateup").val(date);
             $("#dtp_input1").val(date);
+            //console.log(date);
+            var url = "../Handler/SalaryHandler.ashx?opt=QuerySalaryDDL&date=" + date;
+            $.getJSON(url, { Rnd: Math.random() },
+                function (json) {
+                    for (var i = 0; i < json.length; i++) {
+                        $("#selDes").append('<option value=\"' + json[i].Sal_ID + '\">' + json[i].Sal_Description + '</option>');
+                    }
+                    $("#selDes").append('<option value=\"0\">' + date + ' 总收入列表</option>');
+                });
+        });
+        function ondatechange() {
+            var date = $("#dateup").val();
             console.log(date);
             var url = "../Handler/SalaryHandler.ashx?opt=QuerySalaryDDL&date=" + date;
-            $.getJSON(url, { page: 1, pagesize: 15, sortname: '工号', sortorder: 'asc', Rnd: Math.random() },
+            $.getJSON(url, { Rnd: Math.random() },
                 function (json) {
-                    //alert(JSON.stringify(json));
-                    console.log(JSON.stringify(json));
-                    //for (var i = 0; i < json.rows.length; i++) {
-                    //    $("#selDes").append('<option value=\"' + data.rows[i].id + '\">' + data.rows[i].text + '</option>');
-                    //    alert(data.rows[i].id + '-' + data.rows[i].text);
-                    //}
+                    var selOpt = $("#selDes option");
+                    selOpt.remove();
+                    $("#selDes").append('<option value=\"-1\">请选择...</option>');
+                    for (var i = 0; i < json.length; i++) {
+                        $("#selDes").append('<option value=\"' + json[i].Sal_ID + '\">' + json[i].Sal_Description + '</option>');
+                    }
+                    $("#selDes").append('<option value=\"0\">' + date + '总收入列表</option>');
                 });
-            //createGrid("divGrid", "../Handler/SalaryHandler.ashx?opt=Query&call=" + call);
-        });
+        }
 
+        function ddlchange() {
+            if ($("#selDes").val() == 0)
+                createGrid("divGrid", "../Handler/SalaryHandler.ashx?opt=Query&call=6" + "&date=" + $("#dateup").val());
+            else if ($("#selDes").val() != -1)
+                createGrid("divGrid", "../Handler/SalaryHandler.ashx?opt=Query&call=5" + "&said=" + $("#selDes").val());
+        }
 
         function createGrid(divname, url) {
             $("#" + divname).remove();
@@ -70,8 +87,7 @@
 
             $.getJSON(url, { page: 1, pagesize: 15, sortname: '工号', sortorder: 'asc', Rnd: Math.random() },
             function (json) {
-                var colnames = ",{ display: '行号', name:'Row', minWidth: 40 ,width: 50,frozen:true}";
-                colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
+                var colnames = ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
                 colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true}";
                 for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
                 {
@@ -86,14 +102,10 @@
                     { colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}"; }
                 }
                 colnames = colnames.substr(1, colnames.length);
-                //console.log(colnames);
-                //j = json;
                 eval(
                         "grid=$('#" + divname + "').ligerGrid({" +
                         "checkbox: false," +
                         "columns:[" + colnames + "]," +
-                        //"toolbar: { items: [{ text: '导出Execl', type: 'queryCond', click: operate }]}," +
-                        //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
                         "url:'" + url + "'," +
                         "dataAction:'server'," +
                         "height:'auto'," +
@@ -103,25 +115,12 @@
                         "page: 1,pageSize:15,pageSizeOptions: [15, 20, 30, 50, 100]" +
                         "});"
                     );
-                //console.log("grid=$('#" + divname + "').ligerGrid({" +
-                //        "checkbox: false," +
-                //        "columns:[" + colnames + "]," +
-                //        "toolbar: { items: [{ text: '导出Execl', type: 'queryCond', click: operate }]}," +
-                //        //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
-                //        "url:'" + url + "'," +
-                //        "dataAction:'server'," +
-                //        "height:'auto'," +
-                //        "sortname:'工号'," +
-                //        "sortorder:'asc'," +
-                //        "page: 1,pageSize:15,pageSizeOptions: [15, 20, 30, 50, 100]" +
-                //        "});");
             });
         }
-        function operate()
-        { }
 
 
-        
+
+
     </script>
 </head>
 <body>
@@ -131,25 +130,29 @@
         <%--<div class="chaxun-info" style="display: none;">--%>
         <div class="chaxun-info">
             <div class="row">
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-1">
+                </div>
+                <div class="form-group col-sm-5">
                     <label for="dtp_input" class="control-label chaxun-info-label">发放日期：</label>
-                    <div class="input-group date form_date chaxun-info-input" data-date="" data-date-format="yyyy-mm" data-link-field="dtp_input" data-link-format="yyyy-mm">
+                    <div class="input-group date form_date chaxun-info-input" data-date="" data-date-format="yyyy-m" data-link-field="dtp_input" data-link-format="yyyy-m">
                         <input id="dateup" class="form-control" size="16" type="text" readonly datatype="*" errormsg="不能为空" />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         <input type="hidden" id="dtp_input" value="" onchange="ondatechange()" />
                     </div>
                 </div>
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-5">
                     <label for="" class="control-label chaxun-info-label">发放项目:</label>
                     <div class="chaxun-info-input">
-                        <select class="form-control" id="selDes">
-                            <option>请选择</option>
+                        <select class="form-control" id="selDes" onchange="ddlchange()">
+                            <option value="-1">请选择...</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-sm-6">
-                    <button type="button" class="btn btn-primary col-md-1 col-md-offset-6">查 询</button>
+                <div class="form-group col-sm-1">
                 </div>
+                <%--<div class="form-group col-sm-2">
+                    <button type="button" class="btn btn-primary">查 询</button>
+                </div>--%>
                 <br />
             </div>
         </div>

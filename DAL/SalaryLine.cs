@@ -393,6 +393,37 @@ namespace LCSS.DAL
             return DbHelperSQL.Query("GetList_SalaryLineByEmployees", CommandType.StoredProcedure, parameters);
         }
         /// <summary>
+        /// 查询个人收入明细列表（分页）
+        /// </summary>
+        /// <param name="PageSize">每页显示数量</param>
+        /// <param name="PageIndex">页码</param>
+        /// <param name="OrderBy">排序</param>
+        /// <param name="strWhere">条件</param>
+        /// <param name="Emp_Code">员工编号</param>
+        /// <returns></returns>
+        public DataSet GetList_SalaryLineByEmployees2(string Sal_ID, string Emp_Code)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@Sal_ID", SqlDbType.VarChar,20),
+                    new SqlParameter("@Emp_Code", SqlDbType.VarChar, 20)
+					};
+            parameters[0].Value = Sal_ID;
+            parameters[1].Value = Emp_Code;
+            return DbHelperSQL.Query("GetList_SalaryLineByEmployees2", CommandType.StoredProcedure, parameters);
+        }
+        public DataSet GetList_SalaryLineByEmployees3(string Emp_Code, string Sal_Year, string Sal_Month)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@Emp_Code", SqlDbType.VarChar,20),
+                    new SqlParameter("@Sal_Year", SqlDbType.VarChar, 20),
+                    new SqlParameter("@Sal_Month", SqlDbType.VarChar, 20)
+					};
+            parameters[0].Value = Emp_Code;
+            parameters[1].Value = Sal_Year;
+            parameters[2].Value = Sal_Month;
+            return DbHelperSQL.Query("GetList_SalaryLineByEmployees3", CommandType.StoredProcedure, parameters);
+        }
+        /// <summary>
         /// 得到指定年月工资信息
         /// </summary>
         /// <param name="iYear"></param>
