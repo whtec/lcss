@@ -180,6 +180,10 @@ namespace LCSS.BLL
         {
             return dal.GetList_Salary(PageSize, PageIndex, OrderBy, strWhere);
         }
+        public DataSet GetSalaryList(int year, int month, string Emp_Code)
+        {
+            return dal.GetSalaryList(year, month, Emp_Code);
+        }
         #endregion  ExtensionMethod
     }
 }

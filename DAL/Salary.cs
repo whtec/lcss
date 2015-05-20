@@ -3,6 +3,10 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using PC.DBUtility;
+using System.Collections.Generic;
+using System.Text;
+
+
 namespace LCSS.DAL
 {
     /// <summary>
@@ -352,6 +356,59 @@ namespace LCSS.DAL
             parameters[2].Value = OrderBy;
             parameters[3].Value = strWhere;
             return DbHelperSQL.Query("GetList_Salary", CommandType.StoredProcedure, parameters);
+        }
+
+        //public DataSet GetSalaryListByModel(LCSS.Model.Salary model)
+        //{
+        //    StringBuilder sbSql = new System.Text.StringBuilder();
+        //    sbSql.Append("SELECT * FROM [Salary] WHERE 1=1");
+
+        //    List<SqlParameter> parameters=new List<SqlParameter>();
+        //    parameters.Add();
+
+        //    SqlParameter[] parameters = {
+        //            new SqlParameter("@PageSize", SqlDbType.Int),
+        //            new SqlParameter("@PageIndex", SqlDbType.Int),
+        //            new SqlParameter("@Emp_Code", SqlDbType.VarChar,20)
+        //            };
+        //    parameters[0].Value = PageSize;
+        //    parameters[1].Value = PageIndex;
+        //    parameters[2].Value = Emp_Code;
+        //    return DbHelperSQL.Query("GetList_SalaryDate", CommandType.StoredProcedure, parameters);
+        //}
+        public DataSet GetSalaryList(int year, int month, string Emp_Code)
+        {
+            StringBuilder sbSql = new System.Text.StringBuilder();
+                sbSql.Append(@"SELECT distinct [Sal_ID]
+                                  ,[Sal_Year]
+                                  ,[Sal_Month]
+                                  ,[Sal_Add_User]
+                                  ,[Sal_Add_Date]
+                                  ,[Sal_Org_Code]
+                                  ,[Sal_Description]
+                              FROM [dbo].[Salary]
+                                    left join [dbo].[SalaryLine] on [SalaryLine].[SL_Sal_ID]=[Sal_ID] 
+                              WHERE     [Sal_Year]=@Sal_Year 
+                                    AND [Sal_Month]=@Sal_Month 
+                                    AND [SalaryLine].SL_Emp_Code=@SL_Emp_Code");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@Sal_Year", SqlDbType.Int),
+                    new SqlParameter("@Sal_Month", SqlDbType.Int),
+                    new SqlParameter("@SL_Emp_Code", SqlDbType.VarChar,20)
+                    };
+            parameters[0].Value = year;
+            parameters[1].Value = month;
+            parameters[2].Value = Emp_Code;
+            return DbHelperSQL.Query(sbSql.ToString(), parameters);
+        }
+
+
+        private SqlParameter GetSqlParameter(string parameterName,SqlDbType type,int size,object value)
+        {
+            SqlParameter parameter = new SqlParameter(parameterName,type,size);
+            parameter.Value = value;
+
+            return parameter;
         }
         #endregion  ExtensionMethod
     }

@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalaryDetails.aspx.cs" Inherits="Salary_SalaryDetails" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" class="no-js">
@@ -9,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css" />
 
     <link href="../Styles/VerticalTimeline/css/default.css" rel="stylesheet" />
     <link href="../Styles/VerticalTimeline/css/component.css" rel="stylesheet" />
@@ -37,16 +38,18 @@
     </script>--%>
 
     <style>
-
         body {
-        overflow-x:scroll;}
+            overflow-x: scroll;
+        }
+
         .daoru {
-            min-height:500px;
-  margin: 0;}
+            min-height: 500px;
+            margin: 0;
+        }
 
         .alert > h4 {
-        
-        text-align:center;}
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -170,7 +173,6 @@
         var icount = 0;
         var hahaha = "";
         function SalaryDetailsajax() {
-
             icount++;
             console.log(icount);
             //$.get("Handler/SalaryHandler.ashx", { opt: "MyGzt", count: icount }, function (result) {
@@ -190,20 +192,16 @@
                 async: false,
                 cache: false,
                 success: function (result) {
-
                     if (result == hahaha) {
-                     //   $("#li_last").append('      <div class="alert alert-success" role="alert"><h4>没有更多数据了。</h4> </div>');
+                        //   $("#li_last").append('      <div class="alert alert-success" role="alert"><h4>没有更多数据了。</h4> </div>');
                         $("#li_last").parent().parent().append('<div class="alert alert-success" role="alert"><h4>没有更多数据了。</h4></div>');
                         $("#li_last").removeAttr("id");
                     } else {
-
                         $("#li_last").before(result);
                     }
-                },
-
+                }
             });
-            $.ajax({ data: { opt: "MyGzt", count: icount } }
-                )
+            $.ajax({ data: { opt: "MyGzt", count: icount } });
         }
         $(document).ready(function () {
 
@@ -217,7 +215,7 @@
                 var li_lasth = $("#li_last").offset().top;
                 var navH2 = $(window).scrollTop() + $(window).height();
                 var li_lastchazhi = navH2 - li_lasth;
-              //  console.log(li_lastchazhi);
+                //  console.log(li_lastchazhi);
                 // if (li_lastchazhi >= 71) {
                 if (li_lastchazhi >= 45) {
                     //  console.log(icount);

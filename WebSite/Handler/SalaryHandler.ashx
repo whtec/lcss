@@ -36,6 +36,9 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
                 case "MyGzt":
                     json = GetMyGztJSON(context);
                     break;
+                case "QuerySalaryDDL":
+                    json = QuerySalaryDDLByDate(context);
+                    break;
                 default:
                     break;
             }
@@ -66,8 +69,8 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         //oLoginInfo.LoginID = "42000062";
         //oLoginInfo.OrgCode = "Org01";
         //oLoginInfo.UserID = "42000062";
-        
-        
+
+
         int PageSize = 20, PageIndex = 1;
         string OrderBy = string.Empty, strWhere = " 1=1 ", Call = string.Empty;
 
@@ -111,7 +114,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
                     string said = context.Request.Params["said"];
                     strWhere += " AND [导入编次]=" + said;
                     ds = SLBLL.GetList_SalaryLineBySalary(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
-                    
+
                 }
                 break;
             default:
@@ -126,7 +129,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         //throw new Exception("1");
         LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
         if (oLoginInfo == null)
-            context.Response.Redirect("../Login.aspx");
+            context.Response.Redirect("../../Login.aspx");
         LCSS.BLL.Salary SalaryBLL = new LCSS.BLL.Salary();
         LCSS.BLL.SalaryLine SLBLL = new LCSS.BLL.SalaryLine();
         DataSet dsDate;
@@ -209,7 +212,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         oSalary.Sal_Month = int.Parse(date[1]);
         oSalary.Sal_Description = context.Request.Params["des"];
         oSalary.Sal_ID = SalaryBLL.Add(oSalary);
-        
+
         //循环插入数据库（排除空数据）
         LCSS.Model.SalaryLine oSalaryLine;
         LCSS.BLL.CompensationItem CIBLL = new LCSS.BLL.CompensationItem();
@@ -262,6 +265,33 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
 
         //返回匹配后的文件表格
         return DataToJSON.GetGridJson(dtValid);
+    }
+
+    string QuerySalaryDDLByDate(HttpContext context)
+    {
+        LoginInfo oLoginInfo = (LoginInfo)context.Session[PageSessionName.LoginObject];
+        if (oLoginInfo == null)
+            context.Response.Redirect("../Login.aspx");
+
+        string[] date = context.Request.Params["date"].ToString().Split('-');
+        int year = Convert.ToInt32(date[0]);
+        int month = Convert.ToInt32(date[1]);
+
+        LCSS.BLL.Salary SalaryBLL = new LCSS.BLL.Salary();
+        DataSet dsSalary = SalaryBLL.GetSalaryList(year, month, oLoginInfo.UserID);
+        if (dsSalary == null || dsSalary.Tables.Count == 0)
+            return "";
+
+        StringBuilder sHtml = new StringBuilder();
+        sHtml.Append("{");
+        foreach (DataRow dr in dsSalary.Tables[0].Rows)
+        {
+            //sHtml.AppendFormat("<option value=\"{0}\">{1}</option>", dr["Sal_ID"].ToString(), dr["Sal_Description"].ToString());
+            sHtml.AppendFormat(",[id:{0},text:'{1}']", dr["Sal_ID"].ToString(), dr["Sal_Description"].ToString());
+        }
+        sHtml.Remove(1, 1);
+        sHtml.Append("}");
+        return sHtml.ToString();//DataToJSON.GetGridJson(ds);
     }
 
 

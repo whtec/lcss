@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SLListBySalary .aspx.cs" Inherits="SLListBySalary" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SLListBySalary.aspx.cs" Inherits="SLListBySalary" %>
 
 <!DOCTYPE html>
 
@@ -9,8 +9,7 @@
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css">
-
+    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css" />
     <link href="../Styles/bootstrapg/css/todc-bootstrap.css" rel="stylesheet" />
     <link href="../Styles/styles.css" rel="stylesheet" />
     <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
@@ -48,13 +47,19 @@
 
             $("#dateup").val(date);
             $("#dtp_input1").val(date);
-            
+            console.log(date);
+            var url = "../Handler/SalaryHandler.ashx?opt=QuerySalaryDDL&date=" + date;
             $.getJSON(url, { page: 1, pagesize: 15, sortname: '工号', sortorder: 'asc', Rnd: Math.random() },
                 function (json) {
-                    $("#selDes").val(des);
+                    //alert(JSON.stringify(json));
+                    console.log(JSON.stringify(json));
+                    //for (var i = 0; i < json.rows.length; i++) {
+                    //    $("#selDes").append('<option value=\"' + data.rows[i].id + '\">' + data.rows[i].text + '</option>');
+                    //    alert(data.rows[i].id + '-' + data.rows[i].text);
+                    //}
                 });
+            //createGrid("divGrid", "../Handler/SalaryHandler.ashx?opt=Query&call=" + call);
         });
-
 
 
         function createGrid(divname, url) {
@@ -78,7 +83,7 @@
                         colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1'}";
                     }
                     else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数'))
-                    { colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}"; }                    
+                    { colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}"; }
                 }
                 colnames = colnames.substr(1, colnames.length);
                 //console.log(colnames);
@@ -116,9 +121,7 @@
         { }
 
 
-        $(function () {
-            createGrid("divGrid", "../Handler/SalaryHandler.ashx?opt=Query&call=" + call);
-        });
+        
     </script>
 </head>
 <body>
@@ -126,14 +129,14 @@
     <form id="formsll" runat="server">
         <span class="glyphicon glyphicon-menu-down" aria-hidden="true" id="open1"></span>
         <%--<div class="chaxun-info" style="display: none;">--%>
-        <div class="chaxun-info" >
+        <div class="chaxun-info">
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label for="dtp_input" class="control-label chaxun-info-label">发放日期：</label>
                     <div class="input-group date form_date chaxun-info-input" data-date="" data-date-format="yyyy-mm" data-link-field="dtp_input" data-link-format="yyyy-mm">
                         <input id="dateup" class="form-control" size="16" type="text" readonly datatype="*" errormsg="不能为空" />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                        <input type="hidden" id="dtp_input" value="" />
+                        <input type="hidden" id="dtp_input" value="" onchange="ondatechange()" />
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
@@ -144,9 +147,9 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <button type="button" class="btn btn-primary col-md-1 col-md-offset-6">提 交</button>
+                <div class="form-group col-sm-6">
+                    <button type="button" class="btn btn-primary col-md-1 col-md-offset-6">查 询</button>
+                </div>
                 <br />
             </div>
         </div>
