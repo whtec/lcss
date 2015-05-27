@@ -202,17 +202,41 @@ namespace LCSS.BLL
         {
             return dal.GetList_SalaryLineByEmployees(PageSize, PageIndex, OrderBy, strWhere, Emp_Code);
         }
+        /// <summary>
+        /// 查看个人指定编次的导入列表
+        /// </summary>
+        /// <param name="Sal_ID">导入编次</param>
+        /// <param name="Emp_Code">员工编号</param>
+        /// <returns></returns>
         public DataSet GetList_SalaryLineByEmployees2(string Sal_ID, string Emp_Code)
         {
             return dal.GetList_SalaryLineByEmployees2(Sal_ID,Emp_Code);
         }
-        public DataSet GetList_SalaryLineByEmployees3(string Emp_Code, string Sal_Year, string Sal_Month)
+        /// <summary>
+        /// 个人月度总收入（按客户提供格式）,必须固定[CT_CODE]代码
+        /// </summary>
+        /// <param name="iYear"></param>
+        /// <param name="iMonth"></param>
+        /// <param name="Emp_Code"></param>
+        /// <returns></returns>
+        public DataSet GetList_SalaryLineByEmployees3(int iYear, int iMonth, string Emp_Code)
         {
-            return dal.GetList_SalaryLineByEmployees3(Emp_Code, Sal_Year, Sal_Month);
+            return dal.GetList_SalaryLineByEmployees3(iYear, iMonth, Emp_Code);
         }
         public DataSet GetMyGongzitiao(int iYear,int iMonth,string Emp_Code)
         {
             return dal.GetMyGongzitiao(iYear, iMonth, Emp_Code);
+        }
+        /// <summary>
+        /// 得到指定年月工资台账信息
+        /// </summary>
+        /// <param name="iYear"></param>
+        /// <param name="iMonth"></param>
+        /// <param name="Emp_Code">空则查询所有人</param>
+        /// <returns></returns>
+        public DataSet GetIncomeList(int iYear, int iMonth, string Emp_Code)
+        {
+            return dal.GetIncomeList(iYear, iMonth, Emp_Code);
         }
 		#endregion  ExtensionMethod
 	}

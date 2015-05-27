@@ -174,7 +174,7 @@
         var hahaha = "";
         function SalaryDetailsajax() {
             icount++;
-            console.log(icount);
+            //console.log(icount);
             //$.get("Handler/SalaryHandler.ashx", { opt: "MyGzt", count: icount }, function (result) {
             //    //    console.log(result);
             //    if (result == hahaha) {

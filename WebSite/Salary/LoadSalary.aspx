@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>信息导入</title>
+    <title>薪酬导入</title>
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
@@ -13,7 +13,6 @@
     <link href="../Styles/bootstrapg/css/todc-bootstrap.css" rel="stylesheet" />
     <link href="../Styles/styles.css" rel="stylesheet" />
     <link href="../Styles/bootstrapg/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-
     <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="../Styles/bootstrapg/js/bootstrap.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/core/base.js"></script>
@@ -24,12 +23,18 @@
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.min.js"></script>
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.zh-CN.js"></script>
     <script>
-        var onlyshow = true;
-        var desdefault = ' 工资单';
+        var onlyshow = true;//是否只显示数据（无导入）
+        var default_des = ' 工资单';
+        //var girdbodyheight = 600;
+
+        var winheight = parent.document.documentElement.clientHeight;
+        var girdbodyheight = (winheight - 280);
+        //console.log(winheight);
+
         $(function () {
             var today = new Date();
             var date = today.getFullYear() + '-' + (today.getMonth()+1);
-            var des = date + desdefault;
+            var des = date + default_des;
 
             $("#dateup").val(date);
             $("#dtp_input1").val(date);
@@ -38,7 +43,7 @@
 
         function ondatechange()
         {
-            $("#txtDescription").val($("#dtp_input1").val()+desdefault);
+            $("#txtDescription").val($("#dtp_input1").val()+default_des);
         }
        
         //上传选择的excel到服务器并读取内容
@@ -111,7 +116,7 @@
 
             var colnames = ",{ display: '是否匹配', name:'是否匹配', minWidth: 50 ,width: 80,frozen:true}";
             colnames += ",{ display: '工号', name:'工号', minWidth: 50 ,width: 80,frozen:true}";
-            colnames += ",{ display: '姓名', name:'姓名', minWidth: 50 ,width: 80,frozen:true}";
+            colnames += ",{ display: '姓名', name:'姓名', minWidth: 50 ,width: 80,frozen:true,totalSummary:{render: function (){return '<div>当页合计</div>';},align: 'left'}}";
             for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
             {
                 if (i.indexOf("时间") > 0) {
@@ -119,7 +124,14 @@
                     continue;
                 }
                 if (!(i == '是否匹配' || i == '工号' || i == '姓名' || i == '序号'))
-                    colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 50 ,width: 80}";
+                {
+                    if (i == '基数' || i == '系数' ) {
+                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
+                    }
+                    else {
+                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                    }
+                }
             }
             colnames = colnames.substr(1, colnames.length);
             //console.log(colnames);
@@ -128,10 +140,10 @@
                     "columns:[" + colnames + "]," +
                     "data:json," +
                     "dataAction:'local'," +
-                    "height:'auto'," +
+                    "height:'" + girdbodyheight + "'," +
                     "widht:'auto'," +
                     "rownumbers:true," +
-                    "page: 1,pageSize:20,pageSizeOptions: [20,50,100,200,500]";
+                    "page: 1,pageSize:50,pageSizeOptions: [20,50,100,200,500]";
             //if (!onlyshow)
             //    ligergrid += ",toolbar: { items: [{ text: '导入系统', type: 'queryCond',click: onclickimport }]}";
             ligergrid += "});"

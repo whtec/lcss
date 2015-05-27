@@ -1,11 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalaryLineList.aspx.cs" Inherits="SalaryLineList" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>查询列表</title>
+    <title>人工成本/收入汇总查询列表</title>
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
@@ -21,6 +19,7 @@
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerDrag.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>
     <script src="../Scripts/pc.js"></script>
+
     <link href="../Styles/bootstrapg/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.min.js"></script>
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -35,9 +34,18 @@
             border-right: 1px solid #A3C0E8;
             border-bottom: 1px solid #A3C0E8;
         }
+
+        .l-grid-body {
+            /*height:600px;*/
+        }
     </style>
 
     <script type="text/javascript">
+        var winheight = parent.document.documentElement.clientHeight;
+        var girdbodyheight = (winheight - 180) / 1.4;
+
+        //console.log(winheight);
+
         var grid = null;//主表
         var call = "<%=call%>";//request.QueryString("call");
         //var j;
@@ -51,7 +59,7 @@
             function (json) {
                 var colnames = ",{ display: '行号', name:'Row', minWidth: 40 ,width: 50,frozen:true}";
                 colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
-                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true}";
+                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true,totalSummary:{render: function (){return '<div>合计</div>';},align: 'left'}}";
                 for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
                 {
                     if (i.indexOf("时间") > 0) {
@@ -59,10 +67,17 @@
                         //continue;
                     }
                     else if (i.indexOf("实发") >= 0) {
-                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1'}";
+                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
                     }
-                    else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数'))
-                    { colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}"; }                    
+                    else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数')) {
+                        //colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                        if (i == '年度' || i == '月度') {
+                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
+                        }
+                        else {
+                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                        }
+                    }
                 }
                 colnames = colnames.substr(1, colnames.length);
                 //console.log(colnames);
@@ -75,11 +90,12 @@
                         //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
                         "url:'" + url + "'," +
                         "dataAction:'server'," +
-                        "height:'auto'," +
+                    //    "height:'600'," +
+                       "height:'" + girdbodyheight + "'," +
                      //   "width:'100%',"+
                         "sortname:'年度 desc,月度 desc,工号 '," +
                         "sortorder:'asc'," +
-                        "page: 1,pageSize:15,pageSizeOptions: [15, 20, 30, 50, 100]" +
+                        "page: 1,pageSize:50,pageSizeOptions: [20, 30, 50, 100]" +
                         "});"
                     );
                 //console.log("grid=$('#" + divname + "').ligerGrid({" +
@@ -101,8 +117,10 @@
 
 
         $(function () {
-            createGrid("divGrid", "../Handler/SalaryHandler.ashx?opt=Query&call=" + call);
+            createGrid("divGridZoom", "../Handler/SalaryHandler.ashx?opt=Query&call=" + call);
         });
+
+        console.log(winheight + "___" + girdbodyheight);
     </script>
 </head>
 <body>

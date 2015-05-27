@@ -112,17 +112,57 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
             case "5":
                 {
                     string said = context.Request.Params["said"];
-                    ds = SLBLL.GetList_SalaryLineByEmployees2(said.ToString(), oLoginInfo.UserID);
+                    if (said == "-1")
+                    {
+                        string[] date = context.Request.Params["date"].ToString().Split('-');
+                        int iYear = Convert.ToInt32(date[0]);
+                        int iMonth = Convert.ToInt32(date[1]);
+                        /*******************************************************************/
+                        //简单粗暴权限控制
+                        //根据账号查找是否有权限
+                        string sql = @"  select count(*) from [dbo].[T_ConferAuthority]
+                        where [CA_ObjCode]='{0}' or [CA_ObjCode] in (select distinct [AR_Role_Code] from [dbo].[T_Account_Role] where [AR_ACCT_LoginID]='{0}') and [CA_Aut_Code]='{1}'";
+                        object obj = PC.DBUtility.DbHelperSQL.ReturnValue(string.Format(sql, oLoginInfo.LoginID, PageAuthorityName.rgcb));//同人工成本，限HR主任查看
+                        int num = Convert.ToInt32(obj);
+                        if (num <= 0)
+                            throw new Exception("你没有访问权限！");
+                        /*******************************************************************/
+                        //ds = SLBLL.GetIncomeList(iYear, iMonth, oLoginInfo.UserID);
+                        ds = SLBLL.GetIncomeList(iYear, iMonth, null);
+                    }
+                    else if (said == "0")
+                    {
+                        string[] date = context.Request.Params["date"].ToString().Split('-');
+                        int iYear = Convert.ToInt32(date[0]);
+                        int iMonth = Convert.ToInt32(date[1]);
+                        ds = SLBLL.GetList_SalaryLineByEmployees3(iYear, iMonth, oLoginInfo.UserID);
+                    }
+                    else
+                    { ds = SLBLL.GetList_SalaryLineByEmployees2(said.ToString(), oLoginInfo.UserID); }
                 }
                 break;
-            case "6":
+            case "7"://查看指定编次的导入列表(全范围，需有权限 @TODO 加入权限判断)
                 {
-                    string[] date = context.Request.Params["date"].ToString().Split('-');
-                    string Sal_Year = date[0];
-                    string Sal_Month = date[1];
-                    ds = SLBLL.GetList_SalaryLineByEmployees3(oLoginInfo.UserID, Sal_Year, Sal_Month);
+                    string said = context.Request.Params["said"];
+                    ds = SLBLL.GetList_SalaryLineByEmployees2(said.ToString(), "");
                 }
                 break;
+            //case "6":
+            //    {
+            //        string[] date = context.Request.Params["date"].ToString().Split('-');
+            //        int iYear =Convert.ToInt32(date[0]);
+            //        int iMonth = Convert.ToInt32(date[1]);
+            //        ds = SLBLL.GetList_SalaryLineByEmployees3(iYear, iMonth, oLoginInfo.UserID);
+            //    }
+            //    break;
+            //case "8":
+            //    {
+            //        string[] date = context.Request.Params["date"].ToString().Split('-');
+            //        int iYear = Convert.ToInt32(date[0]);
+            //        int iMonth = Convert.ToInt32(date[1]);
+            //        ds = SLBLL.GetIncomeList(iYear, iMonth, oLoginInfo.UserID);
+            //    }
+            //    break;
             default:
                 return "";
         }
@@ -166,10 +206,11 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
             if (!dicHtml.ContainsKey(sKey))
                 dicHtml[sKey] = new StringBuilder();
             decimal Money = decimal.Parse(dr["Money"].ToString());
-            if (Money >= 0)
+            //if (Money >= 0)
+            if (!ConstClass.redLabel.Contains(dr["CI_Type3"].ToString()))
                 dicHtml[sKey].AppendFormat("<li>{0} <span>{1}</span></li>", dr["CI_Name"].ToString(), Money.ToString("F2"));
             else
-                dicHtml[sKey].AppendFormat("<li>{0} <span class=\"red\">{1}</span></li>", dr["CI_Name"].ToString(), Math.Abs(Money).ToString("F2"));
+                dicHtml[sKey].AppendFormat("<li>{0} <span class=\"red\">{1}</span></li>", dr["CI_Name"].ToString(), Money.ToString("F2"));
         }
         StringBuilder sHtml = new StringBuilder();
         sHtml.Append("<li>");
@@ -245,11 +286,11 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
                 oSalaryLine.SL_Sal_ID = oSalary.Sal_ID;
                 oSalaryLine.SL_Pay = Convert.ToDecimal(dr[dc.ColumnName].ToString());
                 oSalaryLine.SL_CI_Code = colname[0];
-                if (colname[0].Contains(ConstClass.minusLabel))
-                {
-                    oSalaryLine.SL_Pay = -oSalaryLine.SL_Pay;
-                    oSalaryLine.SL_CI_Code = colname[0].Remove(0, 1);
-                }
+                //if (colname[0].Contains(ConstClass.minusLabel))
+                //{
+                //    oSalaryLine.SL_Pay = -oSalaryLine.SL_Pay;
+                //    oSalaryLine.SL_CI_Code = colname[0].Remove(0, 1);
+                //}
 
                 ilSalaryLine.Add(oSalaryLine);//SLBLL.Add(oSalaryLine);
             }

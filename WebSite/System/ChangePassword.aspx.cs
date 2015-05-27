@@ -33,7 +33,7 @@ public partial class System_ChangePassword : System.Web.UI.Page
         model.ACCT_LoginID = txtAccount.Value;
         model.ACCT_Pwd = txtCurrent.Value;
         LCSS.BLL.T_Account T_AccountBLL = new LCSS.BLL.T_Account();
-        bool isRight = T_AccountBLL.Exists(txtAccount.Value, txtCurrent.Value);
+        bool isRight = T_AccountBLL.Exists(txtAccount.Value, DESEncrypt.Encrypt(txtCurrent.Value));
         if (isRight)
         {
             if (T_AccountBLL.UpdatePassword(txtAccount.Value, DESEncrypt.Encrypt(txtNew.Value.Trim())))

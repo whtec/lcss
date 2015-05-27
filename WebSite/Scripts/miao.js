@@ -1,7 +1,14 @@
-﻿$(document).ready(function () {
+﻿//var winheight = 0;
+
+//$(document).ready(function () {
+//    if (winheight > 0) {
+//        winheight = document.documentElement.clientHeight;
+
+//        console.log(winheight);
+//    };
     //  console.log("abb");
-    // $('#loadContent').load('Salary/Incomedetails.html');
-})
+//    // $('#loadContent').load('Salary/Incomedetails.html');
+//})
 
 //function zoom(zoomvalue) {
 

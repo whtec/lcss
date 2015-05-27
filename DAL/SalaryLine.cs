@@ -393,12 +393,9 @@ namespace LCSS.DAL
             return DbHelperSQL.Query("GetList_SalaryLineByEmployees", CommandType.StoredProcedure, parameters);
         }
         /// <summary>
-        /// 查询个人收入明细列表（分页）
+        /// 查看个人指定编次的导入列表
         /// </summary>
-        /// <param name="PageSize">每页显示数量</param>
-        /// <param name="PageIndex">页码</param>
-        /// <param name="OrderBy">排序</param>
-        /// <param name="strWhere">条件</param>
+        /// <param name="Sal_ID">导入编次</param>
         /// <param name="Emp_Code">员工编号</param>
         /// <returns></returns>
         public DataSet GetList_SalaryLineByEmployees2(string Sal_ID, string Emp_Code)
@@ -411,7 +408,14 @@ namespace LCSS.DAL
             parameters[1].Value = Emp_Code;
             return DbHelperSQL.Query("GetList_SalaryLineByEmployees2", CommandType.StoredProcedure, parameters);
         }
-        public DataSet GetList_SalaryLineByEmployees3(string Emp_Code, string Sal_Year, string Sal_Month)
+        /// <summary>
+        /// 个人月度总收入（按客户提供格式）,必须固定[CT_CODE]代码
+        /// </summary>
+        /// <param name="iYear"></param>
+        /// <param name="iMonth"></param>
+        /// <param name="Emp_Code"></param>
+        /// <returns></returns>
+        public DataSet GetList_SalaryLineByEmployees3(int iYear, int iMonth, string Emp_Code)
         {
             SqlParameter[] parameters = {
                     new SqlParameter("@Emp_Code", SqlDbType.VarChar,20),
@@ -419,8 +423,8 @@ namespace LCSS.DAL
                     new SqlParameter("@Sal_Month", SqlDbType.VarChar, 20)
 					};
             parameters[0].Value = Emp_Code;
-            parameters[1].Value = Sal_Year;
-            parameters[2].Value = Sal_Month;
+            parameters[1].Value = iYear.ToString();
+            parameters[2].Value = iMonth.ToString();
             return DbHelperSQL.Query("GetList_SalaryLineByEmployees3", CommandType.StoredProcedure, parameters);
         }
         /// <summary>
@@ -450,7 +454,34 @@ namespace LCSS.DAL
                       order by [V_SLTG_Sal_Year],[V_SLTG_Sal_Month],[V_SLTG_CT_Sequence]");
             return DbHelperSQL.Query(strSql.ToString(), CommandType.Text, parameters);
         }
+        /// <summary>
+        /// 得到指定年月工资台账信息
+        /// </summary>
+        /// <param name="iYear"></param>
+        /// <param name="iMonth"></param>
+        /// <param name="Emp_Code">空则查询所有人</param>
+        /// <returns></returns>
+        public DataSet GetIncomeList(int iYear, int iMonth, string Emp_Code)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@iYear", SqlDbType.Int),
+					new SqlParameter("@iMonth", SqlDbType.Int),
+                    new SqlParameter("@Emp_Code", SqlDbType.VarChar,20)
+					};
+            parameters[0].Value = iYear;
+            parameters[1].Value = iMonth;
+            parameters[2].Value = Emp_Code;
 
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"SELECT * FROM View_IncomeList WHERE [年度]=@iYear AND [月度]=@iMonth");
+            if (!string.IsNullOrEmpty(Emp_Code))
+                strSql.Append(@" AND [工号]=@Emp_Code");
+            strSql.Append(@";SELECT COUNT(*) FROM View_IncomeList WHERE [年度]=@iYear AND [月度]=@iMonth");
+            if (!string.IsNullOrEmpty(Emp_Code))
+                strSql.Append(@" AND [工号]=@Emp_Code");
+            return DbHelperSQL.Query(strSql.ToString(), CommandType.Text, parameters);
+
+        }
         #endregion  ExtensionMethod
     }
 }

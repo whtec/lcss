@@ -98,9 +98,9 @@ public class UpLoadFile : IHttpHandler, IRequiresSessionState
             }
             else
             {
-                if (ConstClass.minusType.Contains(model.CI_Type))
-                    dtTemp.Columns[i].ColumnName = ConstClass.minusLabel + model.CI_Code + ConstClass.colCutOff + dtExcel.Columns[i].ColumnName;
-                else
+                //if (ConstClass.minusType.Contains(model.CI_Type))
+                //    dtTemp.Columns[i].ColumnName = ConstClass.minusLabel + model.CI_Code + ConstClass.colCutOff + dtExcel.Columns[i].ColumnName;
+                //else
                     dtTemp.Columns[i].ColumnName = model.CI_Code + ConstClass.colCutOff + dtExcel.Columns[i].ColumnName;
             }
         }
