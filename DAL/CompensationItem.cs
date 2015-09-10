@@ -37,15 +37,15 @@ namespace LCSS.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into CompensationItem(");
-			strSql.Append("CI_Code,CI_Name,CI_Remarks,CI_BuiltIin,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code)");
+			strSql.Append("CI_Code,CI_Name,CI_Remarks,CI_Category,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code)");
 			strSql.Append(" values (");
-			strSql.Append("@CI_Code,@CI_Name,@CI_Remarks,@CI_BuiltIin,@CI_Status,@CI_Sequence,@CI_Org_Code,@CI_CT_Code)");
+			strSql.Append("@CI_Code,@CI_Name,@CI_Remarks,@CI_Category,@CI_Status,@CI_Sequence,@CI_Org_Code,@CI_CT_Code)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@CI_Code", SqlDbType.VarChar,20),
 					new SqlParameter("@CI_Name", SqlDbType.NVarChar,20),
 					new SqlParameter("@CI_Remarks", SqlDbType.NVarChar,200),
-					new SqlParameter("@CI_BuiltIin", SqlDbType.Bit,1),
+					new SqlParameter("@CI_Category", SqlDbType.VarChar,20),
 					new SqlParameter("@CI_Status", SqlDbType.Bit,1),
 					new SqlParameter("@CI_Sequence", SqlDbType.Int,4),
 					new SqlParameter("@CI_Org_Code", SqlDbType.VarChar,50),
@@ -53,7 +53,7 @@ namespace LCSS.DAL
 			parameters[0].Value = model.CI_Code;
 			parameters[1].Value = model.CI_Name;
 			parameters[2].Value = model.CI_Remarks;
-			parameters[3].Value = model.CI_BuiltIin;
+			parameters[3].Value = model.CI_Category;
 			parameters[4].Value = model.CI_Status;
 			parameters[5].Value = model.CI_Sequence;
 			parameters[6].Value = model.CI_Org_Code;
@@ -78,7 +78,7 @@ namespace LCSS.DAL
 			strSql.Append("update CompensationItem set ");
 			strSql.Append("CI_Name=@CI_Name,");
 			strSql.Append("CI_Remarks=@CI_Remarks,");
-			strSql.Append("CI_BuiltIin=@CI_BuiltIin,");
+			strSql.Append("CI_Category=@CI_Category,");
 			strSql.Append("CI_Status=@CI_Status,");
 			strSql.Append("CI_Sequence=@CI_Sequence,");
 			strSql.Append("CI_Org_Code=@CI_Org_Code,");
@@ -87,7 +87,7 @@ namespace LCSS.DAL
 			SqlParameter[] parameters = {
 					new SqlParameter("@CI_Name", SqlDbType.NVarChar,20),
 					new SqlParameter("@CI_Remarks", SqlDbType.NVarChar,200),
-					new SqlParameter("@CI_BuiltIin", SqlDbType.Bit,1),
+					new SqlParameter("@CI_Category",  SqlDbType.VarChar,20),
 					new SqlParameter("@CI_Status", SqlDbType.Bit,1),
 					new SqlParameter("@CI_Sequence", SqlDbType.Int,4),
 					new SqlParameter("@CI_Org_Code", SqlDbType.VarChar,50),
@@ -96,7 +96,7 @@ namespace LCSS.DAL
 					new SqlParameter("@CI_Code", SqlDbType.VarChar,20)};
 			parameters[0].Value = model.CI_Name;
 			parameters[1].Value = model.CI_Remarks;
-			parameters[2].Value = model.CI_BuiltIin;
+			parameters[2].Value = model.CI_Category;
 			parameters[3].Value = model.CI_Status;
 			parameters[4].Value = model.CI_Sequence;
 			parameters[5].Value = model.CI_Org_Code;
@@ -189,7 +189,7 @@ namespace LCSS.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 CI_ID,CI_Code,CI_Name,CI_Remarks,CI_BuiltIin,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code from CompensationItem ");
+			strSql.Append("select  top 1 CI_ID,CI_Code,CI_Name,CI_Remarks,CI_Category,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code from CompensationItem ");
 			strSql.Append(" where CI_ID=@CI_ID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@CI_ID", SqlDbType.BigInt)
@@ -233,16 +233,9 @@ namespace LCSS.DAL
 				{
 					model.CI_Remarks=row["CI_Remarks"].ToString();
 				}
-				if(row["CI_BuiltIin"]!=null && row["CI_BuiltIin"].ToString()!="")
+				if(row["CI_Category"]!=null && row["CI_Category"].ToString()!="")
 				{
-					if((row["CI_BuiltIin"].ToString()=="1")||(row["CI_BuiltIin"].ToString().ToLower()=="true"))
-					{
-						model.CI_BuiltIin=true;
-					}
-					else
-					{
-						model.CI_BuiltIin=false;
-					}
+                    model.CI_Category = row["CI_Category"].ToString();					
 				}
 				if(row["CI_Status"]!=null && row["CI_Status"].ToString()!="")
 				{
@@ -289,7 +282,7 @@ namespace LCSS.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select CI_ID,CI_Code,CI_Name,CI_Remarks,CI_BuiltIin,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code ");
+			strSql.Append("select CI_ID,CI_Code,CI_Name,CI_Remarks,CI_Category,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code ");
 			strSql.Append(" FROM CompensationItem ");
 			if(strWhere.Trim()!="")
 			{
@@ -309,7 +302,7 @@ namespace LCSS.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" CI_ID,CI_Code,CI_Name,CI_Remarks,CI_BuiltIin,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code ");
+			strSql.Append(" CI_ID,CI_Code,CI_Name,CI_Remarks,CI_Category,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code ");
 			strSql.Append(" FROM CompensationItem ");
 			if(strWhere.Trim()!="")
 			{
@@ -399,7 +392,7 @@ namespace LCSS.DAL
         public DataSet GetListByOrg(string CI_Org_Code)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select CI_ID,CI_Code,CI_Name,CI_Remarks,CI_BuiltIin,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code ");
+            strSql.Append("select CI_ID,CI_Code,CI_Name,CI_Remarks,CI_Category,CI_Status,CI_Sequence,CI_Org_Code,CI_CT_Code ");
             strSql.Append(" FROM CompensationItem ");
             SqlParameter[] parameters =  { 
                 new SqlParameter("@CI_Org_Code",SqlDbType.VarChar,20)

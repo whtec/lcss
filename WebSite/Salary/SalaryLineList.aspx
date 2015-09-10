@@ -1,6 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalaryLineList.aspx.cs" Inherits="SalaryLineList" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalaryLineList.aspx.cs" Inherits="SalaryLineList" %>
 
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>人工成本/收入汇总查询列表</title>
@@ -42,7 +43,7 @@
 
     <script type="text/javascript">
         var winheight = parent.document.documentElement.clientHeight;
-        var girdbodyheight = (winheight - 180) / 1.4;
+        var girdbodyheight = (winheight - 180);//(winheight - 180) / 1.4;
 
         //console.log(winheight);
 
@@ -67,15 +68,15 @@
                         //continue;
                     }
                     else if (i.indexOf("实发") >= 0) {
-                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
                     }
                     else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数')) {
-                        //colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                        //colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
                         if (i == '年度' || i == '月度') {
                             colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
                         }
                         else {
-                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
                         }
                     }
                 }

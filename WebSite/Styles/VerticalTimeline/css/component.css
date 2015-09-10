@@ -254,7 +254,7 @@
 
                 .cbp_tmtimeline .cbp_tmlabel .pay-content .pay-base ul > li > span, .cbp_tmtimeline .cbp_tmlabel .pay-total .pay-base ul > li > span {
                     float: right;
-                    color: green;
+                    color: black;
                     font-weight: bold;
                     width:66px;
                 }
@@ -263,6 +263,12 @@
                 .cbp_tmtimeline .cbp_tmlabel .pay-content .pay-base ul > li > .red, .cbp_tmtimeline .cbp_tmlabel .pay-total .pay-base ul > li .red {
                     float: right;
                     color: red;
+                    font-weight: bold;
+                }
+
+                .cbp_tmtimeline .cbp_tmlabel .pay-content .pay-base ul > li > .green, .cbp_tmtimeline .cbp_tmlabel .pay-total .pay-base ul > li .green {
+                    float: right;
+                    color: green;
                     font-weight: bold;
                 }
 

@@ -24,7 +24,16 @@ namespace LCSS.Model
         private string _ci_formula;
 
         /// <summary>
-        /// 类型(输入项,计算项,扣减项(所得税))
+        /// 项目分类(其他分类相关字段不再使用)
+        /// </summary>
+        public string CI_Category
+        {
+            set;
+            get;
+        }
+
+        /// <summary>
+        /// 待删除 类型(输入项,计算项,扣减项(所得税)) 
         /// </summary>
         public string CI_Type
         {
@@ -73,7 +82,7 @@ namespace LCSS.Model
 			get{return _ci_name;}
 		}
 		/// <summary>
-		/// 备注，说明
+        /// 待删除 备注，说明
 		/// </summary>
 		public string CI_Remarks
 		{
@@ -81,7 +90,7 @@ namespace LCSS.Model
 			get{return _ci_remarks;}
 		}
 		/// <summary>
-		/// 该项是否内置固定项
+        /// 待删除 该项是否内置固定项
 		/// </summary>
 		public bool CI_BuiltIin
 		{

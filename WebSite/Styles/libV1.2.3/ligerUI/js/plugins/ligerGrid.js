@@ -313,6 +313,17 @@
         }
         return getFormatDate(value);
     }
+    // add at 2015.09.01 by PC
+    //扩展Fixed2类型的格式化函数,小数点后只显示2位
+    $.ligerDefaults.Grid.formatters['Fixed2'] = function (num, column) {
+        //num 当前的值
+        //column 列信息
+        if (!num) return "0";
+        if (isNaN(num)) return "0";
+
+        return num.toFixed(2);
+    };
+
     //----------------------------------------- END ----------------------------------------//
 
     $.ligerui.controls.Grid = function (element, options)

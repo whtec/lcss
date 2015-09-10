@@ -7,18 +7,18 @@ namespace LCSS.Model
     [Serializable]
     public class LoginInfo
     {
-        public string _LoginID;
-        public string _UserID;
-        public string _UserName;
-        public string _OrgCode;
-        public string _OrgName;
-        public string _UserRole;
-        public string _LoginType;
-        public string _TradeType;
-        public string _Agent;
-        public string _IPAdr;
-        public string _HostName;
-        public string _LoginTime;
+        private string _LoginID;
+        private string _UserID;
+        private string _UserName;
+        private string _OrgCode;
+        private string _OrgName;
+        private string _UserRole;
+        private string _LoginType;
+        private string _TradeType;
+        private string _Agent;
+        private string _IPAdr;
+        private string _HostName;
+        private string _LoginTime;
 
         /// <summary>
         /// µÇÂ¼ÕËºÅ

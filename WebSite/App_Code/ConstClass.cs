@@ -41,14 +41,18 @@ public class ConstClass
     /// <summary>
     /// 应扣项标签
     /// </summary>
-    public const string minusLabel = "负";
+    public const string minusLabel = "CUT";
     /// <summary>
     /// 应扣项包含类型：扣减项,所得税
     /// </summary>
     public const string minusType = "扣减项,所得税";
     /// <summary>
-    /// 应扣项颜色标签
+    /// 应发颜色标签
     /// </summary>
-    public const string redLabel = "红";
+    public const string greenLabel = "ADD";
+    /// <summary>
+    /// 应扣颜色标签
+    /// </summary>
+    public const string redLabel = "CUT";
 
 }

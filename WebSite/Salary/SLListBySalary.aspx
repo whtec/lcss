@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>收入发放列表</title>
+    <title>原收入发放列表，已过期</title>
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
@@ -40,7 +40,8 @@
         var grid = null;//主表
         var call = "<%=call%>";//request.QueryString("call");
         var winheight = parent.document.documentElement.clientHeight;
-        var girdbodyheight = (winheight - 260)/1.4;
+        //var girdbodyheight = (winheight - 260)/1.4;
+        var girdbodyheight = (winheight - 260) ;
         console.log(girdbodyheight);
 
         $(function () {

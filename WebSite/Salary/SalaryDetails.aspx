@@ -11,7 +11,6 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css" />
-
     <link href="../Styles/VerticalTimeline/css/default.css" rel="stylesheet" />
     <link href="../Styles/VerticalTimeline/css/component.css" rel="stylesheet" />
     <script src="../Scripts/jquery.min.js"></script>
@@ -61,110 +60,6 @@
         </header>--%>
         <div class="main">
             <ul class="cbp_tmtimeline">
-                <%--<li>
-                    <time class="cbp_tmtime" datetime=""><span>2015年</span> <span>4月</span></time>
-                    <div class="cbp_tmicon"></div>
-                    <div class="cbp_tmlabel">
-                        <h4>王松<small>第一次</small></h4>
-                        <div class="pay-content">
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-
-                                </ul>
-                            </div>
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                </ul>
-                            </div>
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span class="red">3000.00</span></li>
-                                    <li>基本工资 <span class="red">3000.00</span></li>
-                                    <li>基本工资 <span class="red">3000.00</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="pay-total">
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <time class="cbp_tmtime" datetime=""><span>2015年</span> <span>4月</span></time>
-                    <div class="cbp_tmicon"></div>
-                    <div class="cbp_tmlabel">
-                        <h4>王松<small>第一次</small></h4>
-                        <div class="pay-content">
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                </ul>
-                            </div>
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                </ul>
-                            </div>
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span class="red">3000.00</span></li>
-                                    <li>基本工资 <span class="red">3000.00</span></li>
-                                    <li>基本工资 <span class="red">3000.00</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="pay-total">
-                            <div class="pay-base">
-                                <h5>应发项目</h5>
-                                <ul>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                    <li>基本工资 <span>3000.00</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <time class="cbp_tmtime" datetime=""><span>2015年</span> <span>4月</span></time>
-                    <div class="cbp_tmicon"></div>
-                    <div class="cbp_tmlabel">
-                      <div class="alert alert-success" role="alert"><h3>没有更多数据了。</h3></div>
-                        
-                    </div>
-                </li>--%>
-
                 <li id="li_last"></li>
             </ul>
         </div>

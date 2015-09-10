@@ -20,6 +20,7 @@
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerResizable.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerDrag.js"></script>
     <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerToolBar.js"></script>
+    <script src="../Styles/libV1.2.3/ligerUI/js/plugins/ligerDialog.js"></script>
     <script src="../Scripts/pc.js"></script>
     <link href="../Styles/bootstrapg/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <script src="../Styles/bootstrapg/bootstrap-datetimepicker.min.js"></script>
@@ -50,6 +51,7 @@
                 var colnames = "";//",{ display: '行号', name:'Row', minWidth: 40 ,width: 50,frozen:true}";
                 //colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
                 //colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true}";
+                //colnames += ",{ display: '操作', minWidth: 80 ,width: 80,render: function (){return '<div on click=\"operate()\">删除</div>';}}";
                 for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
                 {
                     if (i.indexOf("时间") > 0) {
@@ -65,8 +67,8 @@
                 eval(
                         "grid=$('#" + divname + "').ligerGrid({" +
                         "checkbox: false," +
-                        "columns:[" + colnames + "]," +
-                        //"toolbar: { items: [{ text: '导出Execl', type: 'queryCond', click: operate }]}," +
+                        "columns:[" + colnames + "]," +                        
+                         "toolbar: { items: [{ text: '删除', type: 'deleteCond', click: operate, icon: 'delete'}]}," +
                         //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
                         "url:'" + url + "'," +
                         "dataAction:'server'," +
@@ -80,8 +82,7 @@
                     );
             });
         }
-        function operate()
-        { }
+       
         //显示顾客订单
         function f_showDetails(row, detailPanel, callback) {
             var url = "../Handler/SalaryHandler.ashx?opt=Query&call=7&said=" + row.流水号;
@@ -103,7 +104,7 @@
                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
                        }
                        else {
-                           colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                           colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
                        }
                    }
                }
@@ -130,6 +131,24 @@
            });
         }
 
+        function operate()
+        {
+            var selRow = grid.getSelectedRow();
+            if (selRow.length == 0) {
+                $.ligerDialog.warn("请先选择要删除的行！");
+                return;
+            }
+            $.ligerDialog.confirm("是否要执行删除操作", function (yes) {
+                if (yes) {
+                    $.ajax({
+                        url: "../Handler/SalaryHandler.ashx?opt=Delete&id=" + selRow.流水号, async: false, success: function () {
+                           //alert(selRow.流水号);
+                        }
+                    });
+                    grid.deleteSelectedRow();
+                }
+            });
+        }
 
     </script>
 </head>

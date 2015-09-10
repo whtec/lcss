@@ -4,8 +4,7 @@
 body {
     /*background-color: #efefef;*/
 }
-#divGridZoom {
-zoom:1.4;}
+#divGridZoom {zoom:1.0;}
 
 .loginbg {
     background: #fff url(../Image/login1.jpg) no-repeat fixed top center;

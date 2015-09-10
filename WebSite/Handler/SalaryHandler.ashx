@@ -39,6 +39,9 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
                 case "QuerySalaryDDL":
                     json = QuerySalaryDDLByDate(context);
                     break;
+                case "Delete":
+                    json = Delete(context);
+                    break;
                 default:
                     break;
             }
@@ -206,11 +209,12 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
             if (!dicHtml.ContainsKey(sKey))
                 dicHtml[sKey] = new StringBuilder();
             decimal Money = decimal.Parse(dr["Money"].ToString());
-            //if (Money >= 0)
-            if (!ConstClass.redLabel.Contains(dr["CI_Type3"].ToString()))
-                dicHtml[sKey].AppendFormat("<li>{0} <span>{1}</span></li>", dr["CI_Name"].ToString(), Money.ToString("F2"));
-            else
-                dicHtml[sKey].AppendFormat("<li>{0} <span class=\"red\">{1}</span></li>", dr["CI_Name"].ToString(), Money.ToString("F2"));
+            string styleColor = string.Empty;
+            if (dr["CI_Category"].ToString().Contains(ConstClass.redLabel))
+                styleColor = "class=\"red\"";
+            else if (dr["CI_Category"].ToString().Contains(ConstClass.greenLabel))
+                styleColor = "class=\"green\"";
+            dicHtml[sKey].AppendFormat("<li>{0} <span {2}>{1}</span></li>", dr["CI_Name"].ToString(), Money.ToString("F2"), styleColor);
         }
         StringBuilder sHtml = new StringBuilder();
         sHtml.Append("<li>");
@@ -233,7 +237,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         sHtml.Append("<ul>");
         foreach (DataRow dr in dsGzt.Tables[1].Rows)
         {
-            sHtml.AppendFormat("<li>{0} <span>{1}</span></li>", dr["V_SLTG_CT_NAME"].ToString(), decimal.Parse(dr["V_SLTG_SL_Pay"].ToString()).ToString("C"));
+            sHtml.AppendFormat("<li>{0} <span class=\"green\">{1}</span></li>", dr["V_SLTG_CT_NAME"].ToString(), decimal.Parse(dr["V_SLTG_SL_Pay"].ToString()).ToString("C"));
         }
         sHtml.Append("</ul>");
         sHtml.Append("</div>");
@@ -330,6 +334,14 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
             return "";
 
         return JSONHelper.TableToJson(dsSalary.Tables[0]);
+    }
+
+    string Delete(HttpContext context)
+    {
+        string Sal_ID = context.Request.QueryString["id"].ToString();
+        LCSS.BLL.Salary SalaryBLL = new LCSS.BLL.Salary();
+        SalaryBLL.Delete(Convert.ToInt64(Sal_ID));
+        return "";
     }
 
 

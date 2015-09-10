@@ -55,5 +55,20 @@ namespace PC.Common
             string json = "{\"Rows\":" + row + ",\"Total\":\"" + total + "\"}";
             return json;
         }
+
+        /// <summary>
+        /// 得到表格所需要的JSON
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static string GetTableJson(DataTable dt)
+        {
+            string json = string.Empty;
+            if (dt != null)
+            {
+                json = JSONHelper.TableToJson(dt);
+            }
+            return json;
+        }
     }
 }
