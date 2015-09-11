@@ -53,9 +53,9 @@
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" runat="server"></div>
                 </div>
             </div>
-            <div class="col-lg-10 col-md-9 col-xs-9">
+            <div class="col-lg-10 col-md-9 col-xs-9" style="padding-left: 0px;">
                 <div class="adminright">
-                    <div id="loadTittle"></div>
+                    <div id="loadTittle" style="display:none"></div>
                     <div id="loadContent">
                         <!--<iframe id="iFrame1" name="iFrame1" width="100%" onload="this.height=iFrame1.document.body.scrollHeight" frameborder="0" src="Salary/SalaryDetails.aspx"></iframe>-->
                         <iframe id="loadContent_f" name="iFrame1" frameborder="0" width="100%" src="Salary/SalaryDetails.aspx" onload="this.height=500"></iframe>
@@ -68,7 +68,7 @@
                                     var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
                                     var height = Math.max(bHeight, dHeight);
                                     iframe.height = height;
-                                    //  console.log(height);
+                                    console.log(height);
                                 } catch (ex) { }
                             }
                             window.setInterval("reinitIframe()", 300);

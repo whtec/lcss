@@ -207,7 +207,7 @@ display:initial;
     font-size: 20px;
     padding: 15px 0 10px 15px;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 .import-file1 {

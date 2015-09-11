@@ -46,6 +46,8 @@ public partial class SalaryLineList : System.Web.UI.Page
         {
             case "1":
                 return PageAuthorityName.rgcb;
+            case "9":
+                return PageAuthorityName.rgcb;
             case "2":
                 return PageAuthorityName.drls;
             case "3":

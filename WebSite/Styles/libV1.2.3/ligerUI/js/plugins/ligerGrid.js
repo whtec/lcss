@@ -264,8 +264,8 @@
 
 
     //-----------------------------START add by PC at 2013.09.27----------------------------//
-    $.ligerDefaults.Grid.formatters['money'] = function (value, column) {
-        function getFormatDate(num) {
+    $.ligerDefaults.Grid.formatters['money'] = function (num, column) {
+        //function getFormatDate(num) {
             var sign = "";
             if (isNaN(num)) {
                 num = 0.00;
@@ -310,18 +310,23 @@
                 return "￥" + sign + res;
             }
             return a.toString();
-        }
-        return getFormatDate(value);
-    }
+        //}
+        //return getFormatDate(value);
+    }    
     // add at 2015.09.01 by PC
     //扩展Fixed2类型的格式化函数,小数点后只显示2位
-    $.ligerDefaults.Grid.formatters['Fixed2'] = function (num, column) {
+    $.ligerDefaults.Grid.formatters['F2'] = function (num, column) {
         //num 当前的值
         //column 列信息
         if (!num) return "0";
         if (isNaN(num)) return "0";
-
-        return num.toFixed(2);
+        var strNum = num + "";
+        var arr1 = strNum.split(".");
+        if (arr1.length >= 2)
+            return num.toFixed(2).toString();
+        else
+            return num;
+        //return num.toFixed(2);
     };
 
     //----------------------------------------- END ----------------------------------------//
@@ -3178,7 +3183,7 @@
             if (p.fixedCellHeight) htmlarr.push('height:' + p.rowHeight + 'px;');
             htmlarr.push('min-height:' + p.rowHeight + 'px; ');
             if (column.align) htmlarr.push('text-align:' + column.align + ';');
-            var content = g._getCellContent(rowdata, column);
+            var content = g._getCellContent(rowdata, column)+"";
             //-----------------------------------------------------------------
             //edit by PC at 2013.11.27
             //htmlarr.push('">' + content + '</div>');

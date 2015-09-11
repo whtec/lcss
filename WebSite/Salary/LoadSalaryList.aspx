@@ -30,8 +30,8 @@
     <script type="text/javascript">
         var grid = null;//主表
         var winheight = parent.document.documentElement.clientHeight;
-        var girdbodyheight = (winheight - 180);
-        var girdbodyheight2 = (winheight - 250);
+        var girdbodyheight = (winheight - 116);
+        //var girdbodyheight2 = (winheight - 250);
         console.log(winheight);
         //var call = "<%=call%>";//request.QueryString("call");
         //var j;
@@ -83,7 +83,7 @@
             });
         }
        
-        //显示顾客订单
+        //显示导入详细
         function f_showDetails(row, detailPanel, callback) {
             var url = "../Handler/SalaryHandler.ashx?opt=Query&call=7&said=" + row.流水号;
             var grid = document.createElement('div');
@@ -104,7 +104,7 @@
                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
                        }
                        else {
-                           colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
+                           colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,type: 'F2',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
                        }
                    }
                }

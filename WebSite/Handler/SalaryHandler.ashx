@@ -80,7 +80,7 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         PageSize = Convert.ToInt32(context.Request.Params["pageSize"]);
         PageIndex = Convert.ToInt32(context.Request.Params["page"]);
         OrderBy = context.Request.Params["sortname"] + " " + context.Request.Params["sortorder"];
-        strWhere += context.Request.Params["where"];
+        //strWhere += context.Request.Params["where"];
         Call = context.Request.Params["call"];
         if (string.IsNullOrWhiteSpace(OrderBy))
             OrderBy = "年度 desc,月度 desc,工号 asc";
@@ -90,7 +90,16 @@ public class SalaryHandler : IHttpHandler, IRequiresSessionState
         switch (Call)
         {
             case "1":
-                ds = SLBLL.GetSalaryLineByMonth(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
+                {
+                    string ecode, year;
+                    ecode = context.Request.Params["ecode"];
+                    year = context.Request.Params["year"];
+                    strWhere = string.Format("[工号]='{0}' and [年度]={1}",ecode,year);
+                    ds = SLBLL.GetSalaryLineByMonth(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
+                    break;
+                }                
+            case "9":
+                ds = SLBLL.GetSalaryLineByYear(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);
                 break;
             case "2":
                 ds = SLBLL.GetList_SalaryLineBySalary(PageSize, PageIndex, OrderBy, strWhere, oLoginInfo.OrgCode);

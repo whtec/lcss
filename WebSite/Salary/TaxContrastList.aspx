@@ -40,7 +40,7 @@
         var grid = null;//主表
         var call = "<%=call%>";//request.QueryString("call");
         var winheight = parent.document.documentElement.clientHeight;
-        var girdbodyheight = (winheight - 260) ;
+        var girdbodyheight = (winheight - 116) ;
         console.log(girdbodyheight);
 
         
@@ -70,31 +70,30 @@
                         { display: '姓名', name: '姓名', width: 60, frozen: true, totalSummary: { render: function () { return '<div>当页合计</div>'; }, align: 'left' } },
                         { display: '年度', name: '年度', width: 50 },
                         { display: '月度', name: '月度', width: 50 },
-                        { display: '工资合计', name: '工资合计', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                        { display: '月度绩效合计', name: '月度绩效合计', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                        { display: '收入合计', name: '收入合计',type:'Fixed2', width: 80,totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                        { display: '工资合计', name: '工资合计', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                        { display: '月度绩效合计', name: '月度绩效合计', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                        { display: '收入合计', name: '收入合计',type:'F2', width: 80,totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
                         { display: '税前扣除部分', columns:
                            [
 
-                               { display: '失业保险', name: '失业保险', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                               { display: '基本养老保险', name: '基本养老保险', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                               { display: '公司公积金', name: '公司公积金', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                               { display: '年金', name: '年金', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '失业保险', name: '失业保险', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '基本养老保险', name: '基本养老保险', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '公司公积金', name: '公司公积金', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '年金', name: '年金', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
                            ]
                        },
                        { display: '应纳税', columns:
                            [
-                               { display: '收入', name: '收入', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                               { display: '公积金企业部分', name: '公积金企业部分', type:'Fixed2', width: 100, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                               { display: '年金', name: '年金1', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
-                               { display: '小计', name: '小计', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '收入', name: '收入', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '公积金企业部分', name: '公积金企业部分', type:'F2', width: 100, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '年金', name: '年金1', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                               { display: '小计', name: '小计', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
                            ]
                         },
-                        { display: '应纳税金', name: '应纳税金', type:'Fixed2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
+                        { display: '应纳税金', name: '应纳税金', type:'F2', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum.toFixed(2) + '</div>'; }, align: 'right' } },
                    ], pageSize: 50, pageSizeOptions: [20, 30, 50, 100], checkbox: false, allowHideColumn: false,
                    data: json,
-                   height: girdbodyheight,
-                   type:'Fixed2', width:'100%'
+                   height: girdbodyheight, width:'100%'
                });
            });
         }
@@ -107,8 +106,8 @@
     <br />
     <form id="formsll" runat="server">
         <span class="glyphicon glyphicon-menu-down" aria-hidden="true" id="open1"></span>
-        <%--<div class="chaxun-info" style="display: none;">--%>
-        <div class="chaxun-info">
+        <div class="chaxun-info" style="display: none;">
+        <%--<div class="chaxun-info">--%>
             <div class="row">
                 <div class="form-group col-sm-1">
                 </div>

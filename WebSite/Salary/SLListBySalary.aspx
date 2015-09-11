@@ -41,7 +41,7 @@
         var call = "<%=call%>";//request.QueryString("call");
         var winheight = parent.document.documentElement.clientHeight;
         //var girdbodyheight = (winheight - 260)/1.4;
-        var girdbodyheight = (winheight - 260) ;
+        var girdbodyheight = (winheight - 116) ;
         console.log(girdbodyheight);
 
         $(function () {
@@ -105,7 +105,7 @@
                         //continue;
                     }
                     else if (i.indexOf("实发") >= 0) {
-                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,type: 'F2',colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
                     }
                     else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数'))
                     {
@@ -113,7 +113,7 @@
                             colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
                         }
                         else {
-                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
+                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,type: 'F2',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum + '</div>';},align: 'right'}}";
                         }
                     }
                 }
@@ -143,27 +143,27 @@
                         { display: '姓名', name: '姓名', width: 80, frozen: true, totalSummary: { render: function () { return '<div>当页合计</div>'; }, align: 'left' } },
                         { display: '年度', name: '年度', width: 80 },
                         { display: '月度', name: '月度', width: 80 },
-                        { display: '工资合计', name: '工资合计', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                        { display: '月度绩效合计', name: '月度绩效合计', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                        { display: '收入合计', name: '收入合计', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                        { display: '工资合计', name: '工资合计', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                        { display: '月度绩效合计', name: '月度绩效合计', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                        { display: '收入合计', name: '收入合计', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
                         { display: '税前扣除部分', columns:
                            [
 
-                               { display: '失业保险', name: '失业保险', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                               { display: '基本养老保险', name: '基本养老保险', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                               { display: '公司公积金', name: '公司公积金', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                               { display: '年金', name: '年金', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '失业保险', name: '失业保险', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '基本养老保险', name: '基本养老保险', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '公司公积金', name: '公司公积金', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '年金', name: '年金', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
                            ]
                        },
                        { display: '应纳税', columns:
                            [
-                               { display: '收入', name: '收入', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                               { display: '公积金企业部分', name: '公积金企业部分', width: 100, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                               { display: '年金', name: '年金1', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
-                               { display: '小计', name: '小计', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '收入', name: '收入', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '公积金企业部分', name: '公积金企业部分', width: 100, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '年金', name: '年金1', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                               { display: '小计', name: '小计', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
                            ]
                         },
-                        { display: '应纳税金', name: '应纳税金', width: 80, totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
+                        { display: '应纳税金', name: '应纳税金', width: 80, type: 'F2', totalSummary: { render: function (suminf, column, cell) { return '<div>' + suminf.sum + '</div>'; }, align: 'right' } },
                    ], pageSize: 50, pageSizeOptions: [20, 30, 50, 100], checkbox: false, allowHideColumn: false,
                    data: json,
                    height: girdbodyheight,

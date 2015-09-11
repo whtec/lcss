@@ -4,11 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>人工成本/收入汇总查询列表</title>
+    <title>人工成本列表/收入汇总查询列表</title>
     <link href="../Styles/libV1.2.3/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
     <link href="../Styles/libV1.2.3/ligerUI/skins/Gray2014/css/all.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../Styles/bootstrapg/css/bootstrap.css" />
 
     <link href="../Styles/bootstrapg/css/todc-bootstrap.css" rel="stylesheet" />
     <link href="../Styles/styles.css" rel="stylesheet" />
@@ -43,7 +43,7 @@
 
     <script type="text/javascript">
         var winheight = parent.document.documentElement.clientHeight;
-        var girdbodyheight = (winheight - 180);//(winheight - 180) / 1.4;
+        var girdbodyheight = (winheight - 116);//(winheight - 180) / 1.4;
 
         //console.log(winheight);
 
@@ -58,9 +58,9 @@
 
             $.getJSON(url, { page: 1, pagesize: 15, sortname: '工号', sortorder: 'asc', Rnd: Math.random() },
             function (json) {
-                var colnames = ",{ display: '行号', name:'Row', minWidth: 40 ,width: 50,frozen:true}";
-                colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
-                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true,totalSummary:{render: function (){return '<div>合计</div>';},align: 'left'}}";
+                var colnames = ",{ display: '行号', name:'Row', minWidth: 40 ,width: 50}";
+                colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80}";
+                colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,totalSummary:{render: function (){return '<div>合计</div>';},align: 'left'}}";
                 for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
                 {
                     if (i.indexOf("时间") > 0) {
@@ -68,7 +68,7 @@
                         //continue;
                     }
                     else if (i.indexOf("实发") >= 0) {
-                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
+                        colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 , type: 'F2', colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
                     }
                     else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数')) {
                         //colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
@@ -76,7 +76,7 @@
                             colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
                         }
                         else {
-                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
+                            colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80, type: 'F2',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
                         }
                     }
                 }
@@ -91,6 +91,7 @@
                         //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
                         "url:'" + url + "'," +
                         "dataAction:'server'," +
+                        "detail: { onShowDetail: f_showDetails ,height:'auto'}," +
                     //    "height:'600'," +
                        "height:'" + girdbodyheight + "'," +
                      //   "width:'100%',"+
@@ -99,19 +100,58 @@
                         "page: 1,pageSize:50,pageSizeOptions: [20, 30, 50, 100]" +
                         "});"
                     );
-                //console.log("grid=$('#" + divname + "').ligerGrid({" +
-                //        "checkbox: false," +
-                //        "columns:[" + colnames + "]," +
-                //        "toolbar: { items: [{ text: '导出Execl', type: 'queryCond', click: operate }]}," +
-                //        //"data:j,"+    //这么写适合不分页的grid,还少读一次数据库
-                //        "url:'" + url + "'," +
-                //        "dataAction:'server'," +
-                //        "height:'auto'," +
-                //        "sortname:'工号'," +
-                //        "sortorder:'asc'," +
-                //        "page: 1,pageSize:15,pageSizeOptions: [15, 20, 30, 50, 100]" +
-                //        "});");
             });
+        }
+        //显示月度详细
+        function f_showDetails(row, detailPanel, callback) {
+            var url = "../Handler/SalaryHandler.ashx?opt=Query&call=1&ecode=" + row.工号 + "&year=" + row.年度;
+            var grid = document.createElement('div');
+            $(detailPanel).append(grid);
+            var colnames = ",{ display: '行号', name:'Row', minWidth: 40 ,width: 50,frozen:true}";
+            colnames += ",{ display: '工号', name:'工号', minWidth: 80 ,width: 80,frozen:true}";
+            colnames += ",{ display: '姓名', name:'姓名', minWidth: 80 ,width: 80,frozen:true,totalSummary:{render: function (){return '<div>合计</div>';},align: 'left'}}";
+            $.getJSON(url, { page: 1, pagesize: 15, sortname: '工号', sortorder: 'asc', Rnd: Math.random() },
+           function (json) {
+               for (var i in json.Rows[0]) //在这里读json的列名，当作表格的列名
+               {
+                   if (i.indexOf("时间") > 0) {
+                       colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,type:'date' }";
+                       //continue;
+                   }
+                   else if (i.indexOf("实发") >= 0) {
+                       colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80 ,type: 'F2',colclass:'gridcolor1',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
+                   }
+                   else if (!(i == 'RECORDCOUNT' || i == 'PASSWORD' || i == 'Row' || i == 'Emp_Code' || i == 'Emp_Name' || i == '工号' || i == '姓名' || i == '组织代码' || i == '基数' || i == '系数')) {
+                       //colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
+                       if (i == '年度' || i == '月度') {
+                           colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80}";
+                       }
+                       else {
+                           colnames += ",{name:'" + i + "',display:'" + i + "', minWidth: 80 ,width: 80,type: 'F2',totalSummary:{render: function (suminf, column, cell){return '<div>' + suminf.sum.toFixed(2) + '</div>';},align: 'right'}}";
+                       }
+                   }
+               }
+               colnames = colnames.substr(1, colnames.length);
+               //console.log(colnames);
+               eval(
+                       "$(grid).css('divGrid', 10).ligerGrid({" +
+                       "checkbox: false," +
+                       "columns:[" + colnames + "]," +
+                       //"toolbar: { items: [{ text: '导出Execl', type: 'queryCond', click: operate }]}," +
+                       "url:'" + url + "'," +
+                       "dataAction:'server'," +
+                       "height:'98%'," +//"height:'" + girdbodyheight2 + "'," +
+                       "width:'98%'," +
+                       "sortname:'年度 desc,月度 desc,工号 '," +
+                       "sortorder:'asc'," +
+                       "isScroll: false," +
+                       "showToggleColBtn: false," +
+                       "showTitle: false," +
+                       "columnWidth: 100," +
+                       "page: 1,pageSize:50,pageSizeOptions: [20, 30, 50, 100]" +
+                       "});"
+                   );
+           });
         }
         function operate()
         { }
@@ -121,7 +161,7 @@
             createGrid("divGridZoom", "../Handler/SalaryHandler.ashx?opt=Query&call=" + call);
         });
 
-        console.log(winheight + "___" + girdbodyheight);
+        //console.log(winheight + "___" + girdbodyheight);
     </script>
 </head>
 <body>
@@ -154,9 +194,9 @@
                 <div class="form-group col-sm-6">
                     <label for="dtp_input2" class="control-label chaxun-info-label">起始日期：</label>
                     <div class="input-group date form_date chaxun-info-input" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:ii:ss">
-                        <input id="dateup" class="form-control" size="16" type="text" value="2015-1-1" readonly datatype="*" errormsg="不能为空">
+                        <input id="dateup" class="form-control" size="16" type="text" value="2015-1-1" readonly datatype="*" errormsg="不能为空" />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                        <input type="hidden" id="dtp_input2" value="">
+                        <input type="hidden" id="dtp_input2" value="" />
                     </div>
                 </div>
                 <div class="form-group col-sm-6">

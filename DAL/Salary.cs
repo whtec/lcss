@@ -112,8 +112,8 @@ namespace LCSS.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from Salary ");
-            strSql.Append(" where Sal_ID=@Sal_ID");
+            strSql.Append("delete from Salary where Sal_ID=@Sal_ID;");
+            strSql.Append("delete from SalaryLine where where SL_Sal_ID=@Sal_ID");
             SqlParameter[] parameters = {
 					new SqlParameter("@Sal_ID", SqlDbType.BigInt)
 			};

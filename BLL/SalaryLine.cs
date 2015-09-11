@@ -177,6 +177,19 @@ namespace LCSS.BLL
             return dal.GetSalaryLineByMonth(PageSize, PageIndex, OrderBy, strWhere, Org_Code);
         }
         /// <summary>
+        /// 查询人工成本列表（每年每人）（分页）
+        /// </summary>
+        /// <param name="PageSize">每页显示数量</param>
+        /// <param name="PageIndex">页码</param>
+        /// <param name="OrderBy">排序</param>
+        /// <param name="strWhere">条件</param>
+        /// <param name="Emp_Code">员工编号</param>
+        /// <returns></returns>
+        public DataSet GetSalaryLineByYear(int PageSize, int PageIndex, string OrderBy, string strWhere, string Org_Code)
+        {
+            return dal.GetSalaryLineByYear(PageSize, PageIndex, OrderBy, strWhere, Org_Code);
+        }
+        /// <summary>
         /// 查询导入的人工成本列表（每次导入每人）（分页）
         /// </summary>
         /// <param name="PageSize">每页显示数量</param>

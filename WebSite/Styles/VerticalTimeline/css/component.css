@@ -219,9 +219,9 @@
     padding-left: 2em;
     padding-right: 2em;
     padding-bottom: 15px;
-    /*font-size: 13px;*/
-    font-size: 18px;
-    font-weight:bold;
+    font-size: 14px;
+    /*font-size: 18px;
+    font-weight:bold;*/
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
